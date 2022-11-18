@@ -28,14 +28,14 @@
 <fieldset>
 	<legend>Login</legend>
 	<mat-form-field>
-		<mat-label>Username or Email</mat-label>
-		<input matInput  type="text" placeholder="What's your identifier?" />
+		<mat-label>Username</mat-label>
+		<input #loginUsername matInput  type="text" placeholder="What's your username?" />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Password</mat-label>
-		<input matInput  type="text" placeholder="What's your password?" />
+		<input #loginPassword matInput  type="text" placeholder="What's your password?" />
 	</mat-form-field>
-	<button mat-raised-button color="primary">
+	<button mat-raised-button color="primary" (click)="login(loginUsername.value, loginPassword.value)">
 		<mat-icon>account_circle</mat-icon>
 		Login
 	</button>
@@ -45,21 +45,21 @@
 	<legend>Sign up</legend>
 	<mat-form-field>
 		<mat-label>Username</mat-label>
-		<input [(ngModel)]="" matInput  type="text" placeholder="What's your identifier?" />
+		<input #registerUsername matInput  type="text" placeholder="What's your identifier?" />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>E-mail address</mat-label>
-		<input matInput  type="email" placeholder="What's your e-mail?" />
+		<input #registerEmail matInput  type="email" placeholder="What's your e-mail?" />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Password</mat-label>
-		<input matInput  type="password" placeholder="What's your password?" />
+		<input #registerPassword matInput  type="password" placeholder="What's your password?" />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Confirm password</mat-label>
-		<input matInput  type="password" placeholder="Repeat your password" />
+		<input #registerPasswordConfirm matInput  type="password" placeholder="Repeat your password" />
 	</mat-form-field>
-	<button mat-raised-button color="primary">
+	<button mat-raised-button color="primary" (click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
 		<mat-icon>account_circle</mat-icon>
 		Sign up
 	</button>

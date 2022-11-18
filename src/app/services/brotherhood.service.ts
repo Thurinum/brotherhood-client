@@ -11,6 +11,10 @@ export class BrotherhoodService {
 		return this.http.post<any>("https://localhost:5001/api/assassins/login", user);
 	}
 
+	register(user: Assassin): any {
+		return this.http.post<any>("https://localhost:5001/api/assassins/register", user);
+	}
+
 	getCities(): Observable<City[]> {
 		return this.http.get<City[]>("https://localhost:5001/api/cities/");
 	}

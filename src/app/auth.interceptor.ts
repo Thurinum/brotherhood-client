@@ -14,14 +14,14 @@ export class AuthInterceptor implements HttpInterceptor {
 	constructor() { }
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		if (request.url != "https://localhost:5001/api/assassins/register" {
+		if (request.url != "https://localhost:5001/api/assassins/register") {
 			request = request.clone({
 				setHeaders: {
 					"Content-Type": "application/json",
 					"Authorization": "Bearer " + this.localStorage.getItem("authKey")
 				}
 			})
-		})
+		}
 
 		return next.handle(request);
 	}

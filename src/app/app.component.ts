@@ -12,10 +12,33 @@ import { HelperService } from './services/helper.service';
 export class AppComponent {
 	cities: City[] = [];
 	currentCity: City = new City("", false);
-	currentUser: Assassin = new Assassin("", "", "");
 
-	login() {
-		this.br
+	login(username: string, password: string) {
+		let user: Assassin = new Assassin;
+		user.username = username;
+		user.password = password;
+
+		this.brotherhood.login(user).subscribe((response: any) => {
+			console.log(response);
+			this.localStorage.setItem("authKey", response["token"]);
+		});
+	}
+
+	register(
+		username: string,
+		email: string,
+		password: string,
+		passwordConfirm: string
+	) {
+		let user: Assassin = new Assassin;
+		user.username = username;
+		user.email = email;
+		user.password = password;
+		user.passwordConfirm = passwordConfirm;
+
+		this.brotherhood.register(user).subscribe((response: any) => {
+			console.log(response);
+		});
 	}
 
 	refreshCities() {
