@@ -1,11 +1,11 @@
 <header>
 	<h1 translate>IntelliBrotherhood&trade; Assassin Manager 2022</h1>
 	<div class="auth">
-		<button mat-raised-button color="primary">
+		<button mat-raised-button color="primary" (click)="uiState = 'login'">
 			<mat-icon>account_circle</mat-icon>
 			Login
 		</button>
-		<button mat-stroked-button color="primary">
+		<button mat-stroked-button color="primary" (click)="uiState = 'register'">
 			<mat-icon>account_circle</mat-icon>
 			Sign up
 		</button>
@@ -14,18 +14,8 @@
 
 <br />
 
-<fieldset>
-	<legend>Add a city</legend>
-	<mat-form-field>
-		<mat-label>Name</mat-label>
-		<input [(ngModel)]="currentCity.name" matInput  type="text" placeholder="Enter city name..." />
-	</mat-form-field>
-	<mat-slide-toggle [(ngModel)]="currentCity.isPublic">Public visibility</mat-slide-toggle>
-	<button mat-raised-button color="primary" (click)="addCity()">+ Add</button>
-</fieldset>
 
-
-<fieldset>
+<fieldset *ngIf="uiState == 'login'">
 	<legend>Login</legend>
 	<mat-form-field>
 		<mat-label>Username</mat-label>
@@ -41,7 +31,7 @@
 	</button>
 </fieldset>
 
-<fieldset>
+<fieldset *ngIf="uiState == 'register'">
 	<legend>Sign up</legend>
 	<mat-form-field>
 		<mat-label>Username</mat-label>
@@ -65,9 +55,19 @@
 	</button>
 </fieldset>
 
+<fieldset *ngIf="uiState == 'addCity'">
+	<legend>Add a city</legend>
+	<mat-form-field>
+		<mat-label>Name</mat-label>
+		<input [(ngModel)]="currentCity.name" matInput  type="text" placeholder="Enter city name..." />
+	</mat-form-field>
+	<mat-slide-toggle [(ngModel)]="currentCity.isPublic">Public visibility</mat-slide-toggle>
+	<button mat-raised-button color="primary" (click)="addCity()">+ Add</button>
+</fieldset>
+
 <br />
 
-<app-city-list [cities]="cities" (select)="selectCity($event)" (remove)="nukeCity($event)"></app-city-list>
+<app-city-list [cities]="cities" (select)="selectCity($event)" (add)="uiState = 'addCity'" (remove)="nukeCity($event)"></app-city-list>
 <!-- <app-city-details></app-city-details> -->
 <!-- <router-outlet></router-outlet> -->
 

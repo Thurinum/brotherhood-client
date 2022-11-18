@@ -1,4 +1,9 @@
-<h2 translate>Added cities</h2>
+<h2>
+	Added cities
+	<button mat-mini-fab color="primary" (click)="add.next()">
+		<mat-icon>add</mat-icon>
+	</button>
+</h2>
 
 <section *ngIf="cities.length > 0; else emptyList" class="card-layout">
 	<app-card #card *ngFor="let city of cities" [model]="city" [canRemove]="true" (remove)="remove.next(city.id)" (click)="select.next(city)"></app-card>

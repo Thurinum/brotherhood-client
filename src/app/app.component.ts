@@ -11,8 +11,9 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 	styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-	cities: City[] = [];
-	currentCity: City = new City("", false);
+	cities: City[] = []
+	currentCity: City = new City("", false)
+	uiState: string = "none"
 
 	login(username: string, password: string) {
 		let user: Assassin = new Assassin;
@@ -22,6 +23,7 @@ export class AppComponent {
 		this.brotherhood.login(user).subscribe((response: any) => {
 			console.log(response);
 			this.localStorage.setItem("authKey", response["token"]);
+			this.uiState = "none";
 		});
 	}
 
@@ -39,6 +41,7 @@ export class AppComponent {
 
 		this.brotherhood.register(user).subscribe((response: any) => {
 			console.log(response);
+			this.uiState = "none";
 		});
 	}
 
@@ -61,6 +64,7 @@ export class AppComponent {
 		this.brotherhood.createCity(this.currentCity).subscribe((response: void) => {
 			console.log(response);
 			this.refreshCities();
+			this.uiState = "none";
 		});
 	}
 

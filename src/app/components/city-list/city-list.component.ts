@@ -15,6 +15,9 @@ export class CityListComponent {
 	cities: City[] = [];
 
 	@Output()
+	add = new EventEmitter<void>();
+
+	@Output()
 	remove = new EventEmitter<number | undefined>();
 
 	@Output()
