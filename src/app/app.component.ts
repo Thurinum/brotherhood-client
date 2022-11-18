@@ -4,6 +4,7 @@ import { City } from './models/city.model';
 import { BrotherhoodService } from './services/brotherhood.service';
 import { HelperService } from './services/helper.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Auth } from './models/auth.interface';
 
 @Component({
 	selector: 'app-root',
@@ -20,10 +21,15 @@ export class AppComponent {
 		user.username = username;
 		user.password = password;
 
-		this.brotherhood.login(user).subscribe((response: any) => {
-			console.log(response);
-			this.localStorage.setItem("authKey", response["token"]);
+		this.brotherhood.login(user).subscribe((response: HttpResponse<Auth>) => {
+			if (!response.body)
+				return;
+
+			this.localStorage.setItem("authKey", response.body.token);
 			this.uiState = "none";
+		},
+		(error: HttpErrorResponse) => {
+			this.helper.error(`Authentication invalid (error ${error.status}).`, error.message);
 		});
 	}
 
