@@ -3,6 +3,7 @@ import { Assassin } from './models/assassin.model';
 import { City } from './models/city.model';
 import { BrotherhoodService } from './services/brotherhood.service';
 import { HelperService } from './services/helper.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-root',
@@ -42,12 +43,19 @@ export class AppComponent {
 	}
 
 	refreshCities() {
-		this.brotherhood.getCities().subscribe((cities: City[]) => {
-			if (cities.length === 0)
-				this.helper.popup("There are no cities in database.");
+		this.brotherhood.getCities().subscribe(
+			(response: HttpResponse<City[]>) => {
+				if (!response.body) {
+					this.helper.popup("Could not fetch cities from the database.");
+					return;
+				}
 
-			this.cities = cities;
-		});
+				this.cities = response.body;
+			},
+			(error: HttpErrorResponse) => {
+				this.helper.popup(`Cannot connect to database. Is the API server running?`);
+				console.error(`Failed to connect to database:\n\n${error.message.toUpperCase()}`);
+			});
 	}
 
 	addCity() {

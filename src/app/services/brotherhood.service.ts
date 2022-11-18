@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { City } from "../models/city.model";
 import { Assassin } from "../models/assassin.model";
+import { HttpResponse } from "@angular/common/http";
 
 
 @Injectable({ providedIn: "root" })
@@ -15,8 +16,8 @@ export class BrotherhoodService {
 		return this.http.post<any>("https://localhost:5001/api/assassins/register", user);
 	}
 
-	getCities(): Observable<City[]> {
-		return this.http.get<City[]>("https://localhost:5001/api/cities/");
+	getCities(): any {
+		return this.http.get<City[]>("https://localhost:5001/api/cities/", {observe: "response"});
 	}
 
 	createCity(city: City): any {
