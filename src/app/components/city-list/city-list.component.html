@@ -1,10 +1,10 @@
 <h2 translate>Added cities</h2>
 
-<section *ngIf="artists.length > 0; else emptyList" class="card-layout">
-	<app-card #card *ngFor="let artist of artists" [model]="artist" [canRemove]="true"></app-card>
+<section *ngIf="cities.length > 0; else emptyList" class="card-layout">
+	<app-card #card *ngFor="let city of cities" [model]="city" [canRemove]="true" (remove)="remove.next(city.id)"></app-card>
 </section>
 
 <ng-template #emptyList>
-	<p translate>There are no cities added. Add cities to see them here.</p>
+	<p>There are no cities added. Add cities to see them here.</p>
 	<br />
 </ng-template>

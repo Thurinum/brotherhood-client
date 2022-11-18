@@ -1,7 +1,8 @@
 <div class="card" matRipple [class.selected]="selected">
+	<mat-icon *ngIf="model.isPublic" class="card-isPublic">public</mat-icon>
 	<img class="card-image" [src]="model.image" draggable="false" onerror="this.src = 'https://media.discordapp.net/attachments/966422391083368469/1028430973156733000/unknown.png'">
-	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model.name ?? "?"}}</marquee>	
+	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model.name ?? "?"}}</marquee>
 </div>
 <button *ngIf="canRemove" class="card-delete" (click)="remove.next(model.id)" mat-fab color="primary">
 	<mat-icon>remove</mat-icon>
-</button>	
+</button>

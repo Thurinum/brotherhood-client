@@ -1,6 +1,7 @@
 export class City {
+	id?: number
+
 	constructor(
-		public id: number,
 		public name: string,
 		public isPublic: boolean
 	) {}

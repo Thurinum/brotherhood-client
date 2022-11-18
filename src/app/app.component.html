@@ -1,5 +1,5 @@
 <header>
-	<h1 translate>IntelliBrotherhood&trade; Staff Manager 2022</h1>
+	<h1 translate>IntelliBrotherhood&trade; Assassin Manager 2022</h1>
 	<div class="auth">
 		<button mat-raised-button color="primary">
 			<mat-icon>account_circle</mat-icon> Login
@@ -16,15 +16,15 @@
 	<legend translate>Add a city</legend>
 	<mat-form-field>
 		<mat-label>Name</mat-label>
-		<input #query matInput type="text" placeholder="Search for city..." />
+		<input [(ngModel)]="currentCity.name" matInput  type="text" placeholder="Enter city name..." />
 	</mat-form-field>
-	<mat-slide-toggle>Public</mat-slide-toggle>
-	<button mat-raised-button color="primary" translate>{{'+ Add'}}</button>
+	<mat-slide-toggle [(ngModel)]="currentCity.isPublic">Public visibility</mat-slide-toggle>
+	<button mat-raised-button color="primary" (click)="addCity()">+ Add</button>
 </fieldset>
 
 <br />
 
-<app-city-list #list></app-city-list>
+<app-city-list [cities]="cities" (remove)="nukeCity($event)"></app-city-list>
 <!-- <app-artist-details></app-artist-details> -->
 <!-- <router-outlet></router-outlet> -->
 
