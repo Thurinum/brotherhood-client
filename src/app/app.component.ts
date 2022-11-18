@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Assassin } from './models/assassin.model';
 import { City } from './models/city.model';
 import { BrotherhoodService } from './services/brotherhood.service';
 import { HelperService } from './services/helper.service';
@@ -11,6 +12,11 @@ import { HelperService } from './services/helper.service';
 export class AppComponent {
 	cities: City[] = [];
 	currentCity: City = new City("", false);
+	currentUser: Assassin = new Assassin("", "", "");
+
+	login() {
+		this.br
+	}
 
 	refreshCities() {
 		this.brotherhood.getCities().subscribe((cities: City[]) => {
@@ -34,6 +40,8 @@ export class AppComponent {
 			this.refreshCities();
 		});
 	}
+
+	private localStorage: Storage = window.localStorage;
 
 	constructor(
 		private brotherhood: BrotherhoodService,

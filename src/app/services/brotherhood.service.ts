@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { HelperService } from "./helper.service";
 import { City } from "../models/city.model";
+import { Assassin } from "../models/assassin.model";
 
 
 @Injectable({ providedIn: "root" })
 export class BrotherhoodService {
+	login(user: Assassin): any {
+		return this.http.post<any>("https://localhost:5001/api/assassins/login", user);
+	}
+
 	getCities(): Observable<City[]> {
 		return this.http.get<City[]>("https://localhost:5001/api/cities/");
 	}
@@ -21,6 +25,5 @@ export class BrotherhoodService {
 
 	constructor(
 		private http: HttpClient,
-		private helper: HelperService
 	) { }
 }
