@@ -46,15 +46,14 @@ export class AppComponent {
 		this.brotherhood.getCities().subscribe(
 			(response: HttpResponse<City[]>) => {
 				if (!response.body) {
-					this.helper.popup("Could not fetch cities from the database.");
+					this.helper.message("Could not fetch cities from the database.");
 					return;
 				}
 
 				this.cities = response.body;
 			},
 			(error: HttpErrorResponse) => {
-				this.helper.popup(`Cannot connect to database. Is the API server running?`);
-				console.error(`Failed to connect to database:\n\n${error.message.toUpperCase()}`);
+				this.helper.error(`Cannot connect to database. Is the API server running?`, error.message);
 			});
 	}
 
@@ -70,6 +69,10 @@ export class AppComponent {
 			console.log(response);
 			this.refreshCities();
 		});
+	}
+
+	selectCity(city: City) {
+		this.helper.message(`This action is unimplemented. OwO.`);
 	}
 
 	private localStorage: Storage = window.localStorage;

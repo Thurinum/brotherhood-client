@@ -10,16 +10,13 @@ import { EventEmitter } from '@angular/core';
 	templateUrl: './city-list.component.html',
 	styleUrls: ['./city-list.component.sass']
 })
-export class CityListComponent implements OnInit {
+export class CityListComponent {
 	@Input()
 	cities: City[] = [];
 
 	@Output()
 	remove = new EventEmitter<number | undefined>();
 
-	constructor(
-		private helper: HelperService,
-		private brotherhood: BrotherhoodService
-	) {}
-	ngOnInit(): void { }
+	@Output()
+	select = new EventEmitter<City>();
 }

@@ -67,8 +67,8 @@
 
 <br />
 
-<app-city-list [cities]="cities" (remove)="nukeCity($event)"></app-city-list>
-<!-- <app-artist-details></app-artist-details> -->
+<app-city-list [cities]="cities" (select)="selectCity($event)" (remove)="nukeCity($event)"></app-city-list>
+<!-- <app-city-details></app-city-details> -->
 <!-- <router-outlet></router-outlet> -->
 
 <br />
