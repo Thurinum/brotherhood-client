@@ -1,0 +1,12 @@
+<h2 translate>Added artists</h2>
+
+<section *ngIf="artists.length > 0; else emptyList" class="card-layout">
+	<app-card #card *ngFor="let artist of artists" [model]="artist" (click)="selectCard(artist)"
+		[selected]="artist.id === selectedArtist?.id" [routerLink]="['/artist', artist.id, 'albums']" [state]="artist"
+		(remove)="removeArtist(artist.id)" [canRemove]="true"></app-card>
+</section>
+
+<ng-template #emptyList>
+	<p translate>There are no artists added. Add artists to see them here.</p>
+	<br />
+</ng-template>

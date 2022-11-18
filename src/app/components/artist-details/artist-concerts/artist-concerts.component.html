@@ -1,0 +1,14 @@
+<div *ngIf="concerts.length > 0; else noConcert">
+	<br>
+	<div *ngFor="let concert of concerts">
+		<p translate>At <b>{{concert.address}}</b> on <b>{{concert.date.toLocaleDateString()}}</b> at <b>{{concert.date.getHours()}}:{{concert.date.getMinutes().toString().padStart(2, "0")}}</b></p>
+		<iframe width="450" height="250" frameborder="0" style="border:0"
+			referrerpolicy="no-referrer-when-downgrade"
+			[src]="'https://www.google.com/maps/embed/v1/place?key=AIzaSyDCYMOr375pqYymINRnloOGaaMbAsF2JcI&q=' + concert.address | urlSanitizer" allowfullscreen>
+		</iframe>
+	</div>
+</div>
+
+<ng-template #noConcert>
+	<p translate>There are no concerts on Bandsintown for this artist.</p>
+</ng-template>

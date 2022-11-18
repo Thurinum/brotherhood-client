@@ -1,0 +1,16 @@
+<h3 translate>Tracks</h3>
+
+<mat-list *ngIf="tracks.length > 0; else noTracks">
+	<mat-list-item matRipple *ngFor="let track of tracks" (click)="getYoutubeUrl(track)">
+		<mat-icon mat-list-icon>music_note</mat-icon>
+		<h4 mat-line>{{track}}</h4>
+	</mat-list-item>
+</mat-list>
+
+<router-outlet></router-outlet>
+
+<ng-template #noTracks>
+	<p translate>There are no tracks for this album.</p>	
+</ng-template>
+<br />
+<a translate mat-raised-button color="primary" routerLink="../../">{{'Back to Albums' | translate}}</a>

@@ -1,0 +1,3 @@
+<section *ngIf="albums.length > 0" class="card-layout">
+	<app-card *ngFor="let album of albums" [model]="album" [routerLink]="[album.id, 'tracks']"></app-card>
+</section>

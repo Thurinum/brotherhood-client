@@ -1,133 +1,37 @@
-<header class="container">
-	<div class="row">
-		<div class="col-auto">📷 J'ai yoink le template de Maxime</div>
-		<div class="col">
-			<!-- eheheh 🤓 -->
-		</div>
-		<div class="col-auto">📝 Inscription</div>
-		<div class="col-auto">🔌 Connexion</div>
-		<div class="col-auto">🚪 Déconnexion</div>
+<header>
+	<h1 translate>JulieSphere&trade; Essentials Art Analytics 2022</h1>
+	<div class="language-selector">
+		<mat-icon>language</mat-icon>
+		<mat-form-field>
+			<mat-label translate>Language</mat-label>
+			<mat-select #language (selectionChange)="setLanguage(language.value)" [value]="this.localStorage.getItem('lang')">
+				<mat-option translate *ngFor="let language of translate.getLangs()" [value]="language">{{languages.names[languages.codes.indexOf(language)]}}</mat-option>				
+			</mat-select>
+		</mat-form-field>
 	</div>
 </header>
 
-<main class="container">
-	<div class="row galleries">
+<br />
 
-		<!-- GALERIES PUBLIQUES -->
-		<div class="col-12 col-lg-6">
-			<div class="left">
-				<div class="close">🔄</div>
-				<h2>👥📷 Galeries publiques</h2>
+<fieldset>
+	<legend translate>Add an artist</legend>
+	<mat-form-field>
+		<input #query matInput type="text" placeholder="{{'Search for artist...'| translate}}" list="queryAutocomplete" autocomplete="true" />
+		<datalist id="queryAutocomplete">
+			<option *ngFor="let option of list.datalist" [value]="option"></option>			
+		</datalist>
+	</mat-form-field>
+	&nbsp;&nbsp;
+	<button (click)="list.addArtist(query.value);query.value = ''" mat-raised-button color="primary" translate>{{'+ Add' | translate}}</button>
+</fieldset>
 
-				<div class="row">
-					<div *ngFor="let city of cities" class="col-6 col-lg-4 gallery">
-						<div>
-							<div class="title">{{city.name}}</div>
-							<img src="assets/images/placeholder.png" alt="Image de la ville {{city.name}}" class="img-fluid">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<br />
 
-		<!-- MES GALERIES -->
-		<div class="col-12 col-lg-6">
-			<div class="right">
-				<div class="close">🔄</div>
-				<h2>👤📷 Mes galeries</h2>
+<app-artist-list #list></app-artist-list>
+<app-artist-details></app-artist-details>
+<router-outlet></router-outlet>
 
-				<div class="row">
-					<div class="col-6 col-lg-4 gallery newGallery">
-						<div>
-							<img src="assets/images/new.png" alt="Nouvelle galerie" class="img-fluid">
-						</div>
-					</div>
-					<div class="col-6 col-lg-4 gallery">
-						<div>
-							<div class="title">Titre</div>
-							<div class="close">❌</div>
-							<div class="owner">➕👤</div>
-							<img src="assets/images/placeholder.png" alt="CHANGE-MOI" class="img-fluid">
-						</div>
-					</div>
-					<div class="col-6 col-lg-4 gallery">
-						<div>
-							<div class="title">Titre</div>
-							<div class="close">❌</div>
-							<div class="owner">➕👤</div>
-							<img src="assets/images/placeholder.png" alt="CHANGE-MOI" class="img-fluid">
-						</div>
-					</div>
-					<div class="col-6 col-lg-4 gallery">
-						<div>
-							<div class="title">Titre</div>
-							<div class="close">❌</div>
-							<div class="owner">➕👤</div>
-							<img src="assets/images/placeholder.png" alt="CHANGE-MOI" class="img-fluid">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
+<br />
+<mat-divider></mat-divider>
 
-<div class="container">
-	<h4 class="aSupprimer">
-		Personnellement je fais apparaître les formulaires ci-dessous en overlay quand on clique sur
-		Connexion, Inscription, Supprimer une galerie ou Ajouter un propriétaire, mais vous en faites ce
-		que vous voulez 😊
-	</h4>
-	<div class="row">
-		<!-- CONNEXION -->
-		<div class="box col-auto">
-			<h3>Connexion</h3>
-			<form>
-				Nom d'utilisateur<br>
-				<input type="text" name="username"><br>
-				Mot de passe<br>
-				<input type="password" name="password"><br>
-				<button type="submit">Se connecter</button>
-			</form>
-		</div>
-
-		<!-- INSCRIPTION -->
-		<div class="box col-auto">
-			<h3>Inscription</h3>
-			<form>
-				Nom d'utilisateur<br>
-				<input type="text" name="username"><br>
-				Adresse courriel<br>
-				<input type="text" name="email"><br>
-				Mot de passe<br>
-				<input type="password" name="password"><br>
-				Confirmez le mot de passe<br>
-				<input type="password" name="passwordConfirm"><br>
-				<button type="submit">S'inscrire</button>
-			</form>
-		</div>
-
-		<!-- NOUVELLE GALERIE -->
-		<div class="box col-auto">
-			<h3>Nouvelle galerie</h3>
-			<form>
-				Titre<br>
-				<input #text (change)="city.name = text.value" type="text" name="name"><br>
-				Publique&nbsp;
-				<input #visibility (change)="city.isPublic = visibility.checked" type="checkbox" name="isPublic"><br>
-				<button type="submit" (click)="saveCity()">Créer la galerie</button>
-			</form>
-		</div>
-
-		<!-- NOUVELLE PROPRIÉTAIRE -->
-		<div class="box col-auto">
-			<h3>Ajouter un propriétaire</h3>
-			<form>
-				Nom d'utilisateur<br>
-				<input type="text" name="name"><br>
-				<button type="submit">Ajouter l'utilisateur</button>
-
-			</form>
-		</div>
-	</div>
-</div>
+<p class="legal"><small translate>&copy;2022 JuliePro. All rights reserved.</small></p>

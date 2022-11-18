@@ -1,0 +1,26 @@
+header
+	display: flex
+	justify-content: space-between
+	align-items: center
+
+	.language-selector
+		display: flex
+		flex-direction: row
+		align-items: center
+		gap: 10px
+
+fieldset
+	width: max-content
+	padding: 15px
+	padding-top: 20px
+	border: solid 2px rgb(71 79 176 / 88%)
+	border-radius: 5px
+	transition: padding 0.1s ease-in-out
+
+.legal
+	text-align: right
+
+@media screen and (max-width: 550px)
+	header
+		flex-direction: column
+		justify-content: center
