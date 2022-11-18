@@ -1,0 +1,9 @@
+@import '@angular/material/theming'
+@include mat-core()
+
+$brotherhood-primary: mat-palette($mat-red)
+$brotherhood-accent: mat-palette($mat-blue, 500, 900, A100)
+$brotherhood-warn: mat-palette($mat-red)
+
+$brotherhood-theme: mat-light-theme($brotherhood-primary, $brotherhood-accent, $brotherhood-warn)
+@include angular-material-theme($brotherhood-theme)

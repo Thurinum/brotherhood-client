@@ -1,37 +1,34 @@
 <header>
-	<h1 translate>JulieSphere&trade; Essentials Art Analytics 2022</h1>
-	<div class="language-selector">
-		<mat-icon>language</mat-icon>
-		<mat-form-field>
-			<mat-label translate>Language</mat-label>
-			<mat-select #language (selectionChange)="setLanguage(language.value)" [value]="this.localStorage.getItem('lang')">
-				<mat-option translate *ngFor="let language of translate.getLangs()" [value]="language">{{languages.names[languages.codes.indexOf(language)]}}</mat-option>				
-			</mat-select>
-		</mat-form-field>
+	<h1 translate>IntelliBrotherhood&trade; Staff Manager 2022</h1>
+	<div class="auth">
+		<button mat-raised-button color="primary">
+			<mat-icon>account_circle</mat-icon> Login
+		</button>
+		<button mat-stroked-button color="primary">
+			<mat-icon>account_circle</mat-icon> Sign up
+		</button>
 	</div>
 </header>
 
 <br />
 
 <fieldset>
-	<legend translate>Add an artist</legend>
+	<legend translate>Add a city</legend>
 	<mat-form-field>
-		<input #query matInput type="text" placeholder="{{'Search for artist...'| translate}}" list="queryAutocomplete" autocomplete="true" />
-		<datalist id="queryAutocomplete">
-			<option *ngFor="let option of list.datalist" [value]="option"></option>			
-		</datalist>
+		<mat-label>Name</mat-label>
+		<input #query matInput type="text" placeholder="Search for city..." />
 	</mat-form-field>
-	&nbsp;&nbsp;
-	<button (click)="list.addArtist(query.value);query.value = ''" mat-raised-button color="primary" translate>{{'+ Add' | translate}}</button>
+	<mat-slide-toggle>Public</mat-slide-toggle>
+	<button mat-raised-button color="primary" translate>{{'+ Add'}}</button>
 </fieldset>
 
 <br />
 
-<app-artist-list #list></app-artist-list>
-<app-artist-details></app-artist-details>
-<router-outlet></router-outlet>
+<app-city-list #list></app-city-list>
+<!-- <app-artist-details></app-artist-details> -->
+<!-- <router-outlet></router-outlet> -->
 
 <br />
 <mat-divider></mat-divider>
 
-<p class="legal"><small translate>&copy;2022 JuliePro. All rights reserved.</small></p>
+<p class="legal"><small translate>&copy;2022 JuliePro Development Services LLC. All rights reserved.</small></p>
