@@ -10,7 +10,7 @@
 <section class="card-layout" [@inOutAnimation]
 	   *ngIf="model.length > 0; else emptyList">
 	<app-card #card *ngFor="let city of model"
-		    [model]="city" [canRemove]="true"
+		    [model]="city" [canRemove]="canAdd"
 		    (select)="select.next(city)"
 		    (remove)="remove.next(city)"
 		    [@inOutAnimation]></app-card>
