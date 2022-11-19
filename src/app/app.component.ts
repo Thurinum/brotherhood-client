@@ -19,9 +19,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
 				transition(
 					":enter",
 					[
-						style({ scale: 0.6, opacity: 0 }),
+						style({ opacity: 0, scale: 0.8 }),
 						animate('0.7s ease-out',
-							style({ scale: 1, opacity: 1 }))
+							style({ bottom: 0, opacity: 1, scale: 1 }))
 					]
 				),
 				transition(
@@ -176,6 +176,9 @@ export class AppComponent {
 	}
 
 	selectCity(city: City) {
+		if (!this.isLoggedIn)
+			this.helper.message("Please log in to assign assassins to cities.");
+
 		this.selectedCity = city;
 		this.uiState = "addCityOwner";
 	}

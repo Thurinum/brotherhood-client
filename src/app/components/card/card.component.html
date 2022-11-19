@@ -1,6 +1,12 @@
 <div class="card" matRipple [class.selected]="selected" (click)="select.next(model)">
-	<mat-icon *ngIf="model.isPublic" class="card-isPublic" title="Cette affaire-là est publique">public</mat-icon>
-	<img class="card-image" [src]="model.image" draggable="false" onerror="this.src = 'https://workleavebalance.files.wordpress.com/2014/07/dscf0834.jpg?w=100'">
+	<mat-icon class="card-isPublic"
+		    matTooltip="This city can be viewed by {{model.isPublic ? 'everyone' : 'you only'}}."
+		    matTooltipPosition="above">
+		{{model.isPublic ? "public" : "private"}}
+	</mat-icon>
+	<img class="card-image"
+	     [src]="model.image" draggable="false"
+	     onerror="this.src = 'https://workleavebalance.files.wordpress.com/2014/07/dscf0834.jpg?w=100'">
 	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model.name ?? "?"}}</marquee>
 </div>
 <button *ngIf="canRemove" class="card-delete" (click)="remove.next(model)" mat-fab color="warn">

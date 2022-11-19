@@ -39,14 +39,17 @@
 	<mat-form-field>
 		<mat-label>Username</mat-label>
 		<input #registerUsername matInput type="text" placeholder="What's your identifier?" />
+		<mat-hint>ID provided by the .</mat-hint>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>E-mail address</mat-label>
 		<input #registerEmail matInput type="email" placeholder="What's your e-mail?" />
+		<mat-hint>Don't use your personal e-mail.</mat-hint>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Password</mat-label>
 		<input #registerPassword matInput type="password" placeholder="What's your password?" />
+		<mat-hint>At least 5 characters.</mat-hint>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Confirm password</mat-label>
@@ -61,15 +64,22 @@
 
 <fieldset *ngIf="uiState == 'addCity'" [@inOutAnimation]>
 	<legend>Register a city</legend>
-	<mat-hint>Managed assassins will become<br />assignable to the city.</mat-hint>
 	<mat-form-field>
 		<mat-label>Name</mat-label>
 		<input #addCityName matInput type="text" placeholder="Enter city name..." />
+		<mat-hint>Managed assassins will become assignable to the city.</mat-hint>
 	</mat-form-field>
-	<mat-hint>Make a city public to allow anyone sdfsdf.</mat-hint>
-	<mat-slide-toggle #addCityIsPublic>Public visibility</mat-slide-toggle>
-	<button mat-raised-button color="primary" (click)="addCity(addCityName.value, addCityIsPublic.checked)">+
-		Add</button>
+	<mat-form-field>
+		<mat-hint>Making a city public allows all mentors to assign assassins within.</mat-hint>
+		<input matInput [hidden]="true">
+		<mat-checkbox #addCityIsPublic color="primary">Public access</mat-checkbox>
+	</mat-form-field>
+	<br />
+	<button mat-raised-button color="primary"
+		  (click)="addCity(addCityName.value, addCityIsPublic.checked)">
+		<mat-icon>check</mat-icon>
+		Register
+	</button>
 </fieldset>
 
 <fieldset *ngIf="uiState == 'addCityOwner' && isLoggedIn" [@inOutAnimation]>
@@ -87,12 +97,12 @@
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
 	<a mat-tab-link
 	   (click)="showUserCities = false; refreshCities()"
-	   [active]="!showUserCities">Public Cities</a>
+	   [active]="!showUserCities">Public Contracts</a>
 	<a *ngIf="isLoggedIn" mat-tab-link
 	   (click)="showUserCities = true; refreshCities()"
-	   [active]="showUserCities">My Cities</a>
+	   [active]="showUserCities">My Contracts</a>
 </nav>
-<mat-tab-nav-panel #tabPanel (click)="uiState = 'none'">
+<mat-tab-nav-panel #tabPanel>
 	<app-city-list [model]="cities"
 			   [canAdd]="isLoggedIn"
 			   (refresh)="refreshCities()"
