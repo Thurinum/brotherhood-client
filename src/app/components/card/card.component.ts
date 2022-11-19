@@ -9,6 +9,7 @@ export class CardComponent implements OnInit {
 	@Input() canRemove: boolean = false;
 	@Input() selected: boolean = false;
 	@Input() model: any = {}
+	@Output() select = new EventEmitter<any>();
 	@Output() remove = new EventEmitter<any>();
 
 	constructor() { }

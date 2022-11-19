@@ -32,10 +32,6 @@
 		<mat-icon>account_circle</mat-icon>
 		Login
 	</button>
-
-	<!-- <button mat-mini-fab>
-		<mat-icon>close</mat-icon>
-	</button> -->
 </fieldset>
 
 <fieldset *ngIf="uiState == 'register'" [@inOutAnimation]>
@@ -57,44 +53,52 @@
 		<input #registerPasswordConfirm matInput type="password" placeholder="Repeat your password" />
 	</mat-form-field>
 	<button mat-raised-button color="primary"
-		(click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
+		  (click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
 		<mat-icon>account_circle</mat-icon>
 		Sign up
 	</button>
 </fieldset>
 
 <fieldset *ngIf="uiState == 'addCity'" [@inOutAnimation]>
-	<legend>Add a city</legend>
+	<legend>Register a city</legend>
+	<mat-hint>Managed assassins will become<br />assignable to the city.</mat-hint>
 	<mat-form-field>
 		<mat-label>Name</mat-label>
 		<input #addCityName matInput type="text" placeholder="Enter city name..." />
 	</mat-form-field>
+	<mat-hint>Make a city public to allow anyone sdfsdf.</mat-hint>
 	<mat-slide-toggle #addCityIsPublic>Public visibility</mat-slide-toggle>
-	<button mat-raised-button color="primary" (click)="addCity(addCityName.value, addCityIsPublic.checked)">+ Add</button>
+	<button mat-raised-button color="primary" (click)="addCity(addCityName.value, addCityIsPublic.checked)">+
+		Add</button>
 </fieldset>
 
-<fieldset *ngIf="uiState == 'addCityOwner'" [@inOutAnimation]>
+<fieldset *ngIf="uiState == 'addCityOwner' && isLoggedIn" [@inOutAnimation]>
 	<legend>Post assassin to {{selectedCity?.name}}</legend>
 	<mat-form-field>
 		<mat-label>Username or email</mat-label>
 		<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
 	</mat-form-field>
-	<button mat-raised-button color="primary" (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">+ Assign</button>
+	<button mat-raised-button color="primary" (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">+
+		Assign</button>
 </fieldset>
 
 <br />
 
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-	<a mat-tab-link (click)="showUserCities = false; refreshCities()" [active]="!showUserCities">Public Cities</a>
-	<a *ngIf="isLoggedIn" mat-tab-link (click)="showUserCities = true; refreshCities()" [active]="showUserCities">My Cities</a>
+	<a mat-tab-link
+	   (click)="showUserCities = false; refreshCities()"
+	   [active]="!showUserCities">Public Cities</a>
+	<a *ngIf="isLoggedIn" mat-tab-link
+	   (click)="showUserCities = true; refreshCities()"
+	   [active]="showUserCities">My Cities</a>
 </nav>
-<mat-tab-nav-panel #tabPanel>
-	<app-city-list
-		[model]="cities"
-		(refresh)="refreshCities()"
-		(select)="selectCity($event)"
-		(add)="uiState = 'addCity'"
-		(remove)="nukeCity($event)"></app-city-list>
+<mat-tab-nav-panel #tabPanel (click)="uiState = 'none'">
+	<app-city-list [model]="cities"
+			   [canAdd]="isLoggedIn"
+			   (refresh)="refreshCities()"
+			   (select)="selectCity($event)"
+			   (add)="uiState = 'addCity'"
+			   (remove)="nukeCity($event)"></app-city-list>
 </mat-tab-nav-panel>
 <!-- <app-city-details></app-city-details> -->
 

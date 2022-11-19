@@ -2,13 +2,18 @@
 	<button mat-mini-fab color="primary" (click)="refresh.next()">
 		<mat-icon>refresh</mat-icon>
 	</button>
-	<button mat-mini-fab color="primary" (click)="add.next()">
+	<button *ngIf="canAdd" mat-mini-fab color="primary" (click)="add.next()">
 		<mat-icon>add</mat-icon>
 	</button>
 </nav>
 
-<section *ngIf="model.length > 0; else emptyList" [@inOutAnimation] class="card-layout">
-	<app-card #card *ngFor="let city of model" [@inOutAnimation] [model]="city" [canRemove]="true" (remove)="remove.next(city)" (click)="select.next(city)"></app-card>
+<section class="card-layout" [@inOutAnimation]
+	   *ngIf="model.length > 0; else emptyList">
+	<app-card #card *ngFor="let city of model"
+		    [model]="city" [canRemove]="true"
+		    (select)="select.next(city)"
+		    (remove)="remove.next(city)"
+		    [@inOutAnimation]></app-card>
 </section>
 
 <ng-template #emptyList>

@@ -36,6 +36,9 @@ export class CityListComponent {
 	@Input()
 	model: City[] = [];
 
+	@Input()
+	canAdd: boolean = false;
+
 	@Output()
 	add = new EventEmitter<void>();
 
