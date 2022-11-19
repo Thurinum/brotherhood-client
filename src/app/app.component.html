@@ -32,6 +32,10 @@
 		<mat-icon>account_circle</mat-icon>
 		Login
 	</button>
+
+	<button mat-mini-fab>
+		<mat-icon>close</mat-icon>
+	</button>
 </fieldset>
 
 <fieldset *ngIf="uiState == 'register'" [@inOutAnimation]>
@@ -76,7 +80,12 @@
 	<a *ngIf="isLoggedIn" mat-tab-link (click)="showUserCities = true; refreshCities()">My Cities</a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
-	<app-city-list [cities]="cities" (select)="selectCity($event)" (add)="uiState = 'addCity'" (remove)="nukeCity($event)"></app-city-list>
+	<app-city-list
+		[model]="cities"
+		(refresh)="refreshCities()"
+		(select)="selectCity($event)"
+		(add)="uiState = 'addCity'"
+		(remove)="nukeCity($event)"></app-city-list>
 </mat-tab-nav-panel>
 <!-- <app-city-details></app-city-details> -->
 

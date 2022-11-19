@@ -1,12 +1,14 @@
-<h2>
-	<wbr />
+<nav>
+	<button mat-mini-fab color="primary" (click)="refresh.next()">
+		<mat-icon>refresh</mat-icon>
+	</button>
 	<button mat-mini-fab color="primary" (click)="add.next()">
 		<mat-icon>add</mat-icon>
 	</button>
-</h2>
+</nav>
 
-<section *ngIf="cities.length > 0; else emptyList" [@inOutAnimation] class="card-layout">
-	<app-card #card *ngFor="let city of cities" [@inOutAnimation] [model]="city" [canRemove]="true" (remove)="remove.next(city.id)" (click)="select.next(city)"></app-card>
+<section *ngIf="model.length > 0; else emptyList" [@inOutAnimation] class="card-layout">
+	<app-card #card *ngFor="let city of model" [@inOutAnimation] [model]="city" [canRemove]="true" (remove)="remove.next(city.id)" (click)="select.next(city)"></app-card>
 </section>
 
 <ng-template #emptyList>

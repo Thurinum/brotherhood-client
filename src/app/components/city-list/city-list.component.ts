@@ -34,7 +34,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class CityListComponent {
 	@Input()
-	cities: City[] = [];
+	model: City[] = [];
 
 	@Output()
 	add = new EventEmitter<void>();
@@ -44,4 +44,7 @@ export class CityListComponent {
 
 	@Output()
 	select = new EventEmitter<City>();
+
+	@Output()
+	refresh = new EventEmitter<void>();
 }
