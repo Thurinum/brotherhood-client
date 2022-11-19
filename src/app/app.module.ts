@@ -21,15 +21,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { CityListComponent } from './components/city-list/city-list.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CardComponent,
-		CityListComponent,
-		PageNotFoundComponent,
+		CityListComponent
 	],
 	imports: [
 		BrowserModule,
