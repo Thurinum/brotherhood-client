@@ -26,12 +26,14 @@ body
 	flex-wrap: wrap
 
 .snackbar
-	width: max-content !important
+	min-width: max-content !important
 	white-space: pre-wrap !important
 
 .snackbar-error
 	color: #eee !important
-	background-color: #6c0707 !important
+	background-color: #6c0707aa !important
+	backdrop-filter: blur(25px) !important
+	font-weight: 500
 
 	.mat-simple-snackbar-action
 		color: white !important

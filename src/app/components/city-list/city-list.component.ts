@@ -40,7 +40,7 @@ export class CityListComponent {
 	add = new EventEmitter<void>();
 
 	@Output()
-	remove = new EventEmitter<number | undefined>();
+	remove = new EventEmitter<City>();
 
 	@Output()
 	select = new EventEmitter<City>();

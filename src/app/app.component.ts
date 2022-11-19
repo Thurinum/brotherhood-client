@@ -163,14 +163,14 @@ export class AppComponent {
 		)
 	}
 
-	nukeCity(id?: number) {
-		this.brotherhood.deleteCity(id).subscribe(
+	nukeCity(city?: City) {
+		this.brotherhood.deleteCity(city?.id).subscribe(
 			(response: HttpResponse<City[]>) => {
-				this.helper.message(`Successfully removed city.`);
+				this.helper.message(`Successfully unregistered ${city?.name}.`);
 				this.refreshCities();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove city (${errorResponse.status}):`, errorResponse);
+				this.helper.httpError(`Failed to remove ${city?.name}`, errorResponse);
 			}
 		)
 	}

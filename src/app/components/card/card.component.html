@@ -3,6 +3,6 @@
 	<img class="card-image" [src]="model.image" draggable="false" onerror="this.src = 'https://workleavebalance.files.wordpress.com/2014/07/dscf0834.jpg?w=100'">
 	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model.name ?? "?"}}</marquee>
 </div>
-<button *ngIf="canRemove" class="card-delete" (click)="remove.next(model.id)" mat-fab color="warn">
+<button *ngIf="canRemove" class="card-delete" (click)="remove.next(model)" mat-fab color="warn">
 	<mat-icon>remove</mat-icon>
 </button>

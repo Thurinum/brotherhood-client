@@ -8,7 +8,7 @@
 </nav>
 
 <section *ngIf="model.length > 0; else emptyList" [@inOutAnimation] class="card-layout">
-	<app-card #card *ngFor="let city of model" [@inOutAnimation] [model]="city" [canRemove]="true" (remove)="remove.next(city.id)" (click)="select.next(city)"></app-card>
+	<app-card #card *ngFor="let city of model" [@inOutAnimation] [model]="city" [canRemove]="true" (remove)="remove.next(city)" (click)="select.next(city)"></app-card>
 </section>
 
 <ng-template #emptyList>

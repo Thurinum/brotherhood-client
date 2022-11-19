@@ -9,7 +9,7 @@ export class CardComponent implements OnInit {
 	@Input() canRemove: boolean = false;
 	@Input() selected: boolean = false;
 	@Input() model: any = {}
-	@Output() remove = new EventEmitter<string>();
+	@Output() remove = new EventEmitter<any>();
 
 	constructor() { }
 	ngOnInit(): void { }
