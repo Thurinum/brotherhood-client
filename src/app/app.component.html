@@ -87,7 +87,9 @@
 	<mat-form-field>
 		<mat-label>Username or email</mat-label>
 		<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
+		<mat-hint>The assassin will begin hunting Templars in that city.</mat-hint>
 	</mat-form-field>
+	<br />
 	<button mat-raised-button color="primary" (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">+
 		Assign</button>
 </fieldset>
