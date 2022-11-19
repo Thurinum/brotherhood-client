@@ -27,6 +27,10 @@ export class BrotherhoodService {
 		return this.http.post<City>("https://localhost:5001/api/cities/add", city);
 	}
 
+	shareCity(city: City, assassin: string): any {
+		return this.http.put<City>(`https://localhost:5001/api/cities/share/${assassin}`, city);
+	}
+
 	deleteCity(id?: number): any {
 		return this.http.delete<City>(`https://localhost:5001/api/cities/${id}/nuke`);
 	}

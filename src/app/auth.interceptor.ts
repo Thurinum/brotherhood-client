@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		if (request.url != "https://localhost:5001/api/assassins/register") {
+			// if (localStorage.getItem("token")) {
 			request = request.clone({
 				setHeaders: {
 					"Content-Type": "application/json",

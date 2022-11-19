@@ -79,7 +79,7 @@
 		<mat-label>Username or email</mat-label>
 		<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
 	</mat-form-field>
-	<button mat-raised-button color="primary" (click)="addCityOwner(selectedCity?.id, addCityOwnerName.value)">+ Assign</button>
+	<button mat-raised-button color="primary" (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">+ Assign</button>
 </fieldset>
 
 <br />

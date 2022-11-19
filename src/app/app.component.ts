@@ -139,17 +139,26 @@ export class AppComponent {
 		)
 	}
 
-	addCityOwner(id?: number, owner?: string) {
-		// this.brotherhood.createCity(this.currentCity).subscribe(
-		// 	(response: HttpResponse<City[]>) => {
-		// 		this.helper.message(`Successfully added city '${this.currentCity.name}'.`);
-		// 		this.refreshCities();
-		// 		this.uiState = "none";
-		// 	},
-		// 	(errorResponse: HttpErrorResponse) => {
-		// 		this.helper.httpError(`Failed to add city`, errorResponse);
-		// 	}
-		// )
+	addCityAssassin(owner?: string, city?: City) {
+		if (!owner) {
+			this.helper.message("Please enter an assassin name.");
+			return;
+		}
+
+		if (!city) {
+			this.helper.message("Something went wrong. Please retry.");
+			return;
+		}
+
+		this.brotherhood.shareCity(city, owner).subscribe(
+			(response: HttpResponse<City[]>) => {
+				this.helper.message(`Successfully assigned ${owner} to ${city.name}.`);
+				this.uiState = "none";
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to assign ${owner} to ${city.name}`, errorResponse);
+			}
+		)
 	}
 
 	nukeCity(id?: number) {
