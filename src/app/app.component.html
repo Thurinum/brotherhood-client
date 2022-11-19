@@ -70,7 +70,18 @@
 
 <br />
 
-<app-city-list [cities]="cities" (select)="selectCity($event)" (add)="uiState = 'addCity'" (remove)="nukeCity($event)"></app-city-list>
+<mat-tab-group>
+	<mat-tab label="Public Cities">
+		<ng-template matTabContent>
+			<app-city-list [cities]="cities" (select)="selectCity($event)" (add)="uiState = 'addCity'" (remove)="nukeCity($event)"></app-city-list>
+		</ng-template>
+	</mat-tab>
+	<mat-tab label="My Cities">
+		<ng-template matTabContent>
+			<app-city-list [cities]="cities" (select)="selectCity($event)" (add)="uiState = 'addCity'" (remove)="nukeCity($event)"></app-city-list>
+		</ng-template>
+	</mat-tab>
+</mat-tab-group>
 <!-- <app-city-details></app-city-details> -->
 <!-- <router-outlet></router-outlet> -->
 
