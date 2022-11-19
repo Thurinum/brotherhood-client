@@ -99,10 +99,10 @@
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
 	<a mat-tab-link
 	   (click)="showUserCities = false; refreshCities()"
-	   [active]="!showUserCities">Public Contracts</a>
+	   [active]="!showUserCities">Public Cities</a>
 	<a *ngIf="isLoggedIn" mat-tab-link
 	   (click)="showUserCities = true; refreshCities()"
-	   [active]="showUserCities">My Contracts</a>
+	   [active]="showUserCities">My Mentored Cities</a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
 	<app-city-list [model]="cities"
