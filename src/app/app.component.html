@@ -18,7 +18,7 @@
 
 <br />
 
-<fieldset *ngIf="uiState == 'login'">
+<fieldset *ngIf="uiState == 'login'" [@inOutAnimation]>
 	<legend>Login</legend>
 	<mat-form-field>
 		<mat-label>Username</mat-label>
@@ -34,7 +34,7 @@
 	</button>
 </fieldset>
 
-<fieldset *ngIf="uiState == 'register'">
+<fieldset *ngIf="uiState == 'register'" [@inOutAnimation]>
 	<legend>Sign up</legend>
 	<mat-form-field>
 		<mat-label>Username</mat-label>
@@ -58,7 +58,7 @@
 	</button>
 </fieldset>
 
-<fieldset *ngIf="uiState == 'addCity'">
+<fieldset *ngIf="uiState == 'addCity'" [@inOutAnimation]>
 	<legend>Add a city</legend>
 	<mat-form-field>
 		<mat-label>Name</mat-label>
@@ -69,6 +69,7 @@
 </fieldset>
 
 <br />
+<hr />
 
 <app-city-list [cities]="cities" (select)="selectCity($event)" (add)="uiState = 'addCity'" (remove)="nukeCity($event)"></app-city-list>
 <!-- <app-city-details></app-city-details> -->

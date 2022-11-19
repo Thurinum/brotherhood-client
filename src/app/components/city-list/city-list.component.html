@@ -5,8 +5,8 @@
 	</button>
 </h2>
 
-<section *ngIf="cities.length > 0; else emptyList" class="card-layout">
-	<app-card #card *ngFor="let city of cities" [model]="city" [canRemove]="true" (remove)="remove.next(city.id)" (click)="select.next(city)"></app-card>
+<section *ngIf="cities.length > 0; else emptyList" [@inOutAnimation] class="card-layout">
+	<app-card #card *ngFor="let city of cities" [@inOutAnimation] [model]="city" [canRemove]="true" (remove)="remove.next(city.id)" (click)="select.next(city)"></app-card>
 </section>
 
 <ng-template #emptyList>
