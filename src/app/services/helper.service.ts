@@ -5,12 +5,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class HelperService {
 	message(msg: string, action: string = "OK") {
-		this.snackBar.open(msg, action, { verticalPosition: 'top' });
+		this.snackBar.open(msg, action, { verticalPosition: "top", panelClass: ["snackbar"] });
 	}
 
-	error(msg: string, error: string, action: string = "OK") {
-		this.snackBar.open(msg, action, { verticalPosition: 'top', panelClass: ["red-snackbar"] });
-		console.error(`${msg}\n\n${error.toUpperCase()}`);
+	httpError(msg: string, errorResponse: HttpErrorResponse, action: string = "OK") {
+		const details = errorResponse.error.errors
+			? Object.values(errorResponse.error.errors).join('\n').replace(/,/g, '\n')
+			: errorResponse.error.message ?? errorResponse.message ?? "Unknown error";
+		const fullMsg = `${msg.toUpperCase()} (${errorResponse.status}):\n\n${details}`;
+
+		this.snackBar.open(fullMsg, action, { verticalPosition: "top", panelClass: ["snackbar", "snackbar-error"] });
+		console.error(fullMsg);
 	}
 
 	constructor(private snackBar: MatSnackBar) { }

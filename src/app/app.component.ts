@@ -57,8 +57,8 @@ export class AppComponent {
 				this.isLoggedIn = true;
 				this.uiState = "none";
 			},
-			(error: HttpErrorResponse) => {
-				this.helper.error(`Authentication invalid (error ${error.status}).`, error.message);
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Authentication invalid`, errorResponse);
 			}
 		);
 	}
@@ -81,13 +81,14 @@ export class AppComponent {
 		user.password = password;
 		user.passwordConfirm = passwordConfirm;
 
+		console.log(user)
 		this.brotherhood.register(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
 				this.uiState = "none";
 			},
-			(error: HttpErrorResponse) => {
-				this.helper.error(`Failed to register user (error ${error.status}).`, error.message);
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to register user`, errorResponse);
 			}
 		);
 	}
@@ -102,25 +103,36 @@ export class AppComponent {
 
 				this.cities = response.body;
 			},
-			(error: HttpErrorResponse) => {
-				this.helper.error(`Cannot connect to database. Is the API server running?`, error.message);
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Cannot connect to database. Is the API server running?`, errorResponse);
 			}
 		);
 	}
 
 	addCity() {
-		this.brotherhood.createCity(this.currentCity).subscribe((response: void) => {
-			console.log(response);
-			this.refreshCities();
-			this.uiState = "none";
-		});
+		this.brotherhood.createCity(this.currentCity).subscribe(
+			(response: HttpResponse<City[]>) => {
+				this.helper.message(`Successfully added city '${this.currentCity.name}'.`);
+				this.refreshCities();
+				this.uiState = "none";
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to add city`, errorResponse);
+			}
+		)
 	}
 
+
 	nukeCity(id?: number) {
-		this.brotherhood.deleteCity(id).subscribe((response: void) => {
-			console.log(response);
-			this.refreshCities();
-		});
+		this.brotherhood.deleteCity(id).subscribe(
+			(response: HttpResponse<City[]>) => {
+				this.helper.message(`Successfully removed city.`);
+				this.refreshCities();
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to remove city (${errorResponse.status}):`, errorResponse.error.errors);
+			}
+		)
 	}
 
 	selectCity(city: City) {
