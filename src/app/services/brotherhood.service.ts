@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
 import { City } from "../models/city.model";
 import { Assassin } from "../models/assassin.model";
-import { HttpResponse } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
 
 
 @Injectable({ providedIn: "root" })
@@ -17,7 +16,11 @@ export class BrotherhoodService {
 	}
 
 	getCities(): any {
-		return this.http.get<City[]>("https://localhost:5001/api/cities/", {observe: "response"});
+		return this.http.get<City[]>("https://localhost:5001/api/cities/public", {observe: "response"});
+	}
+
+	getMyCities(): any {
+		return this.http.get<City[]>("https://localhost:5001/api/cities/user", {observe: "response"});
 	}
 
 	createCity(city: City): any {

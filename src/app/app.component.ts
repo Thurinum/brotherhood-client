@@ -38,6 +38,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class AppComponent {
 	cities: City[] = []
+	showUserCities: boolean = false
 	currentCity: City = new City("", false)
 	uiState: string = "none"
 	isLoggedIn: boolean = false
@@ -52,10 +53,12 @@ export class AppComponent {
 				if (!response)
 					return;
 
-				this.localStorage.setItem("authKey", response.token);
+				localStorage.setItem("authKey", response.token);
 				this.helper.message(`Logged in as '${user.username}'.`);
 				this.isLoggedIn = true;
 				this.uiState = "none";
+
+				this.refreshCities();
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Authentication invalid`, errorResponse);
@@ -64,9 +67,11 @@ export class AppComponent {
 	}
 
 	logout() {
-		this.localStorage.removeItem("authKey");
+		localStorage.removeItem("authKey");
 		this.helper.message("Logged out.");
 		this.isLoggedIn = false;
+
+		this.refreshCities();
 	}
 
 	register(
@@ -81,7 +86,6 @@ export class AppComponent {
 		user.password = password;
 		user.passwordConfirm = passwordConfirm;
 
-		console.log(user)
 		this.brotherhood.register(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
@@ -94,7 +98,9 @@ export class AppComponent {
 	}
 
 	refreshCities() {
-		this.brotherhood.getCities().subscribe(
+		let request = this.showUserCities ? this.brotherhood.getMyCities() : this.brotherhood.getCities();
+
+		request.subscribe(
 			(response: HttpResponse<City[]>) => {
 				if (!response.body) {
 					this.helper.message("Could not fetch cities from the database.");
@@ -102,9 +108,10 @@ export class AppComponent {
 				}
 
 				this.cities = response.body;
+				console.info("Successfully fetched cities from the database.");
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Cannot connect to database. Is the API server running?`, errorResponse);
+				this.helper.httpError(`Could not fetch cities from the database`, errorResponse);
 			}
 		);
 	}
@@ -139,13 +146,11 @@ export class AppComponent {
 		this.helper.message(`This action is unimplemented.`, "UWU");
 	}
 
-	private localStorage: Storage = window.localStorage;
-
 	constructor(
 		private brotherhood: BrotherhoodService,
 		private helper: HelperService
 	) {
-		if (this.localStorage.getItem("authKey"))
+		if (localStorage.getItem("authKey"))
 			this.isLoggedIn = true;
 
 		this.refreshCities();

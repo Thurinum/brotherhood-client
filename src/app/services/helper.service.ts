@@ -9,9 +9,9 @@ export class HelperService {
 	}
 
 	httpError(msg: string, errorResponse: HttpErrorResponse, action: string = "OK") {
-		const details = errorResponse.error.errors
+		const details = errorResponse.error?.errors
 			? Object.values(errorResponse.error.errors).join('\n').replace(/,/g, '\n')
-			: errorResponse.error.message ?? errorResponse.message ?? "Unknown error";
+			: errorResponse.error?.message ?? errorResponse.message ?? "Unknown error";
 		const fullMsg = `${msg.toUpperCase()} (${errorResponse.status}):\n\n${details}`;
 
 		this.snackBar.open(fullMsg, action, { verticalPosition: "top", panelClass: ["snackbar", "snackbar-error"] });
