@@ -67,10 +67,19 @@
 	<legend>Add a city</legend>
 	<mat-form-field>
 		<mat-label>Name</mat-label>
-		<input [(ngModel)]="currentCity.name" matInput type="text" placeholder="Enter city name..." />
+		<input #addCityName matInput type="text" placeholder="Enter city name..." />
 	</mat-form-field>
-	<mat-slide-toggle [(ngModel)]="currentCity.isPublic">Public visibility</mat-slide-toggle>
-	<button mat-raised-button color="primary" (click)="addCity()">+ Add</button>
+	<mat-slide-toggle #addCityIsPublic>Public visibility</mat-slide-toggle>
+	<button mat-raised-button color="primary" (click)="addCity(addCityName.value, addCityIsPublic.checked)">+ Add</button>
+</fieldset>
+
+<fieldset *ngIf="uiState == 'addCityOwner'" [@inOutAnimation]>
+	<legend>Post assassin to {{selectedCity?.name}}</legend>
+	<mat-form-field>
+		<mat-label>Username or email</mat-label>
+		<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
+	</mat-form-field>
+	<button mat-raised-button color="primary" (click)="addCityOwner(selectedCity?.id, addCityOwnerName.value)">+ Assign</button>
 </fieldset>
 
 <br />

@@ -39,7 +39,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class AppComponent {
 	cities: City[] = []
 	showUserCities: boolean = false
-	currentCity: City = new City("", false)
+	selectedCity?: City
 	uiState: string = "none"
 	isLoggedIn: boolean = false
 
@@ -124,10 +124,12 @@ export class AppComponent {
 		);
 	}
 
-	addCity() {
-		this.brotherhood.createCity(this.currentCity).subscribe(
+	addCity(name: string, isPublic: boolean) {
+		const city: City = new City(name, isPublic);
+
+		this.brotherhood.createCity(city).subscribe(
 			(response: HttpResponse<City[]>) => {
-				this.helper.message(`Successfully added city '${this.currentCity.name}'.`);
+				this.helper.message(`Successfully added city '${city.name}'.`);
 				this.refreshCities();
 				this.uiState = "none";
 			},
@@ -137,6 +139,18 @@ export class AppComponent {
 		)
 	}
 
+	addCityOwner(id?: number, owner?: string) {
+		// this.brotherhood.createCity(this.currentCity).subscribe(
+		// 	(response: HttpResponse<City[]>) => {
+		// 		this.helper.message(`Successfully added city '${this.currentCity.name}'.`);
+		// 		this.refreshCities();
+		// 		this.uiState = "none";
+		// 	},
+		// 	(errorResponse: HttpErrorResponse) => {
+		// 		this.helper.httpError(`Failed to add city`, errorResponse);
+		// 	}
+		// )
+	}
 
 	nukeCity(id?: number) {
 		this.brotherhood.deleteCity(id).subscribe(
@@ -151,7 +165,8 @@ export class AppComponent {
 	}
 
 	selectCity(city: City) {
-		this.helper.message(`This action is unimplemented.`, "UWU");
+		this.selectedCity = city;
+		this.uiState = "addCityOwner";
 	}
 
 	constructor(
