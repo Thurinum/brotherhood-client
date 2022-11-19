@@ -170,7 +170,7 @@ export class AppComponent {
 				this.refreshCities();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove city (${errorResponse.status}):`, errorResponse.error.errors);
+				this.helper.httpError(`Failed to remove city (${errorResponse.status}):`, errorResponse);
 			}
 		)
 	}
