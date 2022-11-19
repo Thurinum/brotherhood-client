@@ -15,22 +15,33 @@ export class AppComponent {
 	cities: City[] = []
 	currentCity: City = new City("", false)
 	uiState: string = "none"
+	isLoggedIn: boolean = false
 
 	login(username: string, password: string) {
 		let user: Assassin = new Assassin;
 		user.username = username;
 		user.password = password;
 
-		this.brotherhood.login(user).subscribe((response: HttpResponse<Auth>) => {
-			if (!response.body)
-				return;
+		this.brotherhood.login(user).subscribe(
+			(response: Auth) => {
+				if (!response)
+					return;
 
-			this.localStorage.setItem("authKey", response.body.token);
-			this.uiState = "none";
-		},
-		(error: HttpErrorResponse) => {
-			this.helper.error(`Authentication invalid (error ${error.status}).`, error.message);
-		});
+				this.localStorage.setItem("authKey", response.token);
+				this.helper.message(`Logged in as '${user.username}'.`);
+				this.isLoggedIn = true;
+				this.uiState = "none";
+			},
+			(error: HttpErrorResponse) => {
+				this.helper.error(`Authentication invalid (error ${error.status}).`, error.message);
+			}
+		);
+	}
+
+	logout() {
+		this.localStorage.removeItem("authKey");
+		this.helper.message("Logged out.");
+		this.isLoggedIn = false;
 	}
 
 	register(
@@ -45,10 +56,15 @@ export class AppComponent {
 		user.password = password;
 		user.passwordConfirm = passwordConfirm;
 
-		this.brotherhood.register(user).subscribe((response: any) => {
-			console.log(response);
-			this.uiState = "none";
-		});
+		this.brotherhood.register(user).subscribe(
+			(response: HttpResponse<void>) => {
+				this.helper.message(`Successfully registered as '${user.username}'.`);
+				this.uiState = "none";
+			},
+			(error: HttpErrorResponse) => {
+				this.helper.error(`Failed to register user (error ${error.status}).`, error.message);
+			}
+		);
 	}
 
 	refreshCities() {
@@ -63,7 +79,8 @@ export class AppComponent {
 			},
 			(error: HttpErrorResponse) => {
 				this.helper.error(`Cannot connect to database. Is the API server running?`, error.message);
-			});
+			}
+		);
 	}
 
 	addCity() {
@@ -91,6 +108,9 @@ export class AppComponent {
 		private brotherhood: BrotherhoodService,
 		private helper: HelperService
 	) {
+		if (this.localStorage.getItem("authKey"))
+			this.isLoggedIn = true;
+
 		this.refreshCities();
 	}
 }

@@ -1,13 +1,17 @@
 <header>
-	<h1 translate>IntelliBrotherhood&trade; Assassin Manager 2022</h1>
+	<h1>IntelliBrotherhood&trade; Assassin Manager 2022</h1>
 	<div class="auth">
-		<button mat-raised-button color="primary" (click)="uiState = 'login'">
-			<mat-icon>account_circle</mat-icon>
-			Login
+		<button *ngIf="!isLoggedIn" mat-raised-button color="primary" (click)="uiState = 'login'">
+			<mat-icon>account_circle</mat-icon>&nbsp;
+			<mat-label>Log in</mat-label>
 		</button>
-		<button mat-stroked-button color="primary" (click)="uiState = 'register'">
-			<mat-icon>account_circle</mat-icon>
-			Sign up
+		<button *ngIf="!isLoggedIn" mat-stroked-button color="primary" (click)="uiState = 'register'">
+			<mat-icon>account_circle</mat-icon>&nbsp;
+			<mat-label>Sign up</mat-label>
+		</button>
+		<button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logout()">
+			<mat-icon>vpn_key</mat-icon>&nbsp;
+			<mat-label>Log out</mat-label>
 		</button>
 	</div>
 </header>
