@@ -68,6 +68,7 @@ export class AppComponent {
 
 	logout() {
 		localStorage.removeItem("authKey");
+		this.showUserCities = false;
 		this.helper.message("Logged out.");
 		this.isLoggedIn = false;
 
