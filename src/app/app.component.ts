@@ -43,9 +43,16 @@ export class AppComponent {
 	uiState: string = "none"
 	isLoggedIn: boolean = false
 
-	login(username: string, password: string) {
+	login(identifier: string, password: string) {
 		let user: Assassin = new Assassin;
-		user.username = username;
+
+		// detect email (simple check for x@y)
+		if (identifier.match(/^\S+@\S+$/)) {
+			user.email = identifier;
+		} else {
+			user.username = identifier;
+		}
+
 		user.password = password;
 
 		this.brotherhood.login(user).subscribe(
@@ -54,7 +61,7 @@ export class AppComponent {
 					return;
 
 				localStorage.setItem("authKey", response.token);
-				this.helper.message(`Logged in as '${user.username}'.`);
+				this.helper.message(`Logged in as '${identifier}'.`);
 				this.isLoggedIn = true;
 				this.uiState = "none";
 
