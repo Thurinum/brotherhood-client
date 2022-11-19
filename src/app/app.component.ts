@@ -61,6 +61,7 @@ export class AppComponent {
 					return;
 
 				localStorage.setItem("authKey", response.token);
+				localStorage.setItem("authTime", response.validTo.toString());
 				this.helper.message(`Logged in as '${identifier}'.`);
 				this.isLoggedIn = true;
 				this.uiState = "none";
@@ -75,6 +76,7 @@ export class AppComponent {
 
 	logout() {
 		localStorage.removeItem("authKey");
+		localStorage.removeItem("authTime");
 		this.showUserCities = false;
 		this.helper.message("Logged out.");
 		this.isLoggedIn = false;
@@ -184,6 +186,11 @@ export class AppComponent {
 	) {
 		if (localStorage.getItem("authKey"))
 			this.isLoggedIn = true;
+
+		let validToStr = localStorage.getItem("authTime");
+
+		if (validToStr && new Date() > new Date(validToStr))
+			this.logout();
 
 		this.refreshCities();
 	}
