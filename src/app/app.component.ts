@@ -136,7 +136,7 @@ export class AppComponent {
 	}
 
 	selectCity(city: City) {
-		this.helper.message(`This action is unimplemented. OwO.`);
+		this.helper.message(`This action is unimplemented.`, "UWU");
 	}
 
 	private localStorage: Storage = window.localStorage;
