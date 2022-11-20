@@ -138,6 +138,10 @@ export class AppComponent {
 									console.warn(`No image found for city '${name}'.`);
 									console.log(response);
 								}
+							},
+							(errorResponse: HttpErrorResponse) => {
+								console.error(`Failed to fetch image for city '${name}'. Image for city '${name}' will now be skipped.`);
+								localStorage.setItem("cityImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
 							}
 						);
 					}

@@ -90,8 +90,11 @@
 		<mat-hint>The assassin will begin hunting Templars in that city.</mat-hint>
 	</mat-form-field>
 	<br />
-	<button mat-raised-button color="primary" (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">+
-		Assign</button>
+	<button mat-raised-button color="primary"
+		  (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">
+		<mat-icon>check</mat-icon>
+		Assign
+	</button>
 </fieldset>
 
 <br />
