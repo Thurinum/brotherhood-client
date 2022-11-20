@@ -119,9 +119,35 @@ export class AppComponent {
 
 				this.cities = response.body;
 				console.info("Successfully fetched cities from the database.");
+
+				this.cities.forEach(city => {
+					const name = city.name.toLowerCase();
+					const cachedImage = localStorage.getItem("cityImg_" + name);
+
+					if (cachedImage) {
+						city.image = cachedImage;
+					} else {
+						this.brotherhood.getImageFromPlace(name).subscribe(
+							(response: any) => {
+								const url: string | null = response?.photos[0]?.image?.mobile;
+
+								if (url) {
+									city.image = url;
+									localStorage.setItem("cityImg_" + name, url);
+								} else {
+									console.warn(`No image found for city '${name}'.`);
+									console.log(response);
+								}
+							}
+						);
+					}
+				})
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Could not fetch cities from the database`, errorResponse);
+				if (errorResponse.status === 0)
+					this.helper.httpError("Could not connect to the database. Is the API server running?", errorResponse);
+				else
+					this.helper.httpError("Could not fetch cities from the database.", errorResponse);
 			}
 		);
 	}

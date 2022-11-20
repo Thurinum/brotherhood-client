@@ -6,7 +6,7 @@
 	</mat-icon>
 	<img class="card-image"
 	     [src]="model.image" draggable="false"
-	     onerror="this.src = 'https://workleavebalance.files.wordpress.com/2014/07/dscf0834.jpg?w=100'">
+	     onerror="this.src = 'https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg'">
 	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model.name ?? "?"}}</marquee>
 </div>
 <button *ngIf="canRemove" class="card-delete" (click)="remove.next(model)" mat-fab color="warn">

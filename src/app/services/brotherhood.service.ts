@@ -35,6 +35,10 @@ export class BrotherhoodService {
 		return this.http.delete<City>(`https://localhost:5001/api/cities/${id}/nuke`);
 	}
 
+	getImageFromPlace(place: string): any {
+		return this.http.get(`https://api.teleport.org/api/urban_areas/slug:${place}/images/`);
+	}
+
 	constructor(
 		private http: HttpClient,
 	) { }
