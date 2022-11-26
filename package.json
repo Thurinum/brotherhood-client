@@ -1,6 +1,6 @@
 {
-	"name": "angular-tp2",
-	"version": "0.0.0",
+	"name": "angular-tp4",
+	"version": "1.4.0",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
@@ -24,7 +24,7 @@
 		"@angular/router": "^14.0.0",
 		"@ngx-translate/core": "^14.0.0",
 		"@ngx-translate/http-loader": "^7.0.0",
-		"@zuzak/owo": "^1.18.0",
+		"maxime-pelletier": "^1.69.420",
 		"rxjs": "~7.5.0",
 		"tslib": "^2.3.0",
 		"zone.js": "~0.11.4"

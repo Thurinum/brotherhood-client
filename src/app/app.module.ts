@@ -18,15 +18,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { CityListComponent } from './components/city-list/city-list.component';
+import { CityDetailsComponent } from './components/city-details/city-details.component';
 import { AuthInterceptor } from './auth.interceptor';
-import { CityDetailsComponent } from './city-details/city-details.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CardComponent,
 		CityListComponent,
-  CityDetailsComponent
+		CityDetailsComponent
 	],
 	imports: [
 		BrowserModule,
