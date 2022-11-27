@@ -8,40 +8,52 @@ import { Auth } from './models/auth.interface';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { AssassinationTarget } from './models/target.model';
 
+enum FormState {
+	None,
+	Login,
+	Register,
+	AddCity,
+	AddCityOwner
+}
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.sass'],
 	animations: [
-		trigger(
-			"inOutAnimation",
-			[
-				transition(
-					":enter",
-					[
-						style({ opacity: 0, scale: 0.8 }),
-						animate('0.7s ease-out',
-							style({ bottom: 0, opacity: 1, scale: 1 }))
-					]
-				),
-				transition(
-					':leave',
-					[
-						style({ scale: 1, opacity: 1 }),
-						animate('0.3s ease-in',
-							style({ scale: 0.6, height: 0, opacity: 0 }))
-					]
-				)
-			]
-		)
+		trigger("zoom-animation", [
+			transition(":enter", [
+				style({ opacity: 0, scale: 0.9, height: 0 }),
+				animate('0.7s ease-out',
+					style({ opacity: 1, scale: 1 }))
+			]),
+			transition(':leave', [
+				style({ opacity: 1, scale: 1 }),
+				animate('0.5s ease-in',
+					style({ opacity: 0, scale: 0.9 }))
+			])
+		]),
+		trigger("form-animation", [
+			transition(":enter", [
+				style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.95 }),
+				animate('0.3s ease-out',
+					style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }))
+			]),
+			transition(':leave', [
+				style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }),
+				animate('0.3s ease-in',
+					style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.95 }))
+			])
+		])
 	]
 })
 export class AppComponent {
+	FormState = FormState;
+
 	cities: City[] = []
 	showUserCities: boolean = false
 	selectedCity?: City
-	uiState: string = "none"
+	state: FormState = FormState.None;
 	isLoggedIn: boolean = false
 
 	login(identifier: string, password: string) {
@@ -65,7 +77,7 @@ export class AppComponent {
 				localStorage.setItem("authTime", response.validTo.toString());
 				this.helper.message(`Logged in as '${identifier}'.`);
 				this.isLoggedIn = true;
-				this.uiState = "none";
+				this.state = FormState.None;
 
 				this.refreshCities();
 			},
@@ -100,7 +112,7 @@ export class AppComponent {
 		this.brotherhood.register(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
-				this.uiState = "none";
+				this.state = FormState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to register user`, errorResponse);
@@ -166,7 +178,7 @@ export class AppComponent {
 			(response: HttpResponse<City[]>) => {
 				this.helper.message(`Successfully added city '${city.name}'.`);
 				this.refreshCities();
-				this.uiState = "none";
+				this.state = FormState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to add city`, errorResponse);
@@ -188,7 +200,7 @@ export class AppComponent {
 		this.brotherhood.shareCity(city, owner).subscribe(
 			(response: HttpResponse<City[]>) => {
 				this.helper.message(`Successfully assigned ${owner} to ${city.name}.`);
-				this.uiState = "none";
+				this.state = FormState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to assign ${owner} to ${city.name}`, errorResponse);

@@ -1,11 +1,11 @@
 <header>
 	<h1>IntelliBrotherhood&trade; Assassin Manager 2022</h1>
 	<div class="auth">
-		<button *ngIf="!isLoggedIn" mat-raised-button color="primary" (click)="uiState = 'login'">
+		<button *ngIf="!isLoggedIn" mat-raised-button color="primary" (click)="state = FormState.Login">
 			<mat-icon>account_circle</mat-icon>&nbsp;
 			<mat-label>Log in</mat-label>
 		</button>
-		<button *ngIf="!isLoggedIn" mat-stroked-button color="primary" (click)="uiState = 'register'">
+		<button *ngIf="!isLoggedIn" mat-stroked-button color="primary" (click)="state = FormState.Register">
 			<mat-icon>account_circle</mat-icon>&nbsp;
 			<mat-label>Sign up</mat-label>
 		</button>
@@ -18,101 +18,20 @@
 
 <br />
 
-<fieldset *ngIf="uiState == 'login'" [@inOutAnimation]>
-	<legend>Login</legend>
-	<mat-form-field>
-		<mat-label>Username or Email</mat-label>
-		<input #loginUsername matInput type="text" placeholder="What's your identifier?" />
-	</mat-form-field>
-	<mat-form-field>
-		<mat-label>Password</mat-label>
-		<input #loginPassword matInput type="password" placeholder="What's your password?" />
-	</mat-form-field>
-	<button mat-raised-button color="primary" (click)="login(loginUsername.value, loginPassword.value)">
-		<mat-icon>account_circle</mat-icon>
-		Login
-	</button>
-</fieldset>
-
-<fieldset *ngIf="uiState == 'register'" [@inOutAnimation]>
-	<legend>Sign up</legend>
-	<mat-form-field>
-		<mat-label>Username</mat-label>
-		<input #registerUsername matInput type="text" placeholder="What's your identifier?" />
-		<mat-hint>ID provided by the .</mat-hint>
-	</mat-form-field>
-	<mat-form-field>
-		<mat-label>E-mail address</mat-label>
-		<input #registerEmail matInput type="email" placeholder="What's your e-mail?" />
-		<mat-hint>Don't use your personal e-mail.</mat-hint>
-	</mat-form-field>
-	<mat-form-field>
-		<mat-label>Password</mat-label>
-		<input #registerPassword matInput type="password" placeholder="What's your password?" />
-		<mat-hint>At least 5 characters.</mat-hint>
-	</mat-form-field>
-	<mat-form-field>
-		<mat-label>Confirm password</mat-label>
-		<input #registerPasswordConfirm matInput type="password" placeholder="Repeat your password" />
-	</mat-form-field>
-	<button mat-raised-button color="primary"
-		  (click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
-		<mat-icon>account_circle</mat-icon>
-		Sign up
-	</button>
-</fieldset>
-
-<fieldset *ngIf="uiState == 'addCity'" [@inOutAnimation]>
-	<legend>Register a city</legend>
-	<mat-form-field>
-		<mat-label>Name</mat-label>
-		<input #addCityName matInput type="text" placeholder="Enter city name..." />
-		<mat-hint>Managed assassins will become assignable to the city.</mat-hint>
-	</mat-form-field>
-	<mat-form-field>
-		<mat-hint>Making a city public allows all mentors to assign assassins within.</mat-hint>
-		<input matInput [hidden]="true">
-		<mat-checkbox #addCityIsPublic color="primary">Public access</mat-checkbox>
-	</mat-form-field>
-	<br />
-	<button mat-raised-button color="primary"
-		  (click)="addCity(addCityName.value, addCityIsPublic.checked)">
-		<mat-icon>check</mat-icon>
-		Register
-	</button>
-</fieldset>
-
-<fieldset *ngIf="uiState == 'addCityOwner' && isLoggedIn" [@inOutAnimation]>
-	<legend>Post assassin to {{selectedCity?.name}}</legend>
-	<mat-form-field>
-		<mat-label>Username or email</mat-label>
-		<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
-		<mat-hint>The assassin will begin hunting Templars in that city.</mat-hint>
-	</mat-form-field>
-	<br />
-	<button mat-raised-button color="primary"
-		  (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">
-		<mat-icon>check</mat-icon>
-		Assign
-	</button>
-</fieldset>
-
-<br />
-
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
 	<a mat-tab-link
 	   (click)="showUserCities = false; refreshCities()"
-	   [active]="!showUserCities">Public Cities</a>
+	   [active]="!showUserCities">Public Missions</a>
 	<a *ngIf="isLoggedIn" mat-tab-link
 	   (click)="showUserCities = true; refreshCities()"
-	   [active]="showUserCities">My Mentored Cities</a>
+	   [active]="showUserCities">My Missions</a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
 	<app-city-list [model]="cities"
 			   [canAdd]="isLoggedIn"
 			   (refresh)="refreshCities()"
 			   (select)="selectCity($event)"
-			   (add)="uiState = 'addCity'"
+			   (add)="state = FormState.AddCity"
 			   (remove)="nukeCity($event)"></app-city-list>
 </mat-tab-nav-panel>
 
@@ -122,3 +41,88 @@
 <br />
 <mat-divider></mat-divider>
 <p class="legal"><small>&copy; 2022 JuliePro LLC - v1.3</small></p>
+
+<section class="form-panel" *ngIf="state != FormState.None" [@form-animation]>
+	<button class="form-close" mat-mini-fab color="primary" (click)="state = FormState.None">
+		<mat-icon>close</mat-icon>
+	</button>
+
+	<fieldset *ngIf="state == FormState.Login" [@zoom-animation]>
+		<legend>Login</legend>
+		<mat-form-field>
+			<mat-label>Username or Email</mat-label>
+			<input #loginUsername matInput type="text" placeholder="What's your identifier?" />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input #loginPassword matInput type="password" placeholder="What's your password?" />
+		</mat-form-field>
+		<button mat-raised-button color="primary" (click)="login(loginUsername.value, loginPassword.value)">
+			<mat-icon>account_circle</mat-icon>
+			Login
+		</button>
+	</fieldset>
+
+	<fieldset *ngIf="state == FormState.Register" [@zoom-animation]>
+		<legend>Sign up</legend>
+		<mat-form-field>
+			<mat-label>Username</mat-label>
+			<input #registerUsername matInput type="text" placeholder="What's your identifier?" />
+			<mat-hint>ID provided by the .</mat-hint>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>E-mail address</mat-label>
+			<input #registerEmail matInput type="email" placeholder="What's your e-mail?" />
+			<mat-hint>Don't use your personal e-mail.</mat-hint>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input #registerPassword matInput type="password" placeholder="What's your password?" />
+			<mat-hint>At least 5 characters.</mat-hint>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Confirm password</mat-label>
+			<input #registerPasswordConfirm matInput type="password" placeholder="Repeat your password" />
+		</mat-form-field>
+		<button mat-raised-button color="primary"
+			  (click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
+			<mat-icon>account_circle</mat-icon>
+			Sign up
+		</button>
+	</fieldset>
+
+	<fieldset *ngIf="state == FormState.AddCity" [@zoom-animation]>
+		<legend>Register a city</legend>
+		<mat-form-field>
+			<mat-label>Name</mat-label>
+			<input #addCityName matInput type="text" placeholder="Enter city name..." />
+			<mat-hint>Managed assassins will become assignable to the city.</mat-hint>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-hint>Making a city public allows all mentors to assign assassins within.</mat-hint>
+			<input matInput [hidden]="true">
+			<mat-checkbox #addCityIsPublic color="primary">Public access</mat-checkbox>
+		</mat-form-field>
+		<br />
+		<button mat-raised-button color="primary"
+			  (click)="addCity(addCityName.value, addCityIsPublic.checked)">
+			<mat-icon>check</mat-icon>
+			Register
+		</button>
+	</fieldset>
+
+	<fieldset *ngIf="state == FormState.AddCityOwner && isLoggedIn">
+		<legend>Post assassin to {{selectedCity?.name}}</legend>
+		<mat-form-field>
+			<mat-label>Username or email</mat-label>
+			<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
+			<mat-hint>The assassin will begin hunting Templars in that city.</mat-hint>
+		</mat-form-field>
+		<br />
+		<button mat-raised-button color="primary"
+			  (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">
+			<mat-icon>check</mat-icon>
+			Assign
+		</button>
+	</fieldset>
+</section>

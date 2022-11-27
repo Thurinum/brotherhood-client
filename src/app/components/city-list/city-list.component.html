@@ -1,3 +1,7 @@
+<mat-button-toggle-group appearance="legacy">
+	<mat-button-toggle>Show all</mat-button-toggle>
+	<mat-button-toggle>Group by city</mat-button-toggle>
+</mat-button-toggle-group>
 <nav>
 	<button mat-mini-fab color="primary" (click)="refresh.next()">
 		<mat-icon>refresh</mat-icon>
@@ -6,6 +10,7 @@
 		<mat-icon>add</mat-icon>
 	</button>
 </nav>
+
 
 <section class="card-layout" [@slideXAnimation]
 	   *ngIf="model && model.length > 0; else emptyList">
