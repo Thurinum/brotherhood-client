@@ -111,6 +111,8 @@ export class AppComponent {
 	refreshCities() {
 		let request = this.showUserCities ? this.brotherhood.getMyCities() : this.brotherhood.getCities();
 
+		this.cities = [];
+
 		request.subscribe(
 			(response: HttpResponse<City[]>) => {
 				if (!response.body) {

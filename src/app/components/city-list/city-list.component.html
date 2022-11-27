@@ -7,8 +7,8 @@
 	</button>
 </nav>
 
-<section class="card-layout" [@inOutAnimation]
-	   *ngIf="model.length > 0; else emptyList">
+<section class="card-layout" [@slideXAnimation]
+	   *ngIf="model && model.length > 0; else emptyList">
 	<app-card #card *ngFor="let city of model"
 		    [model]="city" [canRemove]="canAdd"
 		    [selected]="city.id === selectedId"
