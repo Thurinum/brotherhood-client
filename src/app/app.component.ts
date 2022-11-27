@@ -210,25 +210,22 @@ export class AppComponent {
 		if (!this.isLoggedIn)
 			this.helper.message("Please log in to assign assassins to cities.");
 
-		// this.brotherhood.getTargetsInCity(city.id!).subscribe(
-		// 	(response: HttpResponse<AssassinationTarget[]>) => {
-		// 		this.carousel.addItemSet(new CarouselItemSet({
-		// 			name: city.name,
-		// 			items: response.body?.map(target => new CarouselItem({
-		// 				name: `${target.firstName} ${target.lastName}`,
-		// 				src: "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg",
-		// 				isPath: true,
-		// 				tagName: "img"
-		// 			}))!
-		// 		}));
-		// 		this.carousel.show();
-		// 	},
-		// 	(errorResponse: HttpErrorResponse) => {
-		// 		this.helper.httpError(`Failed to get assassination targets within ${city?.name}`, errorResponse);
-		// 	}
-		// );
+		this.brotherhood.getTargetsInCity(city.id!).subscribe(
+			(response: HttpResponse<AssassinationTarget[]>) => {
+				this.selectedCity = city;
 
-		this.selectedCity = city;
+				if (!response.body) {
+					this.helper.message("Could not fetch targets from the database.");
+					return;
+				}
+
+				this.selectedCity.targets = response.body;
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to get assassination targets within ${city?.name}`, errorResponse);
+			}
+		);
+
 		// this.uiState = "addCityOwner"; TODO: Reimplement
 	}
 

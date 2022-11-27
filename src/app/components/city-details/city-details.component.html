@@ -1,1 +1,3 @@
-<p>city-details works!</p>
+<h2>{{model?.name}}</h2>
+
+<p *ngFor="let target of model?.targets">{{target.firstName}} {{target.lastName}}</p>

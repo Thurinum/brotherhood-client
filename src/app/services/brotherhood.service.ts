@@ -20,9 +20,9 @@ export class BrotherhoodService {
 		return this.http.get<City[]>("https://localhost:5001/api/cities/public", {observe: "response"});
 	}
 
-	// getTargetsInCity(id: number): any {
-	// 	return this.http.get<AssassinationTarget[]>(`https://localhost:5001/api/cities/${id}/targets`, {observe: "response"});
-	// }
+	getTargetsInCity(id: number): any {
+		return this.http.get<AssassinationTarget[]>(`https://localhost:5001/api/cities/${id}/targets`, {observe: "response"});
+	}
 
 	getMyCities(): any {
 		return this.http.get<City[]>("https://localhost:5001/api/cities/user", {observe: "response"});
