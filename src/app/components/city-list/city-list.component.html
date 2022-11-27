@@ -11,7 +11,8 @@
 	   *ngIf="model.length > 0; else emptyList">
 	<app-card #card *ngFor="let city of model"
 		    [model]="city" [canRemove]="canAdd"
-		    (select)="select.next(city)"
+		    [selected]="city.id === selectedId"
+		    (select)="select.next(city); selectedId = city.id!"
 		    (remove)="remove.next(city)"
 		    [@inOutAnimation]></app-card>
 </section>

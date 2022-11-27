@@ -50,4 +50,6 @@ export class CityListComponent {
 
 	@Output()
 	refresh = new EventEmitter<void>();
+
+	selectedId: number = -1;
 }
