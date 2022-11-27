@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { City } from "../models/city.model";
 import { Assassin } from "../models/assassin.model";
 import { HttpHeaders } from "@angular/common/http";
+import { AssassinationTarget } from "../models/target.model";
 
 
 @Injectable({ providedIn: "root" })
@@ -18,6 +19,10 @@ export class BrotherhoodService {
 	getCities(): any {
 		return this.http.get<City[]>("https://localhost:5001/api/cities/public", {observe: "response"});
 	}
+
+	// getTargetsInCity(id: number): any {
+	// 	return this.http.get<AssassinationTarget[]>(`https://localhost:5001/api/cities/${id}/targets`, {observe: "response"});
+	// }
 
 	getMyCities(): any {
 		return this.http.get<City[]>("https://localhost:5001/api/cities/user", {observe: "response"});

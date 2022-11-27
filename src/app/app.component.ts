@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Assassin } from './models/assassin.model';
 import { City } from './models/city.model';
 import { BrotherhoodService } from './services/brotherhood.service';
@@ -6,6 +6,7 @@ import { HelperService } from './services/helper.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Auth } from './models/auth.interface';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { AssassinationTarget } from './models/target.model';
 
 
 @Component({
@@ -209,13 +210,33 @@ export class AppComponent {
 		if (!this.isLoggedIn)
 			this.helper.message("Please log in to assign assassins to cities.");
 
+		// this.brotherhood.getTargetsInCity(city.id!).subscribe(
+		// 	(response: HttpResponse<AssassinationTarget[]>) => {
+		// 		this.carousel.addItemSet(new CarouselItemSet({
+		// 			name: city.name,
+		// 			items: response.body?.map(target => new CarouselItem({
+		// 				name: `${target.firstName} ${target.lastName}`,
+		// 				src: "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg",
+		// 				isPath: true,
+		// 				tagName: "img"
+		// 			}))!
+		// 		}));
+		// 		this.carousel.show();
+		// 	},
+		// 	(errorResponse: HttpErrorResponse) => {
+		// 		this.helper.httpError(`Failed to get assassination targets within ${city?.name}`, errorResponse);
+		// 	}
+		// );
+
 		this.selectedCity = city;
-		this.uiState = "addCityOwner";
+		// this.uiState = "addCityOwner"; TODO: Reimplement
 	}
+
 
 	constructor(
 		private brotherhood: BrotherhoodService,
-		private helper: HelperService
+		private helper: HelperService,
+		// private carousel: Carousel
 	) {
 		if (localStorage.getItem("authKey"))
 			this.isLoggedIn = true;
@@ -226,5 +247,6 @@ export class AppComponent {
 			this.logout();
 
 		this.refreshCities();
+
 	}
 }
