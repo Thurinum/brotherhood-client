@@ -35,14 +35,14 @@ enum FormState {
 		]),
 		trigger("form-animation", [
 			transition(":enter", [
-				style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.95 }),
+				style({ opacity: 0, backdropFilter: "blur(0px)", scale: 1.25 }),
 				animate('0.3s ease-out',
 					style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }))
 			]),
 			transition(':leave', [
 				style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }),
 				animate('0.3s ease-in',
-					style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.95 }))
+					style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.75 }))
 			])
 		])
 	]
