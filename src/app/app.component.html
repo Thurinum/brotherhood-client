@@ -113,11 +113,10 @@
 			   (refresh)="refreshCities()"
 			   (select)="selectCity($event)"
 			   (add)="uiState = 'addCity'"
-			   (remove)="nukeCity($event)"
-			   [@inOutAnimation]></app-city-list>
+			   (remove)="nukeCity($event)"></app-city-list>
 </mat-tab-nav-panel>
 
-<app-city-details [model]="selectedCity" [@inOutAnimation]></app-city-details>
+<app-city-details [model]="selectedCity"></app-city-details>
 
 <br />
 <mat-divider></mat-divider>
