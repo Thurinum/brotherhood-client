@@ -6,13 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatRippleModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRippleModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
@@ -36,14 +37,15 @@ import { AuthInterceptor } from './auth.interceptor';
 		BrowserAnimationsModule,
 
 		MatButtonModule,
-		MatInputModule,
-		MatTabsModule,
-		MatSnackBarModule,
-		MatIconModule,
-		MatDividerModule,
-		MatRippleModule,
 		MatCheckboxModule,
-		MatTooltipModule
+		MatDividerModule,
+		MatIconModule,
+		MatInputModule,
+		MatMenuModule,
+		MatRippleModule,
+		MatSnackBarModule,
+		MatTabsModule,
+		MatTooltipModule,
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

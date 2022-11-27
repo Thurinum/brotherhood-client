@@ -3,6 +3,14 @@
 
 <br />
 
+<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+	<mat-icon>more_horiz</mat-icon>
+</button>
+<mat-menu #overflowMenu="matMenu">
+	<button mat-menu-item><mat-icon>supervisor_account</mat-icon>Request assassin as backup</button>
+	<button mat-menu-item><mat-icon>exit_to_app</mat-icon>Cancel all missions</button>
+</mat-menu>
+
 <section *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
 	<div *ngFor="let target of model?.targets">
 		<h3>{{target.firstName}} {{target.lastName}}</h3>
