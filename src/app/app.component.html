@@ -116,7 +116,8 @@
 			   (remove)="nukeCity($event)"></app-city-list>
 </mat-tab-nav-panel>
 
-<app-city-details [model]="selectedCity"></app-city-details>
+<app-city-details *ngIf="selectedCity"
+			[model]="selectedCity"></app-city-details>
 
 <br />
 <mat-divider></mat-divider>

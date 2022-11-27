@@ -1,3 +1,14 @@
 <h2>{{model?.name}}</h2>
+<p>{{model?.description ?? "There is no description for this city."}}</p>
 
-<p *ngFor="let target of model?.targets">{{target.firstName}} {{target.lastName}}</p>
+<br />
+
+<section *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
+	<div *ngFor="let target of model?.targets">
+		<h3>{{target.firstName}} {{target.lastName}}</h3>
+		<img src="https://localhost:5001/images/{{target.id}}.png" alt="Image de {{target.firstName}}" onerror="this.src = 'https://localhost:5001/images/default.png'">
+	</div>
+</section>
+<ng-template #noTarget>
+	<p><em>There are no targets in this city.</em></p>
+</ng-template>
