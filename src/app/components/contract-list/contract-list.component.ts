@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { City } from 'src/app/models/city.model';
+import { Contract } from 'src/app/models/contract.model';
 import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
-	selector: 'app-city-list',
-	templateUrl: './city-list.component.html',
-	styleUrls: ['./city-list.component.sass'],
+	selector: 'app-contract-list',
+	templateUrl: './contract-list.component.html',
+	styleUrls: ['./contract-list.component.sass'],
 	animations: [
 		trigger(
 			"inOutAnimation",
@@ -15,17 +15,17 @@ import { trigger, style, animate, transition } from '@angular/animations';
 				transition(
 					":enter",
 					[
-						style({ scale: 0.9, opacity: 0 }),
+						style({ scale: 0.9, opacontract: 0 }),
 						animate('0.7s ease-out',
-							style({ scale: 1, opacity: 1 }))
+							style({ scale: 1, opacontract: 1 }))
 					]
 				),
 				transition(
 					':leave',
 					[
-						style({ scale: 1, opacity: 1 }),
+						style({ scale: 1, opacontract: 1 }),
 						animate('0.3s ease-in',
-							style({ scale: 0.6, opacity: 0 }))
+							style({ scale: 0.6, opacontract: 0 }))
 					]
 				)
 			]
@@ -36,26 +36,26 @@ import { trigger, style, animate, transition } from '@angular/animations';
 				transition(
 					":enter",
 					[
-						style({ transform: "translateX(-100px) scaleY(0)", opacity: 0 }),
+						style({ transform: "translateX(-100px) scaleY(0)", opacontract: 0 }),
 						animate('0.7s cubic-bezier(0.8, 0.15, 0.2, 1)',
-							style({ transform: "translateX(0) scaleY(1)", opacity: 1 }))
+							style({ transform: "translateX(0) scaleY(1)", opacontract: 1 }))
 					]
 				),
 				transition(
 					':leave',
 					[
-						style({ transform: "translateX(0px) scaleY(1)", opacity: 1 }),
+						style({ transform: "translateX(0px) scaleY(1)", opacontract: 1 }),
 						animate('0.3s cubic-bezier(0.8, 0.15, 0.2, 1)',
-							style({ transform: "translateX(100px) scaleY(0)", opacity: 0 }))
+							style({ transform: "translateX(100px) scaleY(0)", opacontract: 0 }))
 					]
 				)
 			]
 		)
 	]
 })
-export class CityListComponent {
+export class ContractListComponent {
 	@Input()
-	model: City[] = [];
+	model: Contract[] = [];
 
 	@Input()
 	canAdd: boolean = false;
@@ -64,10 +64,10 @@ export class CityListComponent {
 	add = new EventEmitter<void>();
 
 	@Output()
-	remove = new EventEmitter<City>();
+	remove = new EventEmitter<Contract>();
 
 	@Output()
-	select = new EventEmitter<City>();
+	select = new EventEmitter<Contract>();
 
 	@Output()
 	refresh = new EventEmitter<void>();

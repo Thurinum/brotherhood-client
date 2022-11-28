@@ -1,6 +1,6 @@
 <mat-button-toggle-group appearance="legacy">
 	<mat-button-toggle>Show all</mat-button-toggle>
-	<mat-button-toggle>Group by city</mat-button-toggle>
+	<mat-button-toggle>Group by contract</mat-button-toggle>
 </mat-button-toggle-group>
 <nav>
 	<button mat-mini-fab color="primary" (click)="refresh.next()">
@@ -14,17 +14,17 @@
 
 <section class="card-layout" [@slideXAnimation]
 	   *ngIf="model && model.length > 0; else emptyList">
-	<app-card #card *ngFor="let city of model"
-		    [model]="city" [canRemove]="canAdd"
-		    [selected]="city.id === selectedId"
-		    (select)="select.next(city); selectedId = city.id!"
-		    (remove)="remove.next(city)"
+	<app-card #card *ngFor="let contract of model"
+		    [model]="contract" [canRemove]="canAdd"
+		    [selected]="contract.id === selectedId"
+		    (select)="select.next(contract); selectedId = contract.id!"
+		    (remove)="remove.next(contract)"
 		    [@inOutAnimation]></app-card>
 </section>
 
 <ng-template #emptyList>
 	<div [@slideXAnimation]>
-		<p>There are no cities added. Add cities to see them here.</p>
+		<p>There are no contracts added. Add contracts to see them here.</p>
 		<br />
 	</div>
 </ng-template>

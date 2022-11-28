@@ -1,5 +1,5 @@
 <header>
-	<h1>IntelliBrotherhood&trade; Assassin Manager 2022</h1>
+	<h1>IntelliBrotherhood&trade; Contract Manager 2022</h1>
 	<div class="auth">
 		<button *ngIf="!isLoggedIn" mat-raised-button color="primary" (click)="state = FormState.Login">
 			<mat-icon>account_circle</mat-icon>&nbsp;
@@ -20,23 +20,23 @@
 
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
 	<a mat-tab-link
-	   (click)="showUserCities = false; refreshCities()"
-	   [active]="!showUserCities">Public Missions</a>
+	   (click)="showUserContracts = false; refreshContracts()"
+	   [active]="!showUserContracts">Public Contracts</a>
 	<a *ngIf="isLoggedIn" mat-tab-link
-	   (click)="showUserCities = true; refreshCities()"
-	   [active]="showUserCities">My Missions</a>
+	   (click)="showUserContracts = true; refreshContracts()"
+	   [active]="showUserContracts">My Contracts</a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
-	<app-city-list [model]="cities"
+	<app-contract-list [model]="contracts"
 			   [canAdd]="isLoggedIn"
-			   (refresh)="refreshCities()"
-			   (select)="selectCity($event)"
-			   (add)="state = FormState.AddCity"
-			   (remove)="nukeCity($event)"></app-city-list>
+			   (refresh)="refreshContracts()"
+			   (select)="selectContract($event)"
+			   (add)="state = FormState.AddContract"
+			   (remove)="nukeContract($event)"></app-contract-list>
 </mat-tab-nav-panel>
 
-<app-city-details *ngIf="selectedCity"
-			[model]="selectedCity"></app-city-details>
+<app-contract-details *ngIf="selectedContract"
+			[model]="selectedContract"></app-contract-details>
 
 <br />
 <mat-divider></mat-divider>
@@ -91,36 +91,36 @@
 		</button>
 	</fieldset>
 
-	<fieldset *ngIf="state == FormState.AddCity" [@zoom-animation]>
-		<legend>Register a city</legend>
+	<fieldset *ngIf="state == FormState.AddContract" [@zoom-animation]>
+		<legend>Register a contract</legend>
 		<mat-form-field>
 			<mat-label>Name</mat-label>
-			<input #addCityName matInput type="text" placeholder="Enter city name..." />
-			<mat-hint>Managed assassins will become assignable to the city.</mat-hint>
+			<input #addContractName matInput type="text" placeholder="Enter contract name..." />
+			<mat-hint>Managed assassins will become assignable to the contract.</mat-hint>
 		</mat-form-field>
 		<mat-form-field>
-			<mat-hint>Making a city public allows all mentors to assign assassins within.</mat-hint>
+			<mat-hint>Making a contract public allows all mentors to assign assassins within.</mat-hint>
 			<input matInput [hidden]="true">
-			<mat-checkbox #addCityIsPublic color="primary">Public access</mat-checkbox>
+			<mat-checkbox #addContractIsPublic color="primary">Public access</mat-checkbox>
 		</mat-form-field>
 		<br />
 		<button mat-raised-button color="primary"
-			  (click)="addCity(addCityName.value, addCityIsPublic.checked)">
+			  (click)="addContract(addContractName.value, addContractIsPublic.checked)">
 			<mat-icon>check</mat-icon>
 			Register
 		</button>
 	</fieldset>
 
-	<fieldset *ngIf="state == FormState.AddCityOwner && isLoggedIn">
-		<legend>Post assassin to {{selectedCity?.name}}</legend>
+	<fieldset *ngIf="state == FormState.AddContractOwner && isLoggedIn">
+		<legend>Post assassin to {{selectedContract?.name}}</legend>
 		<mat-form-field>
 			<mat-label>Username or email</mat-label>
-			<input #addCityOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
-			<mat-hint>The assassin will begin hunting Templars in that city.</mat-hint>
+			<input #addContractOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
+			<mat-hint>The assassin will begin hunting Templars in that contract.</mat-hint>
 		</mat-form-field>
 		<br />
 		<button mat-raised-button color="primary"
-			  (click)="addCityAssassin(addCityOwnerName.value, selectedCity)">
+			  (click)="addContractAssassin(addContractOwnerName.value, selectedContract)">
 			<mat-icon>check</mat-icon>
 			Assign
 		</button>

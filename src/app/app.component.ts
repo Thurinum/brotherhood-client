@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Assassin } from './models/assassin.model';
-import { City } from './models/city.model';
+import { Contract } from './models/contract.model';
 import { BrotherhoodService } from './services/brotherhood.service';
 import { HelperService } from './services/helper.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Auth } from './models/auth.interface';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { AssassinationTarget } from './models/target.model';
+import { ContractTarget } from './models/target.model';
 
 enum FormState {
 	None,
 	Login,
 	Register,
-	AddCity,
-	AddCityOwner
+	AddContract,
+	AddContractOwner
 }
 
 @Component({
@@ -23,26 +23,26 @@ enum FormState {
 	animations: [
 		trigger("zoom-animation", [
 			transition(":enter", [
-				style({ opacity: 0, scale: 0.9, height: 0 }),
+				style({ opacontract: 0, scale: 0.9, height: 0 }),
 				animate('0.7s ease-out',
-					style({ opacity: 1, scale: 1 }))
+					style({ opacontract: 1, scale: 1 }))
 			]),
 			transition(':leave', [
-				style({ opacity: 1, scale: 1 }),
+				style({ opacontract: 1, scale: 1 }),
 				animate('0.5s ease-in',
-					style({ opacity: 0, scale: 0.9 }))
+					style({ opacontract: 0, scale: 0.9 }))
 			])
 		]),
 		trigger("form-animation", [
 			transition(":enter", [
-				style({ opacity: 0, backdropFilter: "blur(0px)", scale: 1.25 }),
+				style({ opacontract: 0, backdropFilter: "blur(0px)", scale: 1.25 }),
 				animate('0.3s ease-out',
-					style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }))
+					style({ opacontract: 1, backdropFilter: "blur(50px)", scale: 1 }))
 			]),
 			transition(':leave', [
-				style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }),
+				style({ opacontract: 1, backdropFilter: "blur(50px)", scale: 1 }),
 				animate('0.3s ease-in',
-					style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.75 }))
+					style({ opacontract: 0, backdropFilter: "blur(0px)", scale: 0.75 }))
 			])
 		])
 	]
@@ -50,9 +50,9 @@ enum FormState {
 export class AppComponent {
 	FormState = FormState;
 
-	cities: City[] = []
-	showUserCities: boolean = false
-	selectedCity?: City
+	contracts: Contract[] = []
+	showUserContracts: boolean = false
+	selectedContract?: Contract
 	state: FormState = FormState.None;
 	isLoggedIn: boolean = false
 
@@ -79,7 +79,7 @@ export class AppComponent {
 				this.isLoggedIn = true;
 				this.state = FormState.None;
 
-				this.refreshCities();
+				this.refreshContracts();
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Authentication invalid`, errorResponse);
@@ -90,11 +90,11 @@ export class AppComponent {
 	logout() {
 		localStorage.removeItem("authKey");
 		localStorage.removeItem("authTime");
-		this.showUserCities = false;
+		this.showUserContracts = false;
 		this.helper.message("Logged out.");
 		this.isLoggedIn = false;
 
-		this.refreshCities();
+		this.refreshContracts();
 	}
 
 	register(
@@ -120,127 +120,127 @@ export class AppComponent {
 		);
 	}
 
-	refreshCities() {
-		let request = this.showUserCities ? this.brotherhood.getMyCities() : this.brotherhood.getCities();
+	refreshContracts() {
+		let request = this.showUserContracts ? this.brotherhood.getMyContracts() : this.brotherhood.getContracts();
 
-		this.cities = [];
+		this.contracts = [];
 
 		request.subscribe(
-			(response: HttpResponse<City[]>) => {
+			(response: HttpResponse<Contract[]>) => {
 				if (!response.body) {
-					this.helper.message("Could not fetch cities from the database.");
+					this.helper.message("Could not fetch contracts from the database.");
 					return;
 				}
 
-				this.cities = response.body;
-				console.info("Successfully fetched cities from the database.");
+				this.contracts = response.body;
+				console.info("Successfully fetched contracts from the database.");
 
-				this.cities.forEach(city => {
-					const name = city.name.toLowerCase();
-					const cachedImage = localStorage.getItem("cityImg_" + name);
+				this.contracts.forEach(contract => {
+					const name = contract.name.toLowerCase();
+					const cachedImage = localStorage.getItem("contractImg_" + name);
 
-					if (cachedImage) {
-						city.image = cachedImage;
-					} else {
-						this.brotherhood.getImageFromPlace(name).subscribe(
-							(response: any) => {
-								const url: string | null = response?.photos[0]?.image?.mobile;
+					// if (cachedImage) {
+					// 	contract.image = cachedImage;
+					// } else {
+					// 	this.brotherhood.getImageFromPlace(name).subscribe(
+					// 		(response: any) => {
+					// 			const url: string | null = response?.photos[0]?.image?.mobile;
 
-								if (url) {
-									city.image = url;
-									localStorage.setItem("cityImg_" + name, url);
-								} else {
-									console.warn(`No image found for city '${name}'.`);
-									console.log(response);
-								}
-							},
-							(errorResponse: HttpErrorResponse) => {
-								console.error(`Failed to fetch image for city '${name}'. Image for city '${name}' will now be skipped.`);
-								localStorage.setItem("cityImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
-							}
-						);
-					}
+					// 			if (url) {
+					// 				contract.image = url;
+					// 				localStorage.setItem("contractImg_" + name, url);
+					// 			} else {
+					// 				console.warn(`No image found for contract '${name}'.`);
+					// 				console.log(response);
+					// 			}
+					// 		},
+					// 		(errorResponse: HttpErrorResponse) => {
+					// 			console.error(`Failed to fetch image for contract '${name}'. Image for contract '${name}' will now be skipped.`);
+					// 			localStorage.setItem("contractImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
+					// 		}
+					// 	);
+					// }
 				})
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
 					this.helper.httpError("Could not connect to the database. Is the API server running?", errorResponse);
 				else
-					this.helper.httpError("Could not fetch cities from the database.", errorResponse);
+					this.helper.httpError("Could not fetch contracts from the database.", errorResponse);
 			}
 		);
 	}
 
-	addCity(name: string, isPublic: boolean) {
-		const city: City = new City(name, isPublic);
+	addContract(name: string, isPublic: boolean) {
+		const contract: Contract = new Contract(name, isPublic);
 
-		this.brotherhood.createCity(city).subscribe(
-			(response: HttpResponse<City[]>) => {
-				this.helper.message(`Successfully added city '${city.name}'.`);
-				this.refreshCities();
+		this.brotherhood.createContract(contract).subscribe(
+			(response: HttpResponse<Contract[]>) => {
+				this.helper.message(`Successfully added contract '${contract.name}'.`);
+				this.refreshContracts();
 				this.state = FormState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to add city`, errorResponse);
+				this.helper.httpError(`Failed to add contract`, errorResponse);
 			}
 		)
 	}
 
-	addCityAssassin(owner?: string, city?: City) {
+	addContractAssassin(owner?: string, contract?: Contract) {
 		if (!owner) {
 			this.helper.message("Please enter an assassin name.");
 			return;
 		}
 
-		if (!city) {
+		if (!contract) {
 			this.helper.message("Something went wrong. Please retry.");
 			return;
 		}
 
-		this.brotherhood.shareCity(city, owner).subscribe(
-			(response: HttpResponse<City[]>) => {
-				this.helper.message(`Successfully assigned ${owner} to ${city.name}.`);
+		this.brotherhood.shareContract(contract, owner).subscribe(
+			(response: HttpResponse<Contract[]>) => {
+				this.helper.message(`Successfully assigned ${owner} to ${contract.name}.`);
 				this.state = FormState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to assign ${owner} to ${city.name}`, errorResponse);
+				this.helper.httpError(`Failed to assign ${owner} to ${contract.name}`, errorResponse);
 			}
 		)
 	}
 
-	nukeCity(city?: City) {
-		this.brotherhood.deleteCity(city?.id).subscribe(
-			(response: HttpResponse<City[]>) => {
-				this.helper.message(`Successfully unregistered ${city?.name}.`);
-				this.refreshCities();
+	nukeContract(contract?: Contract) {
+		this.brotherhood.deleteContract(contract?.id).subscribe(
+			(response: HttpResponse<Contract[]>) => {
+				this.helper.message(`Successfully unregistered ${contract?.name}.`);
+				this.refreshContracts();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove ${city?.name}`, errorResponse);
+				this.helper.httpError(`Failed to remove ${contract?.name}`, errorResponse);
 			}
 		)
 	}
 
-	selectCity(city: City) {
+	selectContract(contract: Contract) {
 		if (!this.isLoggedIn)
-			this.helper.message("Please log in to assign assassins to cities.");
+			this.helper.message("Please log in to assign assassins to contracts.");
 
-		this.brotherhood.getTargetsInCity(city.id!).subscribe(
-			(response: HttpResponse<AssassinationTarget[]>) => {
-				this.selectedCity = city;
+		this.brotherhood.getTargetsInContract(contract.id!).subscribe(
+			(response: HttpResponse<ContractTarget[]>) => {
+				this.selectedContract = contract;
 
 				if (!response.body) {
 					this.helper.message("Could not fetch targets from the database.");
 					return;
 				}
 
-				this.selectedCity.targets = response.body;
+				this.selectedContract.targets = response.body;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to get assassination targets within ${city?.name}`, errorResponse);
+				this.helper.httpError(`Failed to get assassination targets within ${contract?.name}`, errorResponse);
 			}
 		);
 
-		// this.uiState = "addCityOwner"; TODO: Reimplement
+		// this.uiState = "addContractOwner"; TODO: Reimplement
 	}
 
 
@@ -257,7 +257,7 @@ export class AppComponent {
 		if (validToStr && new Date() > new Date(validToStr))
 			this.logout();
 
-		this.refreshCities();
+		this.refreshContracts();
 
 	}
 }

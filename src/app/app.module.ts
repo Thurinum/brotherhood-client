@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -19,20 +18,19 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
-import { CityListComponent } from './components/city-list/city-list.component';
-import { CityDetailsComponent } from './components/city-details/city-details.component';
+import { ContractListComponent } from './components/contract-list/contract-list.component';
+import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CardComponent,
-		CityListComponent,
-		CityDetailsComponent
+		ContractListComponent,
+		ContractDetailsComponent
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule,
 		FormsModule,
 		HttpClientModule,
 		BrowserAnimationsModule,

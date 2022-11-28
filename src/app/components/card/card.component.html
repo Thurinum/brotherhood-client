@@ -1,6 +1,6 @@
 <div class="card" matRipple [class.selected]="selected" (click)="select.next(model)">
 	<mat-icon class="card-isPublic"
-		    matTooltip="This city can be viewed by {{model.isPublic ? 'everyone' : 'you only'}}."
+		    matTooltip="This contract can be viewed by {{model.isPublic ? 'everyone' : 'you only'}}."
 		    matTooltipPosition="above">
 		{{model.isPublic ? "public" : "lock"}}
 	</mat-icon>

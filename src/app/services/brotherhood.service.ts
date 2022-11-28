@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { City } from "../models/city.model";
+import { Contract } from "../models/contract.model";
 import { Assassin } from "../models/assassin.model";
 import { HttpHeaders } from "@angular/common/http";
-import { AssassinationTarget } from "../models/target.model";
+import { ContractTarget } from "../models/target.model";
 
 
 @Injectable({ providedIn: "root" })
@@ -16,28 +16,28 @@ export class BrotherhoodService {
 		return this.http.post<any>("https://localhost:5001/api/assassins/register", user);
 	}
 
-	getCities(): any {
-		return this.http.get<City[]>("https://localhost:5001/api/cities/public", {observe: "response"});
+	getContracts(): any {
+		return this.http.get<Contract[]>("https://localhost:5001/api/contracts/public", {observe: "response"});
 	}
 
-	getTargetsInCity(id: number): any {
-		return this.http.get<AssassinationTarget[]>(`https://localhost:5001/api/cities/${id}/targets`, {observe: "response"});
+	getTargetsInContract(id: number): any {
+		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contracts/${id}/targets`, {observe: "response"});
 	}
 
-	getMyCities(): any {
-		return this.http.get<City[]>("https://localhost:5001/api/cities/user", {observe: "response"});
+	getMyContracts(): any {
+		return this.http.get<Contract[]>("https://localhost:5001/api/contracts/user", {observe: "response"});
 	}
 
-	createCity(city: City): any {
-		return this.http.post<City>("https://localhost:5001/api/cities/add", city);
+	createContract(contract: Contract): any {
+		return this.http.post<Contract>("https://localhost:5001/api/contracts/add", contract);
 	}
 
-	shareCity(city: City, assassin: string): any {
-		return this.http.put<City>(`https://localhost:5001/api/cities/share/${assassin}`, city);
+	shareContract(contract: Contract, assassin: string): any {
+		return this.http.put<Contract>(`https://localhost:5001/api/contracts/share/${assassin}`, contract);
 	}
 
-	deleteCity(id?: number): any {
-		return this.http.delete<City>(`https://localhost:5001/api/cities/${id}/nuke`);
+	deleteContract(id?: number): any {
+		return this.http.delete<Contract>(`https://localhost:5001/api/contracts/${id}/nuke`);
 	}
 
 	getImageFromPlace(place: string): any {
