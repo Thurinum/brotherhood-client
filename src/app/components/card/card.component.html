@@ -1,13 +1,13 @@
 <div class="card" matRipple [class.selected]="selected" (click)="select.next(model)">
 	<mat-icon class="card-isPublic"
-		    matTooltip="This contract can be viewed by {{model.isPublic ? 'everyone' : 'you only'}}."
+		    matTooltip="This contract can be viewed by {{model?.isPublic ? 'everyone' : 'you only'}}."
 		    matTooltipPosition="above">
-		{{model.isPublic ? "public" : "lock"}}
+		{{model?.isPublic ? "public" : "lock"}}
 	</mat-icon>
 	<img class="card-image"
-	     [src]="model.image" draggable="false"
+	     src="http://localhost:5001/images/{{model?.featuredContractId}}.png" draggable="false"
 	     onerror="this.src = 'https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg'">
-	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model.name ?? "?"}}</marquee>
+	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{model?.codename ?? "?"}}</marquee>
 </div>
 <button *ngIf="canRemove" class="card-delete" (click)="remove.next(model)" mat-fab color="warn">
 	<mat-icon>remove</mat-icon>

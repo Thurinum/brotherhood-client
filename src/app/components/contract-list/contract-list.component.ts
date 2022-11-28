@@ -36,17 +36,17 @@ import { trigger, style, animate, transition } from '@angular/animations';
 				transition(
 					":enter",
 					[
-						style({ transform: "translateX(-100px) scaleY(0)", opacontract: 0 }),
+						style({ transform: "translateX(-100px) scaleY(0)", opacity: 0 }),
 						animate('0.7s cubic-bezier(0.8, 0.15, 0.2, 1)',
-							style({ transform: "translateX(0) scaleY(1)", opacontract: 1 }))
+							style({ transform: "translateX(0) scaleY(1)", opacity: 1 }))
 					]
 				),
 				transition(
 					':leave',
 					[
-						style({ transform: "translateX(0px) scaleY(1)", opacontract: 1 }),
+						style({ transform: "translateX(0px) scaleY(1)", opacity: 1 }),
 						animate('0.3s cubic-bezier(0.8, 0.15, 0.2, 1)',
-							style({ transform: "translateX(100px) scaleY(0)", opacontract: 0 }))
+							style({ transform: "translateX(100px) scaleY(0)", opacity: 0 }))
 					]
 				)
 			]

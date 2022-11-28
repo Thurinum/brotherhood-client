@@ -7,6 +7,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Auth } from './models/auth.interface';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ContractTarget } from './models/target.model';
+import { City } from './models/city.model';
 
 enum FormState {
 	None,
@@ -23,26 +24,26 @@ enum FormState {
 	animations: [
 		trigger("zoom-animation", [
 			transition(":enter", [
-				style({ opacontract: 0, scale: 0.9, height: 0 }),
+				style({ opacity: 0, scale: 0.9, height: 0 }),
 				animate('0.7s ease-out',
-					style({ opacontract: 1, scale: 1 }))
+					style({ opacity: 1, scale: 1 }))
 			]),
 			transition(':leave', [
-				style({ opacontract: 1, scale: 1 }),
+				style({ opacity: 1, scale: 1 }),
 				animate('0.5s ease-in',
-					style({ opacontract: 0, scale: 0.9 }))
+					style({ opacity: 0, scale: 0.9 }))
 			])
 		]),
 		trigger("form-animation", [
 			transition(":enter", [
-				style({ opacontract: 0, backdropFilter: "blur(0px)", scale: 1.25 }),
+				style({ opacity: 0, backdropFilter: "blur(0px)", scale: 1.25 }),
 				animate('0.3s ease-out',
-					style({ opacontract: 1, backdropFilter: "blur(50px)", scale: 1 }))
+					style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }))
 			]),
 			transition(':leave', [
-				style({ opacontract: 1, backdropFilter: "blur(50px)", scale: 1 }),
+				style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }),
 				animate('0.3s ease-in',
-					style({ opacontract: 0, backdropFilter: "blur(0px)", scale: 0.75 }))
+					style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.75 }))
 			])
 		])
 	]
@@ -51,6 +52,7 @@ export class AppComponent {
 	FormState = FormState;
 
 	contracts: Contract[] = []
+	cities: City[] = []
 	showUserContracts: boolean = false
 	selectedContract?: Contract
 	state: FormState = FormState.None;
@@ -136,7 +138,7 @@ export class AppComponent {
 				console.info("Successfully fetched contracts from the database.");
 
 				this.contracts.forEach(contract => {
-					const name = contract.name.toLowerCase();
+					const name = contract.codename.toLowerCase();
 					const cachedImage = localStorage.getItem("contractImg_" + name);
 
 					// if (cachedImage) {
@@ -171,12 +173,31 @@ export class AppComponent {
 		);
 	}
 
-	addContract(name: string, isPublic: boolean) {
-		const contract: Contract = new Contract(name, isPublic);
+	refreshCities() {
+		this.cities = [];
+
+		this.brotherhood.getCities().subscribe(
+			(response: HttpResponse<City[]>) => {
+				if (!response.body) {
+					this.helper.message("Could not fetch cities from the database.");
+					return;
+				}
+
+				this.cities = response.body;
+				console.info("Successfully fetched cities from the database.");
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError("Could not fetch cities from the database.", errorResponse);
+			}
+		);
+	}
+
+	addContract(name: string, city: City, isPublic: boolean) {
+		const contract: Contract = new Contract(name, city, isPublic);
 
 		this.brotherhood.createContract(contract).subscribe(
 			(response: HttpResponse<Contract[]>) => {
-				this.helper.message(`Successfully added contract '${contract.name}'.`);
+				this.helper.message(`Successfully added contract '${contract.codename}'.`);
 				this.refreshContracts();
 				this.state = FormState.None;
 			},
@@ -199,11 +220,11 @@ export class AppComponent {
 
 		this.brotherhood.shareContract(contract, owner).subscribe(
 			(response: HttpResponse<Contract[]>) => {
-				this.helper.message(`Successfully assigned ${owner} to ${contract.name}.`);
+				this.helper.message(`Successfully assigned ${owner} to ${contract.codename}.`);
 				this.state = FormState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to assign ${owner} to ${contract.name}`, errorResponse);
+				this.helper.httpError(`Failed to assign ${owner} to ${contract.codename}`, errorResponse);
 			}
 		)
 	}
@@ -211,11 +232,11 @@ export class AppComponent {
 	nukeContract(contract?: Contract) {
 		this.brotherhood.deleteContract(contract?.id).subscribe(
 			(response: HttpResponse<Contract[]>) => {
-				this.helper.message(`Successfully unregistered ${contract?.name}.`);
+				this.helper.message(`Successfully unregistered ${contract?.codename}.`);
 				this.refreshContracts();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove ${contract?.name}`, errorResponse);
+				this.helper.httpError(`Failed to remove ${contract?.codename}`, errorResponse);
 			}
 		)
 	}
@@ -236,7 +257,7 @@ export class AppComponent {
 				this.selectedContract.targets = response.body;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to get assassination targets within ${contract?.name}`, errorResponse);
+				this.helper.httpError(`Failed to get assassination targets within ${contract?.codename}`, errorResponse);
 			}
 		);
 

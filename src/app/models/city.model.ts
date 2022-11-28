@@ -1,4 +1,4 @@
-export class Contract {
+export class City {
 	id!: number
 	image?: string
 

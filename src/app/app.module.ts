@@ -15,6 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
@@ -45,7 +46,8 @@ import { AuthInterceptor } from './auth.interceptor';
 		MatSnackBarModule,
 		MatTabsModule,
 		MatTooltipModule,
-		MatButtonToggleModule
+		MatButtonToggleModule,
+		MatSelectModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
