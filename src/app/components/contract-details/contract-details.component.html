@@ -11,8 +11,8 @@
 	<button mat-menu-item><mat-icon>exit_to_app</mat-icon>Cancel all missions</button>
 </mat-menu>
 
-<section *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
-	<div *ngFor="let target of model?.targets">
+<section class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
+	<div class="carousel-item" *ngFor="let target of model?.targets">
 		<h3>{{target.firstName}} {{target.lastName}}</h3>
 		<img src="https://localhost:5001/images/{{target.id}}.png" alt="Image de {{target.firstName}}" onerror="this.src = 'https://localhost:5001/images/default.png'">
 	</div>
