@@ -107,6 +107,7 @@
 			<mat-label>Location</mat-label>
 			<mat-select #addContractCity>
 				<mat-option *ngFor="let city of cities" [value]="city">
+					<mat-icon><img [src]="city.image"></mat-icon>
 					{{ city.name }}
 				</mat-option>
 			</mat-select>

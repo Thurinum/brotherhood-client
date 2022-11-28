@@ -136,33 +136,6 @@ export class AppComponent {
 
 				this.contracts = response.body;
 				console.info("Successfully fetched contracts from the database.");
-
-				this.contracts.forEach(contract => {
-					const name = contract.codename.toLowerCase();
-					const cachedImage = localStorage.getItem("contractImg_" + name);
-
-					// if (cachedImage) {
-					// 	contract.image = cachedImage;
-					// } else {
-					// 	this.brotherhood.getImageFromPlace(name).subscribe(
-					// 		(response: any) => {
-					// 			const url: string | null = response?.photos[0]?.image?.mobile;
-
-					// 			if (url) {
-					// 				contract.image = url;
-					// 				localStorage.setItem("contractImg_" + name, url);
-					// 			} else {
-					// 				console.warn(`No image found for contract '${name}'.`);
-					// 				console.log(response);
-					// 			}
-					// 		},
-					// 		(errorResponse: HttpErrorResponse) => {
-					// 			console.error(`Failed to fetch image for contract '${name}'. Image for contract '${name}' will now be skipped.`);
-					// 			localStorage.setItem("contractImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
-					// 		}
-					// 	);
-					// }
-				})
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
@@ -185,6 +158,33 @@ export class AppComponent {
 
 				this.cities = response.body;
 				console.info("Successfully fetched cities from the database.");
+
+				this.cities.forEach(city => {
+					const name = city.name.toLowerCase();
+					const cachedImage = localStorage.getItem("contractImg_" + name);
+
+					if (cachedImage) {
+						city.image = cachedImage;
+					} else {
+						this.brotherhood.getImageFromPlace(name).subscribe(
+							(response: any) => {
+								const url: string | null = response?.photos[0]?.image?.mobile;
+
+								if (url) {
+									city.image = url;
+									localStorage.setItem("contractImg_" + name, url);
+								} else {
+									console.warn(`No image found for city '${name}'.`);
+									console.log(response);
+								}
+							},
+							(errorResponse: HttpErrorResponse) => {
+								console.error(`Failed to fetch image for city '${name}', which will now be skipped.`);
+								localStorage.setItem("contractImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
+							}
+						);
+					}
+				})
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError("Could not fetch cities from the database.", errorResponse);
