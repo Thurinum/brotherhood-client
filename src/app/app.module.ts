@@ -47,7 +47,7 @@ import { AuthInterceptor } from './auth.interceptor';
 		MatTabsModule,
 		MatTooltipModule,
 		MatButtonToggleModule,
-		MatSelectModule
+		MatSelectModule,
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
