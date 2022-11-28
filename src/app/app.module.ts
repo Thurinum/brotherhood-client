@@ -28,7 +28,7 @@ import { AuthInterceptor } from './auth.interceptor';
 		AppComponent,
 		CardComponent,
 		ContractListComponent,
-		ContractDetailsComponent
+		ContractDetailsComponent,
 	],
 	imports: [
 		BrowserModule,
