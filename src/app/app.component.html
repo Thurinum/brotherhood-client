@@ -37,7 +37,8 @@
 
 <app-contract-details *ngIf="selectedContract"
 			    [model]="selectedContract"
-			    (share)="this.state = FormState.AddContractOwner"></app-contract-details>
+			    (share)="state = FormState.AddContractOwner"
+			    (addTarget)="state = FormState.AddContractTarget"></app-contract-details>
 
 <br />
 <mat-divider></mat-divider>
@@ -138,6 +139,24 @@
 			  (click)="addContractAssassin(addContractOwnerName.value, selectedContract)">
 			<mat-icon>check</mat-icon>
 			Send help request
+		</button>
+	</fieldset>
+
+	<fieldset *ngIf="state == FormState.AddContractTarget">
+		<legend>Add a target to {{selectedContract?.codename}}</legend>
+		<mat-form-field>
+			<mat-label>Target</mat-label>
+			<mat-select #addContractTarget placeholder="Choose a target...">
+				<mat-option *ngFor="let target of targets" [value]="target">
+					<mat-icon [style.border-radius.px]=50>add</mat-icon>
+					{{ target.firstName }} {{target.lastName}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<br />
+		<button mat-raised-button color="primary" (click)="addTargetToContract(addContractTarget.value)">
+			<mat-icon>check</mat-icon>
+			Add target
 		</button>
 	</fieldset>
 </section>

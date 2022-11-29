@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
@@ -35,6 +38,7 @@ import { AuthInterceptor } from './auth.interceptor';
 	imports: [
 		BrowserModule,
 		FormsModule,
+		RouterModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
 
@@ -50,6 +54,8 @@ import { AuthInterceptor } from './auth.interceptor';
 		MatTooltipModule,
 		MatButtonToggleModule,
 		MatSelectModule,
+
+		CarouselModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

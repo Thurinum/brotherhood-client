@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Contract } from 'src/app/models/contract.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContractTarget } from 'src/app/models/target.model';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
 	selector: 'app-contract-target-details',
@@ -9,6 +9,5 @@ import { ContractTarget } from 'src/app/models/target.model';
 })
 export class ContractTargetDetailsComponent {
 	@Input() target!: ContractTarget
-
 	@Output() share = new EventEmitter<void>()
 }

@@ -5,18 +5,28 @@
 
 <br />
 
-<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+<button mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.next()">
+	<mat-icon>add</mat-icon>
+</button>
+<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu" >
 	<mat-icon>more_horiz</mat-icon>
 </button>
 <mat-menu #overflowMenu="matMenu">
-	<button mat-menu-item *ngIf="!model?.isPublic" (click)="share.next()"><mat-icon>supervisor_account</mat-icon>Request assassin as backup</button>
-	<button mat-menu-item><mat-icon>exit_to_app</mat-icon>Add target to contract</button>
-	<button mat-menu-item><mat-icon>exit_to_app</mat-icon>Cancel all missions</button>
+	<button mat-menu-item *ngIf="!model?.isPublic" (click)="share.next()">
+		<mat-icon>supervisor_account</mat-icon>Request assassin as backup
+	</button>
+	<button mat-menu-item>
+		<mat-icon>exit_to_app</mat-icon>Cancel all missions
+	</button>
 </mat-menu>
 
-<section class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
-	<app-contract-target-details class="carousel-item" *ngFor="let target of model?.targets" [target]="target"></app-contract-target-details>
-</section>
+<owl-carousel-o class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
+	<ng-container *ngFor="let target of model?.targets">
+		<ng-template carouselSlide>
+			<app-contract-target-details class="carousel-item" [target]="target" [title]="target.firstName"></app-contract-target-details>
+		</ng-template>
+	</ng-container>
+</owl-carousel-o>
 <ng-template #noTarget>
 	<p><em>There are no targets in this contract.</em></p>
 </ng-template>

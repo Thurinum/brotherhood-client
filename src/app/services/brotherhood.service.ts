@@ -30,6 +30,10 @@ export class BrotherhoodService {
 		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/${id}/targets`, {observe: "response"});
 	}
 
+	addContractTarget(contractId: number, target: ContractTarget) {
+		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/${contractId}/target/add`, target);
+	}
+
 	createContract(contract: Contract): any {
 		return this.http.post<Contract>("https://localhost:5001/api/contract/create", contract);
 	}
@@ -44,6 +48,10 @@ export class BrotherhoodService {
 
 	getCities(): any {
 		return this.http.get<City[]>("https://localhost:5001/api/cities", {observe: "response"});
+	}
+
+	getTargets(): any {
+		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/targets`, {observe: "response"});
 	}
 
 	// getContractsInCity(city: City): any {

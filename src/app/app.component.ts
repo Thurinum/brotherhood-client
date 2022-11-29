@@ -15,7 +15,8 @@ enum FormState {
 	Login,
 	Register,
 	AddContract,
-	AddContractOwner
+	AddContractOwner,
+	AddContractTarget
 }
 
 @Component({
@@ -54,6 +55,7 @@ export class AppComponent {
 
 	contracts: Contract[] = []
 	cities: City[] = []
+	targets: ContractTarget[] = []
 	showUserContracts: boolean = false
 	selectedContract?: Contract
 	state: FormState = FormState.None;
@@ -147,6 +149,28 @@ export class AppComponent {
 		);
 	}
 
+	refreshContractTargets() {
+		this.targets = [];
+
+		this.brotherhood.getTargets().subscribe(
+			(response: HttpResponse<ContractTarget[]>) => {
+				if (!response.body) {
+					this.helper.message("Could not fetch contract targets from the database.");
+					return;
+				}
+
+				this.targets = response.body;
+				console.info("Successfully fetched contract targets from the database.");
+			},
+			(errorResponse: HttpErrorResponse) => {
+				if (errorResponse.status === 0)
+					this.helper.httpError("Could not connect to the database. Is the API server running?", errorResponse);
+				else
+					this.helper.httpError("Could not fetch contract targets from the database.", errorResponse);
+			}
+		);
+	}
+
 	refreshCities() {
 		this.cities = [];
 
@@ -232,6 +256,18 @@ export class AppComponent {
 		)
 	}
 
+	addTargetToContract(target: ContractTarget) {
+		this.brotherhood.addContractTarget(this.selectedContract?.id!, target).subscribe(
+			(response: any) => {
+				this.selectContract(this.selectedContract!);
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to add target ${target.firstName} ${target.lastName} to contract '${this.selectedContract?.codename}'`, errorResponse);
+			}
+			)
+		this.state = FormState.None;
+	}
+
 	nukeContract(contract?: Contract) {
 		this.brotherhood.deleteContract(contract?.id).subscribe(
 			(response: HttpResponse<Contract[]>) => {
@@ -279,5 +315,9 @@ export class AppComponent {
 			this.logout();
 
 		this.refreshContracts();
+
+		if (this.isLoggedIn) {
+			this.refreshContractTargets();
+		}
 	}
 }
