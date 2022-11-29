@@ -8,6 +8,7 @@ import { Auth } from './models/auth.interface';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ContractTarget } from './models/target.model';
 import { City } from './models/city.model';
+import { ContractShareDTO } from './models/contractShareDTO';
 
 enum FormState {
 	None,
@@ -218,8 +219,10 @@ export class AppComponent {
 			return;
 		}
 
-		this.brotherhood.shareContract(contract, owner).subscribe(
-			(response: HttpResponse<Contract[]>) => {
+		const dto: ContractShareDTO = new ContractShareDTO(contract.id, owner);
+
+		this.brotherhood.shareContract(dto).subscribe(
+			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully assigned ${owner} to ${contract.codename}.`);
 				this.state = FormState.None;
 			},

@@ -5,6 +5,7 @@ import { Assassin } from "../models/assassin.model";
 import { HttpHeaders } from "@angular/common/http";
 import { ContractTarget } from "../models/target.model";
 import { City } from "../models/city.model";
+import { ContractShareDTO } from "../models/contractShareDTO";
 
 
 @Injectable({ providedIn: "root" })
@@ -33,11 +34,8 @@ export class BrotherhoodService {
 		return this.http.post<Contract>("https://localhost:5001/api/contract/add", contract);
 	}
 
-	shareContract(contract: Contract, assassinId: string): any {
-		return this.http.put<Contract>(`https://localhost:5001/api/contract/share`, {
-			contractId: contract.id.toString(),
-			assassinId: assassinId
-		});
+	shareContract(dto: ContractShareDTO): any {
+		return this.http.put<ContractShareDTO>(`https://localhost:5001/api/contract/share`, dto);
 	}
 
 	deleteContract(id?: number): any {
