@@ -18,27 +18,32 @@
 
 <br />
 
-<nav mat-tab-nav-bar mat-align-tabs="center" [tabPanel]="tabPanel">
-	<a mat-tab-link (click)="showUserContracts = false; refreshContracts()" [active]="!showUserContracts">
-		<mat-icon>public</mat-icon>&nbsp;Public
-		Contracts
-	</a>
-	<a *ngIf="isLoggedIn" mat-tab-link (click)="showUserContracts = true; refreshContracts()"
-		[active]="showUserContracts">
-		<mat-icon>person_pin</mat-icon>&nbsp;My Contracts
-	</a>
-</nav>
-<mat-tab-nav-panel #tabPanel>
-	<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
-		(select)="selectContract($event)" (add)="state = FormState.AddContract;refreshCities()"
-		(remove)="nukeContract($event)"></app-contract-list>
-</mat-tab-nav-panel>
-
-<mat-tab-group dynamicHeight mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center">
 	<mat-tab>
 		<ng-template mat-tab-label>
-			<mat-icon>person_outline</mat-icon>
-			<span>Targets</span>
+			<span class="tab-label" (click)="showUserContracts = false; refreshContracts()">
+				<mat-icon>public</mat-icon>&nbsp;Public Contracts
+			</span>
+		</ng-template>
+		<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+			(select)="selectContract($event)" (add)="state = FormState.AddContract;refreshCities()"
+			(remove)="nukeContract($event)"></app-contract-list>
+	</mat-tab>
+	<mat-tab>
+		<ng-template mat-tab-label>
+			<span class="tab-label" (click)="showUserContracts = true; refreshContracts()">
+				<mat-icon>lock</mat-icon>&nbsp;My Contracts
+			</span>
+		</ng-template>
+		<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+			(select)="selectContract($event)" (add)="state = FormState.AddContract;refreshCities()"
+			(remove)="nukeContract($event)"></app-contract-list>
+	</mat-tab>
+	<mat-tab>
+		<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon>person_outline</mat-icon>&nbsp;Targets
+			</span>
 		</ng-template>
 		<app-contract-target-list [targets]="targets"></app-contract-target-list>
 	</mat-tab>
