@@ -124,7 +124,7 @@ export class AppComponent {
 	}
 
 	refreshContracts() {
-		let request = this.showUserContracts ? this.brotherhood.getMyContracts() : this.brotherhood.getContracts();
+		let request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
 
 		this.contracts = [];
 
@@ -248,7 +248,7 @@ export class AppComponent {
 		if (!this.isLoggedIn)
 			this.helper.message("Please log in to assign assassins to contracts.");
 
-		this.brotherhood.getTargetsInContract(contract.id!).subscribe(
+		this.brotherhood.getContractTargets(contract.id!).subscribe(
 			(response: HttpResponse<ContractTarget[]>) => {
 				this.selectedContract = contract;
 
