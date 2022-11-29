@@ -275,6 +275,7 @@ export class AppComponent {
 			(response: HttpResponse<Contract[]>) => {
 				this.helper.message(`Successfully unregistered ${contract?.codename}.`);
 				this.refreshContracts();
+				this.selectedContract = undefined;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to remove ${contract?.codename}`, errorResponse);
