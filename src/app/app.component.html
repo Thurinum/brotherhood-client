@@ -101,7 +101,8 @@
 		</mat-form-field>
 		<mat-form-field [style.top.px]=12>
 			<mat-label>Briefing</mat-label>
-			<textarea #addContractDescription matInput [style.height.px]=150 placeholder="Enter contract briefing..."></textarea>
+			<textarea #addContractDescription matInput maxlength="300" [style.height.px]=150 placeholder="Enter contract briefing..."></textarea>
+			<mat-hint align="end">{{addContractDescription.value.length}}/300</mat-hint>
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Location</mat-label>
