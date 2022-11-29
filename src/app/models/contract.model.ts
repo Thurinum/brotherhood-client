@@ -5,12 +5,12 @@ import { ContractTarget } from "./target.model"
 export class Contract {
 	id!: number
 	featuredContractId?: number
-	briefing?: string
 	assassins: Assassin[] = []
 	targets: ContractTarget[] = []
 
 	constructor(
 		public codename: string,
+		public briefing: string,
 		public city: City,
 		public isPublic: boolean
 	) {}

@@ -193,8 +193,8 @@ export class AppComponent {
 		);
 	}
 
-	addContract(name: string, city: City, isPublic: boolean) {
-		const contract: Contract = new Contract(name, city, isPublic);
+	addContract(codename: string, briefing: string, city: City, isPublic: boolean) {
+		const contract: Contract = new Contract(codename, briefing, city, isPublic);
 
 		this.brotherhood.createContract(contract).subscribe(
 			(response: HttpResponse<Contract[]>) => {
