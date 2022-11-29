@@ -26,6 +26,8 @@ import { ContractListComponent } from './components/contract-list/contract-list.
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 import { ContractTargetDetailsComponent } from './components/contract-details/contract-target-details/contract-target-details.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { ContractTargetListComponent } from './components/contract-target-list/contract-target-list.component';
+import { CityListComponent } from './components/city-list/city-list.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +35,9 @@ import { AuthInterceptor } from './auth.interceptor';
 		CardComponent,
 		ContractListComponent,
 		ContractDetailsComponent,
-		ContractTargetDetailsComponent
+		ContractTargetDetailsComponent,
+  ContractTargetListComponent,
+  CityListComponent
 	],
 	imports: [
 		BrowserModule,

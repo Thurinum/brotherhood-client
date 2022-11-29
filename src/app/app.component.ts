@@ -16,7 +16,8 @@ enum FormState {
 	Register,
 	AddContract,
 	AddContractOwner,
-	AddContractTarget
+	AddContractTarget,
+	EditContractTarget
 }
 
 @Component({
@@ -58,6 +59,7 @@ export class AppComponent {
 	targets: ContractTarget[] = []
 	showUserContracts: boolean = false
 	selectedContract?: Contract
+	selectedTarget?: ContractTarget
 	state: FormState = FormState.None;
 	isLoggedIn: boolean = false
 
@@ -315,6 +317,7 @@ export class AppComponent {
 			this.logout();
 
 		this.refreshContracts();
+		this.refreshCities();
 
 		if (this.isLoggedIn) {
 			this.refreshContractTargets();
