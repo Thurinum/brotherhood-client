@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { ContractListComponent } from './components/contract-list/contract-list.component';
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
+import { ContractTargetDetailsComponent } from './components/contract-details/contract-target-details/contract-target-details.component';
 import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AuthInterceptor } from './auth.interceptor';
 		CardComponent,
 		ContractListComponent,
 		ContractDetailsComponent,
+		ContractTargetDetailsComponent
 	],
 	imports: [
 		BrowserModule,

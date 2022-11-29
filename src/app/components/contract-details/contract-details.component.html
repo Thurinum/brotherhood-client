@@ -10,14 +10,12 @@
 </button>
 <mat-menu #overflowMenu="matMenu">
 	<button mat-menu-item *ngIf="!model?.isPublic" (click)="share.next()"><mat-icon>supervisor_account</mat-icon>Request assassin as backup</button>
+	<button mat-menu-item><mat-icon>exit_to_app</mat-icon>Add target to contract</button>
 	<button mat-menu-item><mat-icon>exit_to_app</mat-icon>Cancel all missions</button>
 </mat-menu>
 
 <section class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
-	<div class="carousel-item" *ngFor="let target of model?.targets">
-		<h3>{{target.firstName}} {{target.lastName}}</h3>
-		<img src="https://localhost:5001/images/{{target.id}}.webp" alt="Image de {{target.firstName}}" onerror="this.src = 'https://localhost:5001/images/default.png'">
-	</div>
+	<app-contract-target-details class="carousel-item" *ngFor="let target of model?.targets" [target]="target"></app-contract-target-details>
 </section>
 <ng-template #noTarget>
 	<p><em>There are no targets in this contract.</em></p>

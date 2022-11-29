@@ -1,0 +1,26 @@
+<div class="carousel-item">
+	<h3>{{target.firstName}} {{target.lastName}}</h3>
+	<img src="https://localhost:5001/images/{{target.id}}.webp" alt="Image de {{target.firstName}}"
+		onerror="this.src = 'https://localhost:5001/images/default.png'">
+
+	<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+		<mat-icon>more_horiz</mat-icon>
+	</button>
+	<mat-menu #overflowMenu="matMenu">
+		<button mat-menu-item>
+			<mat-icon>picture</mat-icon>Set target as contract cover
+		</button>
+		<button mat-menu-item disabled>
+			<mat-icon>remove</mat-icon>Edit target
+		</button>
+		<button mat-menu-item>
+			<mat-icon>remove</mat-icon>Remove target from contract
+		</button>
+		<button mat-menu-item>
+			<mat-icon>supervisor_account</mat-icon>Mark target as eliminated
+		</button>
+		<button mat-menu-item>
+			<mat-icon>supervisor_account</mat-icon>
+		</button>
+	</mat-menu>
+</div>
