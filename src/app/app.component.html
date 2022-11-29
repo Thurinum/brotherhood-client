@@ -18,7 +18,7 @@
 
 <br />
 
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center" [@form-animation]>
 	<mat-tab>
 		<ng-template mat-tab-label>
 			<span class="tab-label" (click)="showUserContracts = false; refreshContracts()">
@@ -59,9 +59,11 @@
 <app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="state = FormState.AddContractOwner"
 	(addTarget)="state = FormState.AddContractTarget"></app-contract-details>
 
-<br />
-<mat-divider></mat-divider>
-<p class="legal"><small>&copy; 2022 JuliePro LLC - v1.4</small></p>
+<div class="legal">
+	<br />
+	<mat-divider></mat-divider>
+	<p><small>&copy; 2022 JuliePro LLC - v1.4</small></p>
+</div>
 
 <section class="form-panel" *ngIf="state != FormState.None" [@form-animation]>
 	<button class="form-close" mat-mini-fab color="primary" (click)="state = FormState.None">
