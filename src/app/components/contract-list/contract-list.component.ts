@@ -55,7 +55,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class ContractListComponent {
 	@Input()
-	model: Contract[] = [];
+	contracts: Contract[] = [];
 
 	@Input()
 	canAdd: boolean = false;

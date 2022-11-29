@@ -25,14 +25,17 @@
 </nav>
 
 
-<section class="card-layout" [@slideXAnimation]
-	   *ngIf="model && model.length > 0; else emptyList">
-	<app-card #card *ngFor="let contract of model"
-		    [model]="contract" [canRemove]="canAdd"
-		    [selected]="contract.id === selectedId"
-		    (select)="select.next(contract); selectedId = contract.id!"
-		    (remove)="remove.next(contract)"
-		    [@inOutAnimation]></app-card>
+<section class="card-layout" [@slideXAnimation] *ngIf="contracts && contracts.length > 0; else emptyList">
+	<app-card #card *ngFor="let contract of contracts" [model]="contract" [allowRemove]="canAdd"
+		[title]="contract.codename" image="http://localhost:5001/images/{{contract.featuredContractId}}.webp"
+		[selected]="contract.id === selectedId" (select)="select.next(contract); selectedId = contract.id!"
+		(remove)="remove.next(contract)" [@inOutAnimation]>
+		<mat-icon class="card-icon"
+			matTooltip="This contract can be viewed by {{contract.isPublic ? 'everyone' : 'you only'}}."
+			matTooltipPosition="above">
+			{{contract.isPublic ? "public" : "lock"}}
+		</mat-icon>
+	</app-card>
 </section>
 
 <ng-template #emptyList>

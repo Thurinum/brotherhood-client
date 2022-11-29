@@ -7,10 +7,14 @@ import { Contract } from 'src/app/models/contract.model';
 	styleUrls: ['./card.component.sass'],
 })
 export class CardComponent implements OnInit {
-	@Input() canRemove: boolean = false;
+	fallbackImage: string = "https://i.pinimg.com/564x/36/21/55/36215579663ec50ce28f6cd2233de365.jpg"
+
+	@Input() allowRemove: boolean = false;
 	@Input() selected: boolean = false;
-	@Input() model?: Contract
-	@Input() image: string = ""
+	@Input() model: any
+	@Input() title: string = "???"
+	@Input() image: string = this.fallbackImage
+
 	@Output() select = new EventEmitter<any>();
 	@Output() remove = new EventEmitter<any>();
 

@@ -18,7 +18,7 @@
 
 <br />
 
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+<nav mat-tab-nav-bar mat-align-tabs="center" [tabPanel]="tabPanel">
 	<a mat-tab-link (click)="showUserContracts = false; refreshContracts()" [active]="!showUserContracts">
 		<mat-icon>public</mat-icon>&nbsp;Public
 		Contracts
@@ -29,7 +29,7 @@
 	</a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
-	<app-contract-list [model]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+	<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
 		(select)="selectContract($event)" (add)="state = FormState.AddContract;refreshCities()"
 		(remove)="nukeContract($event)"></app-contract-list>
 </mat-tab-nav-panel>
