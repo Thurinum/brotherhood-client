@@ -28,6 +28,11 @@ import { ContractTargetDetailsComponent } from './components/contract-details/co
 import { AuthInterceptor } from './auth.interceptor';
 import { ContractTargetListComponent } from './components/contract-target-list/contract-target-list.component';
 import { CityListComponent } from './components/city-list/city-list.component';
+import { FormLoginComponent } from './components/forms/form-login/form-login.component';
+import { FormRegisterComponent } from './components/forms/form-register/form-register.component';
+import { FormContractUpsertComponent } from './components/forms/form-contract-upsert/form-contract-upsert.component';
+import { FormContractShareComponent } from './components/forms/form-contract-share/form-contract-share.component';
+import { FormContractTargetAddComponent } from './components/forms/form-contract-target-add/form-contract-target-add.component';
 
 @NgModule({
 	declarations: [
@@ -36,8 +41,13 @@ import { CityListComponent } from './components/city-list/city-list.component';
 		ContractListComponent,
 		ContractDetailsComponent,
 		ContractTargetDetailsComponent,
-  ContractTargetListComponent,
-  CityListComponent
+		ContractTargetListComponent,
+		CityListComponent,
+  FormLoginComponent,
+  FormRegisterComponent,
+  FormContractUpsertComponent,
+  FormContractShareComponent,
+  FormContractTargetAddComponent,
 	],
 	imports: [
 		BrowserModule,
