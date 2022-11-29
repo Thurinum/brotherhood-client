@@ -260,15 +260,12 @@ export class AppComponent {
 				this.helper.httpError(`Failed to get assassination targets within ${contract?.codename}`, errorResponse);
 			}
 		);
-
-		// this.uiState = "addContractOwner"; TODO: Reimplement
 	}
 
 
 	constructor(
 		private brotherhood: BrotherhoodService,
 		private helper: HelperService,
-		// private carousel: Carousel
 	) {
 		if (localStorage.getItem("authKey"))
 			this.isLoggedIn = true;
@@ -279,6 +276,5 @@ export class AppComponent {
 			this.logout();
 
 		this.refreshContracts();
-
 	}
 }

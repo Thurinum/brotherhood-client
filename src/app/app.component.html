@@ -36,7 +36,8 @@
 </mat-tab-nav-panel>
 
 <app-contract-details *ngIf="selectedContract"
-			    [model]="selectedContract"></app-contract-details>
+			    [model]="selectedContract"
+			    (share)="this.state = FormState.AddContractOwner"></app-contract-details>
 
 <br />
 <mat-divider></mat-divider>
@@ -124,17 +125,18 @@
 	</fieldset>
 
 	<fieldset *ngIf="state == FormState.AddContractOwner && isLoggedIn">
-		<legend>Post assassin to {{selectedContract?.city!.name}}</legend>
+		// TODO: Admins can add owners directly
+		<legend>Request backup for {{selectedContract?.codename}}</legend>
 		<mat-form-field>
 			<mat-label>Username or email</mat-label>
 			<input #addContractOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
-			<mat-hint>The assassin will begin hunting Templars in that contract.</mat-hint>
+			<mat-hint>The assassin attempt to come to your aid.</mat-hint>
 		</mat-form-field>
 		<br />
 		<button mat-raised-button color="primary"
 			  (click)="addContractAssassin(addContractOwnerName.value, selectedContract)">
 			<mat-icon>check</mat-icon>
-			Assign
+			Send help request
 		</button>
 	</fieldset>
 </section>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { Contract } from 'src/app/models/contract.model';
 export class ContractDetailsComponent implements OnInit {
 	@Input() model?: Contract
 
-	constructor() { }
+	@Output() share = new EventEmitter<void>()
 
 	ngOnInit(): void {
 		setTimeout(() => {
@@ -19,9 +19,19 @@ export class ContractDetailsComponent implements OnInit {
 				cellAlign: 'center',
 				contain: true,
 				imagesLoaded: true,
-				pageDots: false,
-				wrapAround: true
+				pageDots: true,
+				wrapAround: true,
 			});
+
+			// var imgs = elem!.querySelectorAll('.carousel-item img');
+
+			// carousel.on('scroll', function () {
+			// 	carousel.slides.forEach(function (slide: any, i: any) {
+			// 		var img = imgs[i] as HTMLElement;
+			// 		var x = (slide.target + carousel.x) * -1 / 3;
+			// 		img.style.transform = 'translateX(' + x + 'px)';
+			// 	});
+			// });
 		}, 1000);
 	}
 }

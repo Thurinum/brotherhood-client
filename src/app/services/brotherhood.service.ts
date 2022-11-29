@@ -35,7 +35,7 @@ export class BrotherhoodService {
 
 	shareContract(contract: Contract, assassinId: string): any {
 		return this.http.put<Contract>(`https://localhost:5001/api/contract/share`, {
-			contractId: contract.id,
+			contractId: contract.id.toString(),
 			assassinId: assassinId
 		});
 	}
