@@ -1,14 +1,27 @@
-<mat-button-toggle-group appearance="legacy">
-	<mat-button-toggle checked>Show all</mat-button-toggle>
-	<mat-button-toggle>Group by city</mat-button-toggle>
-</mat-button-toggle-group>
 <nav>
-	<button mat-mini-fab color="primary" (click)="refresh.next()">
-		<mat-icon>refresh</mat-icon>
-	</button>
-	<button *ngIf="canAdd" mat-mini-fab color="primary" (click)="add.next()">
-		<mat-icon>add</mat-icon>
-	</button>
+	<span>
+		Browse&nbsp;
+		<mat-button-toggle-group>
+			<mat-button-toggle checked>
+				<mat-icon>description</mat-icon> By name
+			</mat-button-toggle>
+			<mat-button-toggle>
+				<mat-icon>location_city</mat-icon> By city
+			</mat-button-toggle>
+			<mat-button-toggle>
+				<mat-icon>person_pin</mat-icon> By target
+			</mat-button-toggle>
+		</mat-button-toggle-group>
+	</span>
+
+	<span>
+		<button mat-mini-fab color="primary" (click)="refresh.next()">
+			<mat-icon>refresh</mat-icon>
+		</button>
+		<button *ngIf="canAdd" mat-mini-fab color="primary" (click)="add.next()">
+			<mat-icon>add</mat-icon>
+		</button>
+	</span>
 </nav>
 
 
