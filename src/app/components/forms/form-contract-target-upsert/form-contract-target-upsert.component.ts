@@ -1,4 +1,4 @@
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse, HttpParamsOptions } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
 import { ContractTarget } from 'src/app/models/target.model';
@@ -17,9 +17,52 @@ export class FormContractTargetUpsertComponent {
 	firstName: string = ""
 	lastName: string = ""
 
+	URL = URL
 
-	createContractTarget() {
-		this.brotherhood.createContractTarget(this.target!).subscribe(
+	createContractTarget(file: File) {
+		if (!file) {
+			this.helper.message("You must select an image file!");
+			return;
+		}
+
+		if (this.target) {
+			this.helper.message("There is already a current target!");
+			return;
+		}
+
+		this.target = new ContractTarget(this.firstName, this.lastName);
+
+		const formdata = new FormData();
+		formdata.append('file', file, file.name);
+		this.target.formData = formdata;
+
+		this.brotherhood.createContractTarget(this.target).subscribe(
+			(response: HttpResponse<any>) => {
+				this.helper.message(`Successfully added ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`);
+				this.app.state = AppState.None;
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to add ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`, errorResponse);
+			}
+		)
+	}
+
+	updateContractTarget(file: File) {
+		if (!file) {
+			this.helper.message("You must select an image file!");
+			return;
+		}
+
+		if (!this.target) {
+			this.helper.message("There is already a current target!");
+			return;
+		}
+
+		const formdata = new FormData();
+		formdata.append('file', file, file.name);
+		this.target.formData = formdata;
+
+		this.brotherhood.updateContractTarget(this.target).subscribe(
 			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully added ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`);
 				this.app.state = AppState.None;
