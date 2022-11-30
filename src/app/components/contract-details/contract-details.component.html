@@ -1,5 +1,5 @@
 <mat-divider></mat-divider>
-
+<br />
 <h2>{{model?.codename}}</h2>
 <p>{{model?.briefing ?? "There is no description for this contract."}}</p>
 
@@ -8,7 +8,7 @@
 <button mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.next()">
 	<mat-icon>add</mat-icon>
 </button>
-<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu" >
+<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
 	<mat-icon>more_horiz</mat-icon>
 </button>
 <mat-menu #overflowMenu="matMenu">
@@ -23,7 +23,7 @@
 <owl-carousel-o class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
 	<ng-container *ngFor="let target of model?.targets">
 		<ng-template carouselSlide>
-			<app-contract-target-details class="carousel-item" [target]="target" [title]="target.firstName"></app-contract-target-details>
+			<app-contract-target-details class="carousel-item" matRipple [title]="target.firstName" [target]="target" ></app-contract-target-details>
 		</ng-template>
 	</ng-container>
 </owl-carousel-o>

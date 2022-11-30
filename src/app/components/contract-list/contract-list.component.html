@@ -7,7 +7,6 @@
 	</button>
 </nav>
 
-
 <section class="card-layout" [@slide-animation] *ngIf="contracts && contracts.length > 0; else emptyList">
 	<app-card #card *ngFor="let contract of contracts" [model]="contract" [allowRemove]="canAdd"
 		    [title]="contract.codename" image="http://localhost:5001/images/{{contract.featuredContractId}}.webp"
