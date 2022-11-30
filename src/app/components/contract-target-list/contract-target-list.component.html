@@ -1,9 +1,15 @@
-<h2>Targets</h2>
-<div>
-	<section class="card-layout">
-		<app-card *ngFor="let target of targets"
-			    [model]="target"
-			    [title]="target.firstName + ' ' + target.lastName"
-			    image="https://localhost:5001/images/{{target.id}}.webp"></app-card>
-	</section>
-</div>
+<nav>
+	<button mat-mini-fab color="primary" matTooltip="Add a target">
+		<mat-icon>add</mat-icon>
+	</button>
+	<button mat-mini-fab color="primary" matTooltip="Refresh targets">
+		<mat-icon>refresh</mat-icon>
+	</button>
+</nav>
+
+<section class="card-layout">
+	<app-card *ngFor="let target of targets"
+		    [model]="target"
+		    [title]="target.firstName + ' ' + target.lastName"
+		    image="https://localhost:5001/images/{{target.id}}.webp"></app-card>
+</section>

@@ -26,14 +26,17 @@ body
 body::-webkit-scrollbar
 	display: none
 
-/* Set style for all card icons */
-.card-icon
-	position: absolute
-	top: 0
-	left: 0
-	color: white
-	margin: 10px
-	filter: drop-shadow(0 0 10px black)
+/* Right-aligned navigation bar */
+nav
+	width: 99%
+	padding-top: 10px
+	margin-bottom: 30px
+
+	display: flex
+	align-items: center
+	justify-content: flex-end
+	gap: 5px
+
 
 /* Layout for contract, target, and city cards */
 .card-layout
@@ -46,6 +49,15 @@ body::-webkit-scrollbar
 	display: flex
 	flex-wrap: wrap
 	justify-content: left
+
+/* Set style for all card icons */
+.card-icon
+	position: absolute
+	top: 0
+	left: 0
+	color: white
+	margin: 10px
+	filter: drop-shadow(0 0 10px black)
 
 /* Fix glitching scrollbars appearing on tab-bar transition */
 .mat-tab-body, .mat-tab-body-content

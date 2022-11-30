@@ -1,38 +1,21 @@
 <nav>
-	<span>
-		Browse&nbsp;
-		<mat-button-toggle-group>
-			<mat-button-toggle checked>
-				<mat-icon>description</mat-icon> By name
-			</mat-button-toggle>
-			<mat-button-toggle>
-				<mat-icon>location_city</mat-icon> By city
-			</mat-button-toggle>
-			<mat-button-toggle>
-				<mat-icon>person_pin</mat-icon> By target
-			</mat-button-toggle>
-		</mat-button-toggle-group>
-	</span>
-
-	<span>
-		<button mat-mini-fab color="primary" (click)="refresh.next()">
-			<mat-icon>refresh</mat-icon>
-		</button>
-		<button *ngIf="canAdd" mat-mini-fab color="primary" (click)="add.next()">
-			<mat-icon>add</mat-icon>
-		</button>
-	</span>
+	<button *ngIf="canAdd" mat-mini-fab color="primary" matTooltip="Add a contract" (click)="add.next()">
+		<mat-icon>add</mat-icon>
+	</button>
+	<button mat-mini-fab color="primary" matTooltip="Refresh contracts" (click)="refresh.next()">
+		<mat-icon>refresh</mat-icon>
+	</button>
 </nav>
 
 
 <section class="card-layout" [@slide-animation] *ngIf="contracts && contracts.length > 0; else emptyList">
 	<app-card #card *ngFor="let contract of contracts" [model]="contract" [allowRemove]="canAdd"
-		[title]="contract.codename" image="http://localhost:5001/images/{{contract.featuredContractId}}.webp"
-		[selected]="contract.id === selectedId" (select)="select.next(contract); selectedId = contract.id!"
-		(remove)="remove.next(contract)">
+		    [title]="contract.codename" image="http://localhost:5001/images/{{contract.featuredContractId}}.webp"
+		    [selected]="contract.id === selectedId" (select)="select.next(contract); selectedId = contract.id!"
+		    (remove)="remove.next(contract)">
 		<mat-icon class="card-icon"
-			matTooltip="This contract can be viewed by {{contract.isPublic ? 'everyone' : 'you only'}}."
-			matTooltipPosition="above">
+			    matTooltip="This contract can be viewed by {{contract.isPublic ? 'everyone' : 'you only'}}."
+			    matTooltipPosition="above">
 			{{contract.isPublic ? "public" : "lock"}}
 		</mat-icon>
 	</app-card>
