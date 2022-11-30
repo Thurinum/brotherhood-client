@@ -1,3 +1,4 @@
+<!-- HEADER -->
 <header>
 	<h1>IntelliBrotherhood&trade; Contract Manager 2022</h1>
 	<div class="auth">
@@ -18,53 +19,52 @@
 
 <br />
 
-<mat-tab-group mat-align-tabs="center" [@form-animation]>
-	<mat-tab>
-		<ng-template mat-tab-label>
-			<span class="tab-label" (click)="showUserContracts = false; refreshContracts()">
-				<mat-icon>public</mat-icon>&nbsp;Public Contracts
-			</span>
-		</ng-template>
-		<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
-					 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
-					 (remove)="nukeContract($event)"></app-contract-list>
-	</mat-tab>
-	<mat-tab *ngIf="isLoggedIn">
-		<ng-template mat-tab-label>
-			<span class="tab-label" (click)="showUserContracts = true; refreshContracts()">
-				<mat-icon>lock</mat-icon>&nbsp;My Contracts
-			</span>
-		</ng-template>
-		<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
-					 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
-					 (remove)="nukeContract($event)"></app-contract-list>
-	</mat-tab>
-	<mat-tab>
-		<ng-template mat-tab-label>
-			<span class="tab-label">
-				<mat-icon>person_outline</mat-icon>&nbsp;Targets
-			</span>
-		</ng-template>
-		<app-contract-target-list [targets]="targets"></app-contract-target-list>
-	</mat-tab>
-	<mat-tab label="Cities">
-		<ng-template mat-tab-label>
-			<mat-icon>location_city</mat-icon>
-			<span>Cities</span>
-		</ng-template>
-		<app-city-list [cities]="cities"></app-city-list>
-	</mat-tab>
-</mat-tab-group>
+<main>
+	<!-- PRIMARY CONTENT -->
+	<mat-tab-group mat-align-tabs="center" [@form-animation]>
+		<mat-tab>
+			<ng-template mat-tab-label>
+				<span class="tab-label" (click)="showUserContracts = false; refreshContracts()">
+					<mat-icon>public</mat-icon>&nbsp;Public Contracts
+				</span>
+			</ng-template>
+			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+						 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
+						 (remove)="nukeContract($event)"></app-contract-list>
+		</mat-tab>
+		<mat-tab *ngIf="isLoggedIn">
+			<ng-template mat-tab-label>
+				<span class="tab-label" (click)="showUserContracts = true; refreshContracts()">
+					<mat-icon>lock</mat-icon>&nbsp;My Contracts
+				</span>
+			</ng-template>
+			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+						 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
+						 (remove)="nukeContract($event)"></app-contract-list>
+		</mat-tab>
+		<mat-tab>
+			<ng-template mat-tab-label>
+				<span class="tab-label">
+					<mat-icon>person_outline</mat-icon>&nbsp;Targets
+				</span>
+			</ng-template>
+			<app-contract-target-list [targets]="targets"></app-contract-target-list>
+		</mat-tab>
+		<mat-tab label="Cities">
+			<ng-template mat-tab-label>
+				<mat-icon>location_city</mat-icon>
+				<span>Cities</span>
+			</ng-template>
+			<app-city-list [cities]="cities"></app-city-list>
+		</mat-tab>
+	</mat-tab-group>
 
-<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="state = AppState.ShareContract"
-			    (addTarget)="state = AppState.AddContractTarget"></app-contract-details>
+	<!-- SECONDARY CONTENT -->
+	<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="state = AppState.ShareContract"
+				    (addTarget)="state = AppState.AddContractTarget"></app-contract-details>
+</main>
 
-<div class="legal">
-	<br />
-	<mat-divider></mat-divider>
-	<p><small>&copy; 2022 JuliePro LLC - v1.4</small></p>
-</div>
-
+<!-- MODAL DIALOGS -->
 <section class="form-panel" *ngIf="state != AppState.None" [@form-animation]>
 	<button class="form-close" mat-mini-fab color="primary" (click)="state = AppState.None">
 		<mat-icon>close</mat-icon>
@@ -79,3 +79,11 @@
 		<app-form-contract-target-upsert *ngSwitchCase="AppState.EditContractTarget" [target]="selectedTarget"></app-form-contract-target-upsert>
 	</ng-container>
 </section>
+
+<br />
+
+<!-- FOOTER -->
+<footer class="legal">
+	<mat-divider></mat-divider>
+	<p><small>&copy; 2022 JuliePro LLC - v1.4</small></p>
+</footer>
