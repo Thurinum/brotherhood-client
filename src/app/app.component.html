@@ -76,28 +76,6 @@
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
+		<app-form-contract-target-upsert *ngSwitchCase="AppState.EditContractTarget" [target]="selectedTarget"></app-form-contract-target-upsert>
 	</ng-container>
-
-
-
-
-
-	<fieldset *ngIf="state == AppState.EditContractTarget">
-		<legend>Edit target {{selectedTarget?.firstName}} {{selectedTarget?.lastName}}</legend>
-		<mat-form-field>
-			<mat-label>First name</mat-label>
-			<input #addContractName matInput type="text" placeholder="Enter contract name..." />
-			<mat-hint>You will be able to assign assassins to the contract.</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>First name</mat-label>
-			<input #addContractName matInput type="text" placeholder="Enter contract name..." />
-			<mat-hint>You will be able to assign assassins to the contract.</mat-hint>
-		</mat-form-field>
-		<br />
-		<button mat-raised-button color="primary">
-			<mat-icon>check</mat-icon>
-			Add target
-		</button>
-	</fieldset>
 </section>

@@ -1,0 +1,16 @@
+<fieldset>
+	<legend>Edit target {{target?.firstName}} {{target?.lastName}}</legend>
+	<mat-form-field>
+		<mat-label>First name</mat-label>
+		<input #firstName matInput type="text" placeholder="Enter contract name..." />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Last name</mat-label>
+		<input #lastName matInput type="text" placeholder="Enter contract name..." />
+	</mat-form-field>
+	<br />
+	<button mat-raised-button color="primary"> // TODO: Implement
+		<mat-icon>check</mat-icon>
+		Add target
+	</button>
+</fieldset>
