@@ -7,9 +7,9 @@
 	</button>
 </nav>
 
-<section class="card-layout">
+<section class="card-layout" [@slide-animation]>
 	<app-card *ngFor="let target of targets"
-		    [model]="target"
+		    [model]="target" [allowRemove]="true"
 		    [title]="target.firstName + ' ' + target.lastName"
 		    image="https://localhost:5001/images/{{target.id}}.webp"></app-card>
 </section>

@@ -9,6 +9,8 @@
 
 
 <section class="card-layout" [@slide-animation]>
-	<app-card #card *ngFor="let city of cities" [model]="city"
+	<app-card #card *ngFor="let city of cities" [model]="city" [allowRemove]="false"
 		    [title]="city.name" [image]="city.image!"></app-card>
 </section>
+
+<br />
