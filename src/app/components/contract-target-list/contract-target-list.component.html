@@ -7,7 +7,7 @@
 	</button>
 </nav>
 
-<section class="card-layout" [@slide-animation]>
+<section class="card-layout">
 	<app-card *ngFor="let target of targets"
 		    [model]="target" [allowRemove]="true"
 		    [title]="target.firstName + ' ' + target.lastName"
