@@ -1,10 +1,6 @@
-import {
-	HttpResponse,
-	HttpErrorResponse,
-	HttpParamsOptions,
-} from "@angular/common/http";
+import { HttpResponse, HttpErrorResponse, HttpParamsOptions, } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Contract } from "src/app/models/contract.model";
+import { first } from "rxjs";
 import { ContractTarget } from "src/app/models/target.model";
 import { AppState, AppStateService } from "src/app/services/appstate.service";
 import { BrotherhoodService } from "src/app/services/brotherhood.service";
@@ -16,54 +12,38 @@ import { HelperService } from "src/app/services/helper.service";
 	styleUrls: ["./form-contract-target-upsert.component.sass"],
 })
 export class FormContractTargetUpsertComponent {
-	@Input() target?: ContractTarget;
-	@Output() refresh = new EventEmitter();
+	@Input() target? = new ContractTarget()
+	@Input() isUpdate: boolean = false;
+	@Output() refresh = new EventEmitter()
 
-	firstName: string = "";
-	lastName: string = "";
+	file?: File;
 
 	URL = URL;
 
-	createContractTarget(file: File) {
+	createContractTarget(file?: File) {
 		if (!file) {
-			this.helper.message("You must select an image file!");
+			this.helper.message("Please select an image for the target.");
 			return;
 		}
 
-		if (this.target) {
-			this.helper.message("There is already a current target!");
-			return;
-		}
+		const target = new ContractTarget();
+		const formData = new FormData;
+		formData.append("file", file, file.name);
+		target.formData = formData;
 
-		this.target = new ContractTarget(this.firstName, this.lastName);
-
-		const formdata = new FormData();
-		formdata.append("file", file, file.name);
-		this.target.formData = formdata;
-
-		this.brotherhood.createContractTarget(this.target).subscribe(
+		this.brotherhood.createContractTarget(target).subscribe(
 			(response: HttpResponse<any>) => {
-				this.helper.message(
-					`Successfully added ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`
-				);
+				this.helper.message(`Successfully added ${this.target.firstName} ${this.target.lastName} to the list of targets.`);
 				this.app.state = AppState.None;
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(
-					`Failed to add ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`,
-					errorResponse
-				);
+				this.helper.httpError(`Failed to add ${this.target.firstName} ${this.target.lastName} to the list of targets`, errorResponse);
 			}
 		);
 	}
 
-	updateContractTarget(file: File) {
-		if (!this.target) {
-			this.helper.message("There is already a current target!");
-			return;
-		}
-
+	updateContractTarget(file?: File) {
 		if (file) {
 			const formdata = new FormData();
 			formdata.append("file", file, file.name);
@@ -72,17 +52,12 @@ export class FormContractTargetUpsertComponent {
 
 		this.brotherhood.updateContractTarget(this.target).subscribe(
 			(response: HttpResponse<any>) => {
-				this.helper.message(
-					`Successfully added ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`
-				);
+				this.helper.message(`Successfully updated target ${this.target?.firstName} ${this.target?.lastName}.`);
 				this.app.state = AppState.None;
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(
-					`Failed to add ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`,
-					errorResponse
-				);
+				this.helper.httpError(`Failed to update target ${this.target?.firstName} ${this.target?.lastName}`, errorResponse);
 			}
 		);
 	}

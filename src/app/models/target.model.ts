@@ -1,9 +1,6 @@
 export class ContractTarget {
 	id?: number
+	firstName?: string
+	lastName?: string
 	formData?: FormData
-
-	constructor(
-		public firstName: string,
-		public lastName: string,
-	) { }
 }

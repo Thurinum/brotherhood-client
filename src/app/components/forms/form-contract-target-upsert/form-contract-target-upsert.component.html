@@ -1,31 +1,31 @@
 <fieldset>
-	<legend>{{target ? "Edit" : "Create"}} target {{target?.firstName}} {{target?.lastName}}</legend>
+	<legend>{{isUpdate ? "Edit" : "Create"}} target {{target.firstName}} {{target.lastName}}</legend>
 
 	<mat-form-field>
 		<mat-label>First name</mat-label>
-		<input [(ngModel)]="target?.firstName ?? firstName" matInput type="text"
+		<input [(ngModel)]="target?.firstName" matInput type="text"
 			placeholder="Enter contract name..." />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Last name</mat-label>
-		<input [(ngModel)]="target?.lastName ?? lastName" matInput type="text"
+		<input [(ngModel)]="target.lastName" matInput type="text"
 			placeholder="Enter contract name..." />
 	</mat-form-field>
 	<div class="upload-wrapper">
-		<button class="upload" (click)="file.click()" mat-raised-button color="primary">
+		<button class="upload" (click)="upload.click()" mat-raised-button color="primary">
 			<mat-icon>upload</mat-icon>&nbsp;Choose picture
 		</button>
-		<input #file type="file" accept="image/*" (change)="preview.src = URL.createObjectURL(file!.files![0])" />
+		<input #upload type="file" accept="image/*" (change)="file = upload!.files![0];preview.src = URL.createObjectURL(file)" />
 	</div>
 
 	<mat-hint class="upload-preview">
-		<img #preview src="https://localhost:5001/images/{{target?.id}}.webp" (error)="preview.src = 'https://localhost:5001/images/default.png'" alt="Picture preview of {{target?.firstName}} {{target?.lastName}}" />
+		<img #preview src="https://localhost:5001/images/{{target.id}}.webp" (error)="preview.src = 'https://localhost:5001/images/default.png'" alt="Picture preview of {{target.firstName}} {{target.lastName}}" />
 		<br />
 		<small>Picture preview</small>
 	</mat-hint>
 
-	<button mat-raised-button color="primary" (click)="target ? updateContractTarget(file!.files![0]) : createContractTarget(file!.files![0])">
+	<button mat-raised-button color="primary" (click)="target ? updateContractTarget(file) : createContractTarget(file)">
 		<mat-icon>check</mat-icon>
-		{{target ? "Apply changes" : "Create target"}}
+		{{isUpdate ? "Save changes" : "Create target"}}
 	</button>
 </fieldset>

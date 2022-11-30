@@ -79,12 +79,12 @@
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
-		<app-form-contract-target-upsert *ngSwitchCase="AppState.UpsertContractTarget" [target]="selectedTarget"></app-form-contract-target-upsert>
+		<app-form-contract-target-upsert *ngSwitchCase="AppState.UpsertContractTarget" [target]="selectedTarget!" [isUpdate]="selectedTarget === undefined"></app-form-contract-target-upsert>
 	</ng-container>
 
 	<div class="cutie">
 		<img src="https://media.discordapp.net/attachments/1030541948244729858/1036410640690073762/C39E0365-7EAD-4B6B-AA57-626392FD5CDC.gif" />
-		<p>You shouldn't be seeing this. Oh well.<br />Have a pwoto.</p>
+		<p>You shouldn't be seeing this.<br />Oh well. Here's a pwoto.</p>
 	</div>
 </section>
 
