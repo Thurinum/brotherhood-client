@@ -50,11 +50,9 @@ export class AppComponent {
 	get isLoggedIn() {
 		return this.app.isLoggedIn;
 	}
-
 	get state() {
 		return this.app.state;
 	}
-
 	set state(state: AppState) {
 		this.app.state = state;
 	}
@@ -166,21 +164,6 @@ export class AppComponent {
 				this.helper.httpError("Could not fetch cities from the database.", errorResponse);
 			}
 		);
-	}
-
-
-
-
-	addTargetToContract(target: ContractTarget) {
-		this.brotherhood.addContractTarget(this.selectedContract?.id!, target).subscribe(
-			(response: any) => {
-				this.selectContract(this.selectedContract!);
-			},
-			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to add target ${target.firstName} ${target.lastName} to contract '${this.selectedContract?.codename}'`, errorResponse);
-			}
-			)
-		this.app.state = AppState.None;
 	}
 
 	nukeContract(contract?: Contract) {

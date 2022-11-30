@@ -1,1 +1,17 @@
-<p>form-contract-target-add works!</p>
+<fieldset>
+	<legend>Add a target to {{contract?.codename}}</legend>
+	<mat-form-field>
+		<mat-label>Target</mat-label>
+		<mat-select #target placeholder="Choose a target...">
+			<mat-option *ngFor="let target of contractTargets" [value]="target">
+				<mat-icon [style.border-radius.px]=50>add</mat-icon>
+				{{ target.firstName }} {{target.lastName}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<br />
+	<button mat-raised-button color="primary" (click)="addTargetToCurrentContract(target.value)">
+		<mat-icon>check</mat-icon>
+		Add target
+	</button>
+</fieldset>

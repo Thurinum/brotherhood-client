@@ -75,27 +75,12 @@
 		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
+		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
 	</ng-container>
 
 
 
-	<fieldset *ngIf="state == AppState.AddContractTarget">
-		<legend>Add a target to {{selectedContract?.codename}}</legend>
-		<mat-form-field>
-			<mat-label>Target</mat-label>
-			<mat-select #addContractTarget placeholder="Choose a target...">
-				<mat-option *ngFor="let target of targets" [value]="target">
-					<mat-icon [style.border-radius.px]=50>add</mat-icon>
-					{{ target.firstName }} {{target.lastName}}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<br />
-		<button mat-raised-button color="primary" (click)="addTargetToContract(addContractTarget.value)">
-			<mat-icon>check</mat-icon>
-			Add target
-		</button>
-	</fieldset>
+
 
 	<fieldset *ngIf="state == AppState.EditContractTarget">
 		<legend>Edit target {{selectedTarget?.firstName}} {{selectedTarget?.lastName}}</legend>
