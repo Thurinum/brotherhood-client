@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { City } from 'src/app/models/city.model';
 import { Contract } from 'src/app/models/contract.model';
 import { AppState, AppStateService } from 'src/app/services/appstate.service';
+=======
+import { Component, OnInit } from '@angular/core';
+import { AppStateService } from 'src/app/services/appstate.service';
+>>>>>>> a84973205aca2f8b71002ad2f810c59a38d3a82f
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
 
@@ -12,6 +17,7 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./form-contract-upsert.component.sass']
 })
 export class FormContractUpsertComponent {
+<<<<<<< HEAD
 	@Input() cities: City[] = [];
 	@Output() create = new EventEmitter
 
@@ -30,6 +36,8 @@ export class FormContractUpsertComponent {
 		)
 	}
 
+=======
+>>>>>>> a84973205aca2f8b71002ad2f810c59a38d3a82f
 	constructor(
 		private brotherhood: BrotherhoodService,
 		private app: AppStateService,

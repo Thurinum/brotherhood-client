@@ -73,6 +73,7 @@
 	<ng-container [ngSwitch]="app.state">
 		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts()"></app-form-login>
 		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
+		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 	</ng-container>
 
