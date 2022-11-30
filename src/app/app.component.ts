@@ -9,16 +9,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { ContractTarget } from './models/target.model';
 import { City } from './models/city.model';
 import { ContractShareDTO } from './models/contractShareDTO';
+import { AppState, AppStateService } from './services/appstate.service';
 
-enum FormState {
-	None,
-	Login,
-	Register,
-	AddContract,
-	AddContractOwner,
-	AddContractTarget,
-	EditContractTarget
-}
+
 
 @Component({
 	selector: 'app-root',
@@ -52,7 +45,7 @@ enum FormState {
 	]
 })
 export class AppComponent {
-	FormState = FormState;
+	AppState = AppState;
 
 	contracts: Contract[] = []
 	cities: City[] = []
@@ -60,46 +53,13 @@ export class AppComponent {
 	showUserContracts: boolean = false
 	selectedContract?: Contract
 	selectedTarget?: ContractTarget
-	state: FormState = FormState.None;
-	isLoggedIn: boolean = false
-
-	login(identifier: string, password: string) {
-		let user: Assassin = new Assassin;
-
-		// detect email (simple check for x@y)
-		if (identifier.match(/^\S+@\S+$/)) {
-			user.email = identifier;
-		} else {
-			user.username = identifier;
-		}
-
-		user.password = password;
-
-		this.brotherhood.login(user).subscribe(
-			(response: Auth) => {
-				if (!response)
-					return;
-
-				localStorage.setItem("authKey", response.token);
-				localStorage.setItem("authTime", response.validTo.toString());
-				this.helper.message(`Logged in as '${identifier}'.`);
-				this.isLoggedIn = true;
-				this.state = FormState.None;
-
-				this.refreshContracts();
-			},
-			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Authentication invalid`, errorResponse);
-			}
-		);
-	}
 
 	logout() {
 		localStorage.removeItem("authKey");
 		localStorage.removeItem("authTime");
 		this.showUserContracts = false;
 		this.helper.message("Logged out.");
-		this.isLoggedIn = false;
+		this.appstate.isLoggedIn = false;
 
 		this.refreshContracts();
 	}
@@ -119,7 +79,7 @@ export class AppComponent {
 		this.brotherhood.register(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
-				this.state = FormState.None;
+				this.appstate.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to register user`, errorResponse);
@@ -226,7 +186,7 @@ export class AppComponent {
 			(response: HttpResponse<Contract[]>) => {
 				this.helper.message(`Successfully added contract '${contract.codename}'.`);
 				this.refreshContracts();
-				this.state = FormState.None;
+				this.appstate.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to add contract`, errorResponse);
@@ -250,7 +210,7 @@ export class AppComponent {
 		this.brotherhood.shareContract(dto).subscribe(
 			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully assigned ${owner} to ${contract.codename}.`);
-				this.state = FormState.None;
+				this.appstate.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to assign ${owner} to ${contract.codename}`, errorResponse);
@@ -267,7 +227,7 @@ export class AppComponent {
 				this.helper.httpError(`Failed to add target ${target.firstName} ${target.lastName} to contract '${this.selectedContract?.codename}'`, errorResponse);
 			}
 			)
-		this.state = FormState.None;
+		this.appstate.state = AppState.None;
 	}
 
 	nukeContract(contract?: Contract) {
@@ -284,7 +244,7 @@ export class AppComponent {
 	}
 
 	selectContract(contract: Contract) {
-		if (!this.isLoggedIn)
+		if (!this.appstate.isLoggedIn)
 			this.helper.message("Please log in to assign assassins to contracts.");
 
 		this.brotherhood.getContractTargets(contract.id!).subscribe(
@@ -307,10 +267,11 @@ export class AppComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
+		public appstate: AppStateService,
 		private helper: HelperService,
 	) {
 		if (localStorage.getItem("authKey"))
-			this.isLoggedIn = true;
+			this.appstate.isLoggedIn = true;
 
 		let validToStr = localStorage.getItem("authTime");
 
@@ -320,7 +281,7 @@ export class AppComponent {
 		this.refreshContracts();
 		this.refreshCities();
 
-		if (this.isLoggedIn) {
+		if (this.appstate.isLoggedIn) {
 			this.refreshContractTargets();
 		}
 	}

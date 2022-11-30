@@ -1,1 +1,14 @@
-<p>form-login works!</p>
+<fieldset [@zoom-animation]>
+	<legend>Login</legend>
+	<mat-form-field>
+		<mat-label>Username or Email</mat-label>
+		<input #identifier matInput type="text" placeholder="What's your identifier?" />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Password</mat-label>
+		<input #password matInput type="password" placeholder="What's your password?" />
+	</mat-form-field>
+	<button mat-raised-button color="primary" (click)="_login(identifier.value, password.value)">
+		<mat-icon>account_circle</mat-icon>Login
+	</button>
+</fieldset>
