@@ -13,4 +13,7 @@ export class ContractTargetListComponent {
 
 	@Output() add = new EventEmitter
 	@Output() refresh = new EventEmitter
+	@Output() select = new EventEmitter<ContractTarget>()
+
+	selectedId: number = -1;
 }

@@ -11,5 +11,7 @@
 	<app-card *ngFor="let target of targets"
 		    [model]="target" [allowRemove]="true"
 		    [title]="target.firstName + ' ' + target.lastName"
+		    (select)="select.emit(target); selectedId = target.id!"
+		    [selected]="target.id === selectedId"
 		    image="https://localhost:5001/images/{{target.id}}.webp"></app-card>
 </section>
