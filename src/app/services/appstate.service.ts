@@ -11,7 +11,7 @@ export enum AppState {
 	None,
 	Login,
 	Register,
-	AddContract,
+	CreateContract,
 	AddContractOwner,
 	AddContractTarget,
 	EditContractTarget

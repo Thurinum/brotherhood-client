@@ -1,1 +1,27 @@
-<p>form-register works!</p>
+<fieldset [@zoom-animation]>
+	<legend>Sign up</legend>
+	<mat-form-field>
+		<mat-label>Username</mat-label>
+		<input #username matInput type="text" placeholder="What's your identifier?" />
+		<mat-hint>ID provided by the .</mat-hint>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>E-mail address</mat-label>
+		<input #email matInput type="email" placeholder="What's your e-mail?" />
+		<mat-hint>Don't use your personal e-mail.</mat-hint>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Password</mat-label>
+		<input #password matInput type="password" placeholder="What's your password?" />
+		<mat-hint>At least 5 characters.</mat-hint>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Confirm password</mat-label>
+		<input #passwordConfirm matInput type="password" placeholder="Repeat your password" />
+	</mat-form-field>
+	<button mat-raised-button color="primary"
+		  (click)="register(username.value, email.value, password.value, passwordConfirm.value)">
+		<mat-icon>account_circle</mat-icon>
+		Sign up
+	</button>
+</fieldset>

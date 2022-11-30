@@ -12,7 +12,7 @@ import { HelperService } from 'src/app/services/helper.service';
 	styleUrls: ['./form-login.component.sass']
 })
 export class FormLoginComponent {
-	@Output() login = new EventEmitter<void>()
+	@Output() login = new EventEmitter
 
 	_login(identifier: string, password: string) {
 		let user: Assassin = new Assassin;

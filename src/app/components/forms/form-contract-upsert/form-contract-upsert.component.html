@@ -1,1 +1,33 @@
-<p>form-contract-upsert works!</p>
+<fieldset [@zoom-animation] [style.width.px]=300>
+	<legend>Create a contract</legend>
+	<mat-form-field>
+		<mat-label>Codename</mat-label>
+		<input #name matInput type="text" placeholder="Enter contract name..." />
+		<mat-hint>You will be able to assign assassins to the contract.</mat-hint>
+	</mat-form-field>
+	<mat-form-field [style.top.px]=12>
+		<mat-label>Briefing</mat-label>
+		<textarea #briefing matInput maxlength="300" [style.height.px]=150
+			    placeholder="Enter contract briefing..."></textarea>
+		<mat-hint align="end">{{briefing.value.length}}/300</mat-hint>
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Location</mat-label>
+		<mat-select #location placeholder="Choose location...">
+			<mat-option *ngFor="let city of cities" [value]="city">
+				<mat-icon [style.border-radius.px]=50><img [src]="city.image"></mat-icon>
+				{{ city.name }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field [style.top.px]=-23>
+		<input matInput hidden />
+		<mat-checkbox #isPublic color="primary">Public contract</mat-checkbox>
+		<mat-hint>Can be picked up by any assassin.</mat-hint>
+	</mat-form-field>
+	<button mat-raised-button color="primary"
+		  (click)="createContract(name.value, briefing.value, location.value, isPublic.checked)">
+		<mat-icon>check</mat-icon>
+		Register
+	</button>
+</fieldset>

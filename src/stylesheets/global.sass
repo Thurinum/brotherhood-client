@@ -1,8 +1,11 @@
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel'
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default'
+@use "theme"
+@use "form"
+
+@import './node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel'
+@import './node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default'
 
 html
-	background-image: url(./assets/background.webp)
+	background-image: url(/assets/background.webp)
 	background-position: center top
 	height: auto
 
@@ -23,6 +26,7 @@ body
 body::-webkit-scrollbar
 	display: none
 
+/* Set style for all card icons */
 .card-icon
 	position: absolute
 	top: 0
@@ -31,6 +35,11 @@ body::-webkit-scrollbar
 	margin: 10px
 	filter: drop-shadow(0 0 10px black)
 
+/* Fix glitching scrollbars appearing on tab-bar transition */
+.mat-tab-body, .mat-tab-body-content
+	overflow: hidden !important
+
+/* Customize Angular Material snackbar */
 .snackbar
 	min-width: max-content !important
 	white-space: pre-wrap !important
@@ -44,5 +53,3 @@ body::-webkit-scrollbar
 	.mat-simple-snackbar-action
 		color: white !important
 
-.mat-tab-body, .mat-tab-body-content
-	overflow: hidden !important

@@ -26,8 +26,8 @@
 			</span>
 		</ng-template>
 		<app-contract-list [contracts]="contracts" [canAdd]="app.isLoggedIn" (refresh)="refreshContracts()"
-			(select)="selectContract($event)" (add)="app.state = AppState.AddContract;refreshCities()"
-			(remove)="nukeContract($event)"></app-contract-list>
+					 (select)="selectContract($event)" (add)="app.state = AppState.CreateContract;refreshCities()"
+					 (remove)="nukeContract($event)"></app-contract-list>
 	</mat-tab>
 	<mat-tab>
 		<ng-template mat-tab-label>
@@ -36,8 +36,8 @@
 			</span>
 		</ng-template>
 		<app-contract-list [contracts]="contracts" [canAdd]="app.isLoggedIn" (refresh)="refreshContracts()"
-			(select)="selectContract($event)" (add)="app.state = AppState.AddContract;refreshCities()"
-			(remove)="nukeContract($event)"></app-contract-list>
+					 (select)="selectContract($event)" (add)="app.state = AppState.CreateContract;refreshCities()"
+					 (remove)="nukeContract($event)"></app-contract-list>
 	</mat-tab>
 	<mat-tab>
 		<ng-template mat-tab-label>
@@ -57,7 +57,7 @@
 </mat-tab-group>
 
 <app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="app.state = AppState.AddContractOwner"
-	(addTarget)="app.state = AppState.AddContractTarget"></app-contract-details>
+			    (addTarget)="app.state = AppState.AddContractTarget"></app-contract-details>
 
 <div class="legal">
 	<br />
@@ -72,69 +72,12 @@
 
 	<ng-container [ngSwitch]="app.state">
 		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts()"></app-form-login>
+		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
+		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 	</ng-container>
 
-	<fieldset *ngIf="app.state == AppState.Register" [@zoom-animation]>
-		<legend>Sign up</legend>
-		<mat-form-field>
-			<mat-label>Username</mat-label>
-			<input #registerUsername matInput type="text" placeholder="What's your identifier?" />
-			<mat-hint>ID provided by the .</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>E-mail address</mat-label>
-			<input #registerEmail matInput type="email" placeholder="What's your e-mail?" />
-			<mat-hint>Don't use your personal e-mail.</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>Password</mat-label>
-			<input #registerPassword matInput type="password" placeholder="What's your password?" />
-			<mat-hint>At least 5 characters.</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>Confirm password</mat-label>
-			<input #registerPasswordConfirm matInput type="password" placeholder="Repeat your password" />
-		</mat-form-field>
-		<button mat-raised-button color="primary"
-			(click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
-			<mat-icon>account_circle</mat-icon>
-			Sign up
-		</button>
-	</fieldset>
 
-	<fieldset *ngIf="app.state == AppState.AddContract" [@zoom-animation] [style.width.px]=300>
-		<legend>Create a contract</legend>
-		<mat-form-field>
-			<mat-label>Codename</mat-label>
-			<input #addContractName matInput type="text" placeholder="Enter contract name..." />
-			<mat-hint>You will be able to assign assassins to the contract.</mat-hint>
-		</mat-form-field>
-		<mat-form-field [style.top.px]=12>
-			<mat-label>Briefing</mat-label>
-			<textarea #addContractDescription matInput maxlength="300" [style.height.px]=150
-				placeholder="Enter contract briefing..."></textarea>
-			<mat-hint align="end">{{addContractDescription.value.length}}/300</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>Location</mat-label>
-			<mat-select #addContractCity placeholder="Choose location...">
-				<mat-option *ngFor="let city of cities" [value]="city">
-					<mat-icon [style.border-radius.px]=50><img [src]="city.image"></mat-icon>
-					{{ city.name }}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<mat-form-field [style.top.px]=-23>
-			<input matInput hidden />
-			<mat-checkbox #addContractIsPublic color="primary">Public contract</mat-checkbox>
-			<mat-hint>Can be picked up by any assassin.</mat-hint>
-		</mat-form-field>
-		<button mat-raised-button color="primary"
-			(click)="addContract(addContractName.value, addContractDescription.value, addContractCity.value, addContractIsPublic.checked)">
-			<mat-icon>check</mat-icon>
-			Register
-		</button>
-	</fieldset>
+
 
 	<fieldset *ngIf="app.state == AppState.AddContractOwner && app.isLoggedIn">
 		// TODO: Admins can add owners directly
@@ -146,7 +89,7 @@
 		</mat-form-field>
 		<br />
 		<button mat-raised-button color="primary"
-			(click)="addContractAssassin(addContractOwnerName.value, selectedContract)">
+			  (click)="addContractAssassin(addContractOwnerName.value, selectedContract)">
 			<mat-icon>check</mat-icon>
 			Send help request
 		</button>
