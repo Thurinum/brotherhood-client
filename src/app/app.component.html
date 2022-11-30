@@ -48,9 +48,9 @@
 					<mat-icon>person_outline</mat-icon>&nbsp;Targets
 				</span>
 			</ng-template>
-			<app-contract-target-list [targets]="targets" (add)="state = AppState.CreateContractTarget"
+			<app-contract-target-list [targets]="targets" (add)="selectedTarget = undefined;state = AppState.UpsertContractTarget"
 							  (refresh)="refreshContractTargets()"
-							  (select)="selectedTarget = $event"></app-contract-target-list>
+							  (select)="selectedTarget = $event;state = AppState.UpsertContractTarget"></app-contract-target-list>
 		</mat-tab>
 		<mat-tab label="Cities">
 			<ng-template mat-tab-label>
@@ -79,7 +79,7 @@
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
-		<app-form-contract-target-upsert *ngIf="state == AppState.CreateContractTarget || state == AppState.EditContractTarget" [target]="selectedTarget"></app-form-contract-target-upsert>
+		<app-form-contract-target-upsert *ngSwitchCase="AppState.UpsertContractTarget" [target]="selectedTarget"></app-form-contract-target-upsert>
 	</ng-container>
 
 	<div class="cutie">

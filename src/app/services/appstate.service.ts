@@ -7,8 +7,7 @@ export enum AppState {
 	CreateContract,
 	ShareContract,
 	AddContractTarget,
-	CreateContractTarget,
-	EditContractTarget
+	UpsertContractTarget
 }
 
 @Injectable({ providedIn: "root" })

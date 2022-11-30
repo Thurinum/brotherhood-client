@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
 import { ContractTarget } from 'src/app/models/target.model';
@@ -13,6 +13,22 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class FormContractTargetUpsertComponent {
 	@Input() target?: ContractTarget
+
+	firstName: string = ""
+	lastName: string = ""
+
+
+	createContractTarget() {
+		this.brotherhood.createContractTarget(this.target!).subscribe(
+			(response: HttpResponse<any>) => {
+				this.helper.message(`Successfully added ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`);
+				this.app.state = AppState.None;
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to add ${this.target?.firstName} ${this.target?.lastName} to the list of targets.`, errorResponse);
+			}
+		)
+	}
 
 	constructor(
 		private brotherhood: BrotherhoodService,
