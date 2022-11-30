@@ -34,8 +34,8 @@ export class FormLoginComponent {
 				localStorage.setItem("authTime", response.validTo.toString());
 				this.helper.message(`Logged in as '${identifier}'.`);
 
-				this.appstate.isLoggedIn = true;
-				this.appstate.state = AppState.None;
+				this.app.isLoggedIn = true;
+				this.app.state = AppState.None;
 				this.login.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
@@ -46,7 +46,7 @@ export class FormLoginComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
-		private appstate: AppStateService,
+		private app: AppStateService,
 		private helper: HelperService
 	) {}
 }

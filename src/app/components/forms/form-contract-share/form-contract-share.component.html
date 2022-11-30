@@ -1,1 +1,15 @@
-<p>form-contract-share works!</p>
+// TODO: Admins can add owners directly
+<fieldset>
+	<legend>Request backup for {{contract?.codename}}</legend>
+	<mat-form-field>
+		<mat-label>Username or email</mat-label>
+		<input #shareeName matInput type="text" placeholder="Enter assassin identifier..." />
+		<mat-hint>The assassin attempt to come to your aid.</mat-hint>
+	</mat-form-field>
+	<br />
+	<button mat-raised-button color="primary"
+		  (click)="addContractAssassin(shareeName.value, contract)">
+		<mat-icon>check</mat-icon>
+		Send help request
+	</button>
+</fieldset>

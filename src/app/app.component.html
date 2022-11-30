@@ -56,7 +56,7 @@
 	</mat-tab>
 </mat-tab-group>
 
-<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="app.state = AppState.AddContractOwner"
+<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="app.state = AppState.ShareContract"
 			    (addTarget)="app.state = AppState.AddContractTarget"></app-contract-details>
 
 <div class="legal">
@@ -75,26 +75,10 @@
 		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
+		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 	</ng-container>
 
 
-
-
-	<fieldset *ngIf="app.state == AppState.AddContractOwner && app.isLoggedIn">
-		// TODO: Admins can add owners directly
-		<legend>Request backup for {{selectedContract?.codename}}</legend>
-		<mat-form-field>
-			<mat-label>Username or email</mat-label>
-			<input #addContractOwnerName matInput type="text" placeholder="Enter assassin identifier..." />
-			<mat-hint>The assassin attempt to come to your aid.</mat-hint>
-		</mat-form-field>
-		<br />
-		<button mat-raised-button color="primary"
-			  (click)="addContractAssassin(addContractOwnerName.value, selectedContract)">
-			<mat-icon>check</mat-icon>
-			Send help request
-		</button>
-	</fieldset>
 
 	<fieldset *ngIf="app.state == AppState.AddContractTarget">
 		<legend>Add a target to {{selectedContract?.codename}}</legend>

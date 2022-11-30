@@ -158,29 +158,6 @@ export class AppComponent {
 
 
 
-	addContractAssassin(owner?: string, contract?: Contract) {
-		if (!owner) {
-			this.helper.message("Please enter an assassin name.");
-			return;
-		}
-
-		if (!contract) {
-			this.helper.message("Something went wrong. Please retry.");
-			return;
-		}
-
-		const dto: ContractShareDTO = new ContractShareDTO(contract.id, owner);
-
-		this.brotherhood.shareContract(dto).subscribe(
-			(response: HttpResponse<any>) => {
-				this.helper.message(`Successfully assigned ${owner} to ${contract.codename}.`);
-				this.app.state = AppState.None;
-			},
-			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to assign ${owner} to ${contract.codename}`, errorResponse);
-			}
-		)
-	}
 
 	addTargetToContract(target: ContractTarget) {
 		this.brotherhood.addContractTarget(this.selectedContract?.id!, target).subscribe(
