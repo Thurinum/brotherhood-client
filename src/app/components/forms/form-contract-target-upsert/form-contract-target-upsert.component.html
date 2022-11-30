@@ -1,5 +1,6 @@
 <fieldset>
 	<legend>{{target ? "Edit" : "Create"}} target {{target?.firstName}} {{target?.lastName}}</legend>
+
 	<mat-form-field>
 		<mat-label>First name</mat-label>
 		<input [(ngModel)]="target?.firstName ?? firstName" matInput type="text"
@@ -16,7 +17,14 @@
 		</button>
 		<input #file type="file" />
 	</div>
-	<br />
+
+	<mat-hint class="upload-preview">
+		<img src="https://localhost:5001/images/{{target?.id}}.webp"
+			alt="Picture preview of {{target?.firstName}} {{target?.lastName}}">
+		<br />
+		<small>Picture preview</small>
+	</mat-hint>
+
 	<button mat-raised-button color="primary" (click)="createContractTarget()">
 		<mat-icon>check</mat-icon>
 		Add target
