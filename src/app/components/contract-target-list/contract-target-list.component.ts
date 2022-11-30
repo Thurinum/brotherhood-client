@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ContractTarget } from 'src/app/models/target.model';
 import { SlideAnimation } from 'src/app/animations.module';
 
@@ -11,5 +11,6 @@ import { SlideAnimation } from 'src/app/animations.module';
 export class ContractTargetListComponent {
 	@Input() targets!: ContractTarget[]
 
-	constructor() { }
+	@Output() add = new EventEmitter
+	@Output() refresh = new EventEmitter
 }

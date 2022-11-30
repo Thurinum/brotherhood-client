@@ -2,14 +2,14 @@
 	<h2>{{model?.codename}}</h2>
 
 	<span>
-		<button mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.next()">
+		<button mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.emit()">
 			<mat-icon>add</mat-icon>
 		</button>
 		<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
 			<mat-icon>more_horiz</mat-icon>
 		</button>
 		<mat-menu #overflowMenu="matMenu" xPosition="before">
-			<button mat-menu-item *ngIf="!model?.isPublic" (click)="share.next()">
+			<button mat-menu-item *ngIf="!model?.isPublic" (click)="share.emit()">
 				<mat-icon>supervisor_account</mat-icon>Request assassin as backup
 			</button>
 			<button mat-menu-item>

@@ -1,8 +1,8 @@
 <nav>
-	<button mat-mini-fab color="primary" matTooltip="Add a target">
+	<button mat-mini-fab color="primary" matTooltip="Add a target" (click)="add.emit()">
 		<mat-icon>add</mat-icon>
 	</button>
-	<button mat-mini-fab color="primary" matTooltip="Refresh targets">
+	<button mat-mini-fab color="primary" matTooltip="Refresh targets" (click)="refresh.emit()">
 		<mat-icon>refresh</mat-icon>
 	</button>
 </nav>

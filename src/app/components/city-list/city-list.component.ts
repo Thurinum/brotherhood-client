@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { City } from 'src/app/models/city.model';
 import { SlideAnimation } from 'src/app/animations.module';
 
@@ -11,6 +11,6 @@ import { SlideAnimation } from 'src/app/animations.module';
 export class CityListComponent {
 	@Input() cities!: City[]
 
-	constructor() { }
-
+	@Output() add = new EventEmitter
+	@Output() refresh = new EventEmitter
 }
