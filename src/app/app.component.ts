@@ -64,29 +64,6 @@ export class AppComponent {
 		this.refreshContracts();
 	}
 
-	register(
-		username: string,
-		email: string,
-		password: string,
-		passwordConfirm: string
-	) {
-		let user: Assassin = new Assassin;
-		user.username = username;
-		user.email = email;
-		user.password = password;
-		user.passwordConfirm = passwordConfirm;
-
-		this.brotherhood.register(user).subscribe(
-			(response: HttpResponse<void>) => {
-				this.helper.message(`Successfully registered as '${user.username}'.`);
-				this.app.state = AppState.None;
-			},
-			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to register user`, errorResponse);
-			}
-		);
-	}
-
 	refreshContracts() {
 		let request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
 

@@ -72,35 +72,10 @@
 
 	<ng-container [ngSwitch]="app.state">
 		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts()"></app-form-login>
+		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 	</ng-container>
 
-	<fieldset *ngIf="app.state == AppState.Register" [@zoom-animation]>
-		<legend>Sign up</legend>
-		<mat-form-field>
-			<mat-label>Username</mat-label>
-			<input #registerUsername matInput type="text" placeholder="What's your identifier?" />
-			<mat-hint>ID provided by the .</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>E-mail address</mat-label>
-			<input #registerEmail matInput type="email" placeholder="What's your e-mail?" />
-			<mat-hint>Don't use your personal e-mail.</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>Password</mat-label>
-			<input #registerPassword matInput type="password" placeholder="What's your password?" />
-			<mat-hint>At least 5 characters.</mat-hint>
-		</mat-form-field>
-		<mat-form-field>
-			<mat-label>Confirm password</mat-label>
-			<input #registerPasswordConfirm matInput type="password" placeholder="Repeat your password" />
-		</mat-form-field>
-		<button mat-raised-button color="primary"
-			(click)="register(registerUsername.value, registerEmail.value, registerPassword.value, registerPasswordConfirm.value)">
-			<mat-icon>account_circle</mat-icon>
-			Sign up
-		</button>
-	</fieldset>
+
 
 	<fieldset *ngIf="app.state == AppState.AddContract" [@zoom-animation] [style.width.px]=300>
 		<legend>Create a contract</legend>
