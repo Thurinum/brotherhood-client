@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Assassin } from './models/assassin.model';
+import { Component } from '@angular/core';
 import { Contract } from './models/contract.model';
 import { BrotherhoodService } from './services/brotherhood.service';
 import { HelperService } from './services/helper.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Auth } from './models/auth.interface';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { ContractTarget } from './models/target.model';
 import { City } from './models/city.model';
-import { ContractShareDTO } from './models/contractShareDTO';
 import { AppState, AppStateService } from './services/appstate.service';
+import { ZoomAnimation, FormAnimation } from './animations.module';
 
 
 
@@ -17,32 +14,7 @@ import { AppState, AppStateService } from './services/appstate.service';
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.sass'],
-	animations: [
-		trigger("zoom-animation", [
-			transition(":enter", [
-				style({ opacity: 0, scale: 0.9, height: 0 }),
-				animate('0.7s ease-out',
-					style({ opacity: 1, scale: 1 }))
-			]),
-			transition(':leave', [
-				style({ opacity: 1, scale: 1 }),
-				animate('0.5s ease-in',
-					style({ opacity: 0, scale: 0.9 }))
-			])
-		]),
-		trigger("form-animation", [
-			transition(":enter", [
-				style({ opacity: 0, backdropFilter: "blur(0px)", scale: 1.25 }),
-				animate('0.3s ease-out',
-					style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }))
-			]),
-			transition(':leave', [
-				style({ opacity: 1, backdropFilter: "blur(50px)", scale: 1 }),
-				animate('0.3s ease-in',
-					style({ opacity: 0, backdropFilter: "blur(0px)", scale: 0.75 }))
-			])
-		])
-	]
+	animations: [FormAnimation, ZoomAnimation]
 })
 export class AppComponent {
 	AppState = AppState;

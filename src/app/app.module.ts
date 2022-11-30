@@ -49,7 +49,7 @@ import { FormContractTargetUpsertComponent } from './components/forms/form-contr
 		FormContractUpsertComponent,
 		FormContractShareComponent,
 		FormContractTargetAddComponent,
-  FormContractTargetUpsertComponent,
+		FormContractTargetUpsertComponent,
 	],
 	imports: [
 		BrowserModule,
