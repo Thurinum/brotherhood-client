@@ -59,7 +59,7 @@ export class AppComponent {
 		localStorage.removeItem("authTime");
 		this.showUserContracts = false;
 		this.helper.message("Logged out.");
-		this.appstate.isLoggedIn = false;
+		this.app.isLoggedIn = false;
 
 		this.refreshContracts();
 	}
@@ -79,7 +79,7 @@ export class AppComponent {
 		this.brotherhood.register(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
-				this.appstate.state = AppState.None;
+				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to register user`, errorResponse);
@@ -186,7 +186,7 @@ export class AppComponent {
 			(response: HttpResponse<Contract[]>) => {
 				this.helper.message(`Successfully added contract '${contract.codename}'.`);
 				this.refreshContracts();
-				this.appstate.state = AppState.None;
+				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to add contract`, errorResponse);
@@ -210,7 +210,7 @@ export class AppComponent {
 		this.brotherhood.shareContract(dto).subscribe(
 			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully assigned ${owner} to ${contract.codename}.`);
-				this.appstate.state = AppState.None;
+				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to assign ${owner} to ${contract.codename}`, errorResponse);
@@ -227,7 +227,7 @@ export class AppComponent {
 				this.helper.httpError(`Failed to add target ${target.firstName} ${target.lastName} to contract '${this.selectedContract?.codename}'`, errorResponse);
 			}
 			)
-		this.appstate.state = AppState.None;
+		this.app.state = AppState.None;
 	}
 
 	nukeContract(contract?: Contract) {
@@ -244,7 +244,7 @@ export class AppComponent {
 	}
 
 	selectContract(contract: Contract) {
-		if (!this.appstate.isLoggedIn)
+		if (!this.app.isLoggedIn)
 			this.helper.message("Please log in to assign assassins to contracts.");
 
 		this.brotherhood.getContractTargets(contract.id!).subscribe(
@@ -267,11 +267,11 @@ export class AppComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
-		public appstate: AppStateService,
+		public app: AppStateService,
 		private helper: HelperService,
 	) {
 		if (localStorage.getItem("authKey"))
-			this.appstate.isLoggedIn = true;
+			this.app.isLoggedIn = true;
 
 		let validToStr = localStorage.getItem("authTime");
 
@@ -281,7 +281,7 @@ export class AppComponent {
 		this.refreshContracts();
 		this.refreshCities();
 
-		if (this.appstate.isLoggedIn) {
+		if (this.app.isLoggedIn) {
 			this.refreshContractTargets();
 		}
 	}
