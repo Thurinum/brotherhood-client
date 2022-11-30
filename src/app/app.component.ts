@@ -47,6 +47,18 @@ import { AppState, AppStateService } from './services/appstate.service';
 export class AppComponent {
 	AppState = AppState;
 
+	get isLoggedIn() {
+		return this.app.isLoggedIn;
+	}
+
+	get state() {
+		return this.app.state;
+	}
+
+	set state(state: AppState) {
+		this.app.state = state;
+	}
+
 	contracts: Contract[] = []
 	cities: City[] = []
 	targets: ContractTarget[] = []
@@ -208,7 +220,7 @@ export class AppComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
-		public app: AppStateService,
+		private app: AppStateService,
 		private helper: HelperService,
 	) {
 		if (localStorage.getItem("authKey"))
@@ -220,6 +232,7 @@ export class AppComponent {
 			this.logout();
 
 		this.refreshContracts();
+		this.refreshContractTargets();
 		this.refreshCities();
 
 		if (this.app.isLoggedIn) {

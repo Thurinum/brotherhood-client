@@ -1,15 +1,15 @@
 <header>
 	<h1>IntelliBrotherhood&trade; Contract Manager 2022</h1>
 	<div class="auth">
-		<button *ngIf="!app.isLoggedIn" mat-raised-button color="primary" (click)="app.state = AppState.Login">
+		<button *ngIf="!isLoggedIn" mat-raised-button color="primary" (click)="state = AppState.Login">
 			<mat-icon>account_circle</mat-icon>&nbsp;
 			<mat-label>Log in</mat-label>
 		</button>
-		<button *ngIf="!app.isLoggedIn" mat-stroked-button color="primary" (click)="app.state = AppState.Register">
+		<button *ngIf="!isLoggedIn" mat-stroked-button color="primary" (click)="state = AppState.Register">
 			<mat-icon>account_circle</mat-icon>&nbsp;
 			<mat-label>Sign up</mat-label>
 		</button>
-		<button *ngIf="app.isLoggedIn" mat-raised-button color="primary" (click)="logout()">
+		<button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logout()">
 			<mat-icon>vpn_key</mat-icon>&nbsp;
 			<mat-label>Log out</mat-label>
 		</button>
@@ -25,18 +25,18 @@
 				<mat-icon>public</mat-icon>&nbsp;Public Contracts
 			</span>
 		</ng-template>
-		<app-contract-list [contracts]="contracts" [canAdd]="app.isLoggedIn" (refresh)="refreshContracts()"
-					 (select)="selectContract($event)" (add)="app.state = AppState.CreateContract;refreshCities()"
+		<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+					 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
 					 (remove)="nukeContract($event)"></app-contract-list>
 	</mat-tab>
-	<mat-tab>
+	<mat-tab *ngIf="isLoggedIn">
 		<ng-template mat-tab-label>
 			<span class="tab-label" (click)="showUserContracts = true; refreshContracts()">
 				<mat-icon>lock</mat-icon>&nbsp;My Contracts
 			</span>
 		</ng-template>
-		<app-contract-list [contracts]="contracts" [canAdd]="app.isLoggedIn" (refresh)="refreshContracts()"
-					 (select)="selectContract($event)" (add)="app.state = AppState.CreateContract;refreshCities()"
+		<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+					 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
 					 (remove)="nukeContract($event)"></app-contract-list>
 	</mat-tab>
 	<mat-tab>
@@ -56,8 +56,8 @@
 	</mat-tab>
 </mat-tab-group>
 
-<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="app.state = AppState.ShareContract"
-			    (addTarget)="app.state = AppState.AddContractTarget"></app-contract-details>
+<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="state = AppState.ShareContract"
+			    (addTarget)="state = AppState.AddContractTarget"></app-contract-details>
 
 <div class="legal">
 	<br />
@@ -65,14 +65,13 @@
 	<p><small>&copy; 2022 JuliePro LLC - v1.4</small></p>
 </div>
 
-<section class="form-panel" *ngIf="app.state != AppState.None" [@form-animation]>
-	<button class="form-close" mat-mini-fab color="primary" (click)="app.state = AppState.None">
+<section class="form-panel" *ngIf="state != AppState.None" [@form-animation]>
+	<button class="form-close" mat-mini-fab color="primary" (click)="state = AppState.None">
 		<mat-icon>close</mat-icon>
 	</button>
 
-	<ng-container [ngSwitch]="app.state">
+	<ng-container [ngSwitch]="state">
 		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts()"></app-form-login>
-		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 		<app-form-register *ngSwitchCase="AppState.Register"></app-form-register>
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
@@ -80,7 +79,7 @@
 
 
 
-	<fieldset *ngIf="app.state == AppState.AddContractTarget">
+	<fieldset *ngIf="state == AppState.AddContractTarget">
 		<legend>Add a target to {{selectedContract?.codename}}</legend>
 		<mat-form-field>
 			<mat-label>Target</mat-label>
@@ -98,7 +97,7 @@
 		</button>
 	</fieldset>
 
-	<fieldset *ngIf="app.state == AppState.EditContractTarget">
+	<fieldset *ngIf="state == AppState.EditContractTarget">
 		<legend>Edit target {{selectedTarget?.firstName}} {{selectedTarget?.lastName}}</legend>
 		<mat-form-field>
 			<mat-label>First name</mat-label>
