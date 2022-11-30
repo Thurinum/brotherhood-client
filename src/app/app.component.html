@@ -70,7 +70,7 @@
 		<mat-icon>close</mat-icon>
 	</button>
 
-	<ng-container *ngSwitch="app.state">
+	<ng-container [ngSwitch]="app.state">
 		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts()"></app-form-login>
 	</ng-container>
 
