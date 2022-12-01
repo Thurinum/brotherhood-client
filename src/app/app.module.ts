@@ -33,7 +33,8 @@ import { FormRegisterComponent } from './components/forms/form-register/form-reg
 import { FormContractUpsertComponent } from './components/forms/form-contract-upsert/form-contract-upsert.component';
 import { FormContractShareComponent } from './components/forms/form-contract-share/form-contract-share.component';
 import { FormContractTargetAddComponent } from './components/forms/form-contract-target-add/form-contract-target-add.component';
-import { FormContractTargetUpsertComponent } from './components/forms/form-contract-target-upsert/form-contract-target-upsert.component';
+import { FormContractTargetUpdateComponent } from './components/forms/form-contract-target-update/form-contract-target-update.component';
+import { FormContractTargetCreateComponent } from './components/forms/form-contract-target-create/form-contract-target-create.component';
 
 @NgModule({
 	declarations: [
@@ -49,7 +50,8 @@ import { FormContractTargetUpsertComponent } from './components/forms/form-contr
 		FormContractUpsertComponent,
 		FormContractShareComponent,
 		FormContractTargetAddComponent,
-		FormContractTargetUpsertComponent,
+		FormContractTargetUpdateComponent,
+		FormContractTargetCreateComponent,
 	],
 	imports: [
 		BrowserModule,

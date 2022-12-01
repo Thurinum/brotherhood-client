@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
 import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { SlideAnimation, ZoomAnimation } from 'src/app/animations.module';
+import { SlideAnimation, ZoomAnimation } from 'src/app/animations';
 
 @Component({
 	selector: 'app-contract-list',

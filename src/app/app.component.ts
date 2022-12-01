@@ -6,7 +6,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ContractTarget } from './models/target.model';
 import { City } from './models/city.model';
 import { AppState, AppStateService } from './services/appstate.service';
-import { ZoomAnimation, FormAnimation } from './animations.module';
+import { ZoomAnimation, FormAnimation } from './animations';
 
 
 

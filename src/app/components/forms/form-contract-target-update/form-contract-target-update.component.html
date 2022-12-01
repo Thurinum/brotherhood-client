@@ -1,15 +1,15 @@
 <fieldset>
-	<legend>{{isUpdate ? "Edit" : "Create"}} target {{target.firstName}} {{target.lastName}}</legend>
+	<legend>Update target {{target.firstName}} {{target.lastName}}</legend>
 
 	<mat-form-field>
 		<mat-label>First name</mat-label>
-		<input [(ngModel)]="target?.firstName" matInput type="text"
-			placeholder="Enter contract name..." />
+		<input [(ngModel)]="target.firstName" matInput type="text"
+			 placeholder="Enter contract name..." />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Last name</mat-label>
 		<input [(ngModel)]="target.lastName" matInput type="text"
-			placeholder="Enter contract name..." />
+			 placeholder="Enter contract name..." />
 	</mat-form-field>
 	<div class="upload-wrapper">
 		<button class="upload" (click)="upload.click()" mat-raised-button color="primary">
@@ -24,8 +24,8 @@
 		<small>Picture preview</small>
 	</mat-hint>
 
-	<button mat-raised-button color="primary" (click)="target ? updateContractTarget(file) : createContractTarget(file)">
+	<button mat-raised-button color="primary" (click)="updateContractTarget(file)">
 		<mat-icon>check</mat-icon>
-		{{isUpdate ? "Save changes" : "Create target"}}
+		Save changes
 	</button>
 </fieldset>

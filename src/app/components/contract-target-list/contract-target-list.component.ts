@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ContractTarget } from 'src/app/models/target.model';
-import { SlideAnimation } from 'src/app/animations.module';
+import { SlideAnimation } from 'src/app/animations';
 
 @Component({
 	selector: 'app-contract-target-list',

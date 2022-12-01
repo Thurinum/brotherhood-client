@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { City } from 'src/app/models/city.model';
-import { SlideAnimation } from 'src/app/animations.module';
+import { SlideAnimation } from 'src/app/animations';
 
 @Component({
 	selector: 'app-city-list',
