@@ -1,6 +1,6 @@
-<img src="https://localhost:5001/images/{{target.id}}.webp" alt="Image de {{target.firstName}}"
-onerror="this.src = '/src/assets/blank-profile.svg'">
-<h3>{{target.firstName}} {{target.lastName}}</h3>
+<img src="https://localhost:5001/images/targets/{{target.id}}.webp" alt="Image de {{target.firstName}}"
+onerror="this.src = '/assets/blank-profile.svg'">
+<h3>{{target.firstName}} {{target.lastName}}<br/><span style="font-weight: normal;font-size: 0.85em">{{target.title}}</span></h3>
 
 <button class="overflow-menu-btn" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
 	<mat-icon>more_horiz</mat-icon>
