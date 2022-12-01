@@ -28,7 +28,7 @@ export class FormContractTargetCreateComponent {
 		const target = new ContractTarget();
 		const formData = new FormData;
 		formData.append("file", file, file.name);
-		target.formData = formData;
+		// target.formData = formData;
 
 		this.brotherhood.createContractTarget(target).subscribe(
 			(response: HttpResponse<any>) => {
