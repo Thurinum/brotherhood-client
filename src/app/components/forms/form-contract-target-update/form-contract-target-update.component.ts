@@ -20,13 +20,13 @@ export class FormContractTargetUpdateComponent {
 	file?: File;
 
 	updateContractTarget(file?: File) {
-		if (file) {
-			const formdata = new FormData();
-			formdata.append("file", file, file.name);
-			this.target.formData = formdata;
-		}
+		const formData = new FormData();
+		formData.append("model", JSON.stringify(this.target));
 
-		this.brotherhood.updateContractTarget(this.target).subscribe(
+		if (file)
+			formData.append("file", file, file.name);
+
+		this.brotherhood.updateContractTarget(this.target.id!, formData).subscribe(
 			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully updated target ${this.target?.firstName} ${this.target?.lastName}.`);
 				this.app.state = AppState.None;

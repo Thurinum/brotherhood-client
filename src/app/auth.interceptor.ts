@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		if (request.url == "https://localhost:5001/api/assassins/register")
 			return next.handle(request);
 
-		if (request.url == "https://localhost:5001/api/contract/target/create") {
+		if (request.url.match(/https:\/\/localhost:5001\/api\/contract\/target\/.*/g)) {
 			request = request.clone({
 				setHeaders: {
 					"Authorization": "Bearer " + localStorage.getItem("authKey")
