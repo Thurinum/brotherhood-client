@@ -9,5 +9,6 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class ContractTargetDetailsComponent {
 	@Input() target!: ContractTarget
-	@Output() share = new EventEmitter<void>()
+	@Output() share = new EventEmitter()
+	@Output() setAsCover = new EventEmitter()
 }

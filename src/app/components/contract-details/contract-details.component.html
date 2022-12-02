@@ -29,7 +29,10 @@
 	<owl-carousel-o class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
 		<ng-container *ngFor="let target of model?.targets">
 			<ng-template carouselSlide>
-				<app-contract-target-details class="carousel-item" matRipple [title]="target.firstName" [target]="target"></app-contract-target-details>
+				<app-contract-target-details class="carousel-item" matRipple
+								     [title]="target.firstName"
+								     [target]="target"
+								     (setAsCover)="setContractCover(target)"></app-contract-target-details>
 			</ng-template>
 		</ng-container>
 	</owl-carousel-o>

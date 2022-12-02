@@ -6,19 +6,16 @@ onerror="this.src = '/assets/blank-profile.svg'">
 	<mat-icon>more_horiz</mat-icon>
 </button>
 <mat-menu #overflowMenu="matMenu" xPosition="before">
-	<button mat-menu-item>
-		<mat-icon>picture</mat-icon>Set target as contract cover
-	</button>
-	<button mat-menu-item disabled>
-		<mat-icon>remove</mat-icon>Edit target
+	<button mat-menu-item (click)="setAsCover.emit()">
+		<mat-icon>insert_photo</mat-icon>Set target as contract cover
 	</button>
 	<button mat-menu-item>
-		<mat-icon>remove</mat-icon>Remove target from contract
+		<mat-icon>edit</mat-icon>Edit target
 	</button>
 	<button mat-menu-item>
-		<mat-icon>supervisor_account</mat-icon>Mark target as eliminated
+		<mat-icon>remove_circle</mat-icon>Remove target from contract
 	</button>
 	<button mat-menu-item>
-		<mat-icon>supervisor_account</mat-icon>
+		<mat-icon>how_to_reg</mat-icon>Mark target as eliminated
 	</button>
 </mat-menu>

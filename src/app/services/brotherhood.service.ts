@@ -62,10 +62,6 @@ export class BrotherhoodService {
 		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/targets`, {observe: "response"});
 	}
 
-	// getContractsInCity(city: City): any {
-	// 	return this.http.get<Contract[]>(`https://localhost:5001/api/city${city.id}/contracts`, {observe: "response"});
-	// }
-
 	getImageFromPlace(place: string): any {
 		return this.http.get(`https://api.teleport.org/api/urban_areas/slug:${place}/images/`);
 	}

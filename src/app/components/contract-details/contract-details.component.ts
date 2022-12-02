@@ -1,16 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ContractTarget } from 'src/app/models/target.model';
 
 @Component({
 	selector: 'app-contract-details',
 	templateUrl: './contract-details.component.html',
 	styleUrls: ['./contract-details.component.sass']
 })
-export class ContractDetailsComponent implements OnInit {
+export class ContractDetailsComponent {
 	@Input() model?: Contract
-	@Output() share = new EventEmitter<void>()
-	@Output() addTarget = new EventEmitter<void>()
+	@Output() share = new EventEmitter()
+	@Output() addTarget = new EventEmitter()
 
 	carouselOptions: OwlOptions = {
 		loop: true,
@@ -37,17 +38,7 @@ export class ContractDetailsComponent implements OnInit {
 		nav: true
 	}
 
-	ngOnInit(): void {
-		// setTimeout(() => {
-		// 	const elem = document.querySelector('.carousel');
-		// 	// @ts-ignore
-		// 	const carousel = new Flickity(elem, {
-		// 		cellAlign: 'center',
-		// 		contain: true,
-		// 		imagesLoaded: true,
-		// 		pageDots: true,
-		// 		wrapAround: true,
-		// 	});
-		// }, 1000);
+	setContractCover(target: ContractTarget) {
+
 	}
 }

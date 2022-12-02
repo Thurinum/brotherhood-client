@@ -63,7 +63,9 @@
 	</mat-tab-group>
 
 	<!-- SECONDARY CONTENT -->
-	<app-contract-details *ngIf="selectedContract" [model]="selectedContract" (share)="state = AppState.ShareContract"
+	<app-contract-details *ngIf="selectedContract"
+				    [model]="selectedContract"
+				    (share)="state = AppState.ShareContract"
 				    (addTarget)="state = AppState.AddContractTarget"></app-contract-details>
 </main>
 
