@@ -198,5 +198,10 @@ export class AppComponent {
 		if (this.app.isLoggedIn) {
 			this.refreshContractTargets();
 		}
+
+		window.addEventListener("keydown", (e) => {
+			if (e.key === "Escape")
+				this.state = AppState.None;
+		})
 	}
 }
