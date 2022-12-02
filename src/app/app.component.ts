@@ -35,6 +35,7 @@ export class AppComponent {
 	showUserContracts: boolean = false
 	selectedContract?: Contract
 	selectedTarget?: ContractTarget
+	storage: Storage = window.localStorage
 
 	logout() {
 		localStorage.removeItem("authKey");

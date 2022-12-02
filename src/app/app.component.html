@@ -21,7 +21,7 @@
 
 <main>
 	<!-- PRIMARY CONTENT -->
-	<mat-tab-group mat-align-tabs="center" [@form-animation]>
+	<mat-tab-group mat-align-tabs="center" [selectedIndex]="storage.getItem('lastTabIndex')" (selectedIndexChange)="storage.setItem('lastTabIndex', $event.toString())" [@form-animation]>
 		<mat-tab>
 			<ng-template mat-tab-label>
 				<span class="tab-label" (click)="showUserContracts = false; refreshContracts()">
