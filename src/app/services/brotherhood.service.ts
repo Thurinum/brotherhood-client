@@ -42,6 +42,10 @@ export class BrotherhoodService {
 		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/target/${id}/edit`, data);
 	}
 
+	setContractCover(id: number, target: ContractTarget): any {
+		return this.http.put<number>(`https://localhost:5001/api/contract/${id}/setcover`, target);
+	}
+
 	createContract(contract: Contract): any {
 		return this.http.post<Contract>("https://localhost:5001/api/contract/create", contract);
 	}

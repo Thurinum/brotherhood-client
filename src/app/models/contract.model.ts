@@ -4,7 +4,7 @@ import { ContractTarget } from "./target.model"
 
 export class Contract {
 	id!: number
-	featuredContractId?: number
+	coverTargetId?: number
 	assassins: Assassin[] = []
 	targets: ContractTarget[] = []
 

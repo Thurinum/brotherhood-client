@@ -9,7 +9,7 @@
 
 <section class="card-layout" [@slide-animation] *ngIf="contracts && contracts.length > 0">
 	<app-card #card *ngFor="let contract of contracts" [model]="contract" [allowRemove]="canAdd"
-		    [title]="contract.codename" image="http://localhost:5001/images/{{contract.featuredContractId}}.webp"
+		    [title]="contract.codename" image="https://localhost:5001/images/targets/lg/{{contract.coverTargetId}}.webp"
 		    [selected]="contract.id === selectedId" (select)="select.next(contract); selectedId = contract.id!"
 		    (remove)="remove.next(contract)">
 		<mat-icon class="card-icon"

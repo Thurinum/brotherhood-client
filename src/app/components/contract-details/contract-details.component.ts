@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ContractTarget } from 'src/app/models/target.model';
+import { BrotherhoodService } from 'src/app/services/brotherhood.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
 	selector: 'app-contract-details',
@@ -12,6 +15,7 @@ export class ContractDetailsComponent {
 	@Input() model?: Contract
 	@Output() share = new EventEmitter()
 	@Output() addTarget = new EventEmitter()
+	@Output() refresh = new EventEmitter()
 
 	carouselOptions: OwlOptions = {
 		loop: true,
@@ -39,6 +43,19 @@ export class ContractDetailsComponent {
 	}
 
 	setContractCover(target: ContractTarget) {
-
+		this.brotherhood.setContractCover(this.model!.id, target).subscribe(
+			(response: HttpResponse<void>) => {
+				console.info(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.model?.codename}.`);
+				this.refresh.emit();
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to set ${target.firstName} ${target.lastName} as cover for ${this.model?.codename}.`, errorResponse);
+			}
+		);
 	}
+
+	constructor(
+		private brotherhood: BrotherhoodService,
+		private helper: HelperService
+	) { }
 }
