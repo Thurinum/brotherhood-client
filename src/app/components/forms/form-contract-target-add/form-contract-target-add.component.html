@@ -2,6 +2,7 @@
 	<legend>Add a target to {{contract?.codename}}</legend>
 	<mat-form-field>
 		<mat-label>Target</mat-label>
+		<mat-icon [style.border-radius.px]=50><img *ngIf="target.value" src="https://localhost:5001/images/targets/sm/{{target.value.id}}.webp?id={{target.value.imageCacheId}}"></mat-icon>
 		<mat-select #target placeholder="Choose a target...">
 			<mat-option *ngFor="let target of contractTargets" [value]="target">
 				<mat-icon [style.border-radius.px]=50><img src="https://localhost:5001/images/targets/sm/{{target.id}}.webp?id={{target.imageCacheId}}"></mat-icon>
@@ -9,7 +10,6 @@
 			</mat-option>
 		</mat-select>
 	</mat-form-field>
-	<br />
 	<button mat-raised-button color="primary" (click)="addTargetToCurrentContract(target.value)">
 		<mat-icon>check</mat-icon>
 		Add target

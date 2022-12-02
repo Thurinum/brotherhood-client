@@ -13,6 +13,7 @@
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Location</mat-label>
+		<mat-icon [style.border-radius.px]=50><img *ngIf="location.value" [src]="location.value.image"></mat-icon>
 		<mat-select #location placeholder="Choose location...">
 			<mat-option *ngFor="let city of cities" [value]="city">
 				<mat-icon [style.border-radius.px]=50><img [src]="city.image"></mat-icon>
