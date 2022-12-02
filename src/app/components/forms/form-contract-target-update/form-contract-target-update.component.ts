@@ -36,7 +36,6 @@ export class FormContractTargetUpdateComponent {
 				maxHeight: Infinity,
 				quality: 1.0,
 			});
-			console.log(lgImage)
 			formData.append("image-lg", new File([lgImage], file.name));
 		}
 

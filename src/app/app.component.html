@@ -79,7 +79,7 @@
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
-		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" (refresh)="refreshContractTargets()"></app-form-contract-target-create>
+		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" (refresh)="state = AppState.Login"></app-form-contract-target-create>
 		<app-form-contract-target-update *ngSwitchCase="AppState.UpdateContractTarget" [target]="selectedTarget!" (refresh)="refreshContractTargets()"></app-form-contract-target-update>
 	</ng-container>
 
