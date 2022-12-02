@@ -178,6 +178,11 @@ export class AppComponent {
 		)
 	}
 
+	changeTab(index: number) {
+		if (index > 1)
+			this.selectedContract = undefined;
+	}
+
 	constructor(
 		private brotherhood: BrotherhoodService,
 		private app: AppStateService,
