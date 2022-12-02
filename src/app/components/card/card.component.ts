@@ -14,6 +14,7 @@ export class CardComponent implements OnInit {
 	@Input() model: any
 	@Input() title: string = "???"
 	@Input() image: string = this.fallbackImage
+	@Input() overlay: string = ""
 
 	@Output() select = new EventEmitter<any>();
 	@Output() remove = new EventEmitter<any>();

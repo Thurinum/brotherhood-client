@@ -11,7 +11,7 @@
 	<app-card #card *ngFor="let contract of contracts" [model]="contract" [allowRemove]="canAdd"
 		    [title]="contract.codename" image="https://localhost:5001/images/targets/lg/{{contract.coverTargetId}}.webp"
 		    [selected]="contract.id === selectedId" (select)="select.next(contract); selectedId = contract.id!"
-		    (remove)="remove.next(contract)">
+		    (remove)="remove.next(contract)" overlay="/assets/card-overlay.svg">
 		<mat-icon class="card-icon"
 			    matTooltip="This contract can be viewed by {{contract.isPublic ? 'everyone' : 'you only'}}."
 			    matTooltipPosition="above">
