@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContractTarget } from 'src/app/models/target.model';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
 	selector: 'app-contract-target-details',
@@ -9,6 +8,10 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class ContractTargetDetailsComponent {
 	@Input() target!: ContractTarget
+	@Input() allowEdit: boolean = false
+
 	@Output() share = new EventEmitter()
+	@Output() edit = new EventEmitter()
+	@Output() remove = new EventEmitter()
 	@Output() setAsCover = new EventEmitter()
 }

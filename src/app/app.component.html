@@ -48,9 +48,10 @@
 					<mat-icon>person_outline</mat-icon>&nbsp;Targets
 				</span>
 			</ng-template>
-			<app-contract-target-list [targets]="targets" (add)="state = AppState.CreateContractTarget"
+			<app-contract-target-list [targets]="targets" [allowEdit]="isLoggedIn"
+							  (add)="state = AppState.CreateContractTarget"
 							  (refresh)="refreshContractTargets()"
-							  (select)="selectedTarget = $event;state = AppState.UpdateContractTarget"></app-contract-target-list>
+							  (select)="selectContractTarget($event)"></app-contract-target-list>
 		</mat-tab>
 		<mat-tab label="Cities">
 			<ng-template mat-tab-label>
@@ -58,15 +59,16 @@
 					<mat-icon>location_city</mat-icon>&nbsp;Cities
 				</span>
 			</ng-template>
-			<app-city-list [cities]="cities"></app-city-list>
+			<app-city-list [cities]="cities" [allowEdit]="isLoggedIn" (refresh)="refreshCities()"></app-city-list>
 		</mat-tab>
 	</mat-tab-group>
 
 	<!-- SECONDARY CONTENT -->
 	<app-contract-details *ngIf="selectedContract"
-				    [model]="selectedContract"
+				    [model]="selectedContract" [allowEdit]="isLoggedIn"
 				    (share)="state = AppState.ShareContract"
 				    (addTarget)="state = AppState.AddContractTarget"
+				    (editTarget)="selectContractTarget($event);state = AppState.UpdateContractTarget"
 				    (refresh)="refreshContracts()"></app-contract-details>
 </main>
 

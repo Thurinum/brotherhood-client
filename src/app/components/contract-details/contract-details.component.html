@@ -2,18 +2,21 @@
 	<h2>{{model?.codename}}</h2>
 
 	<span>
-		<button mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.emit()">
+		<button *ngIf="!model?.isPublic" mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.emit()">
 			<mat-icon>add</mat-icon>
 		</button>
-		<button mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+		<button *ngIf="!model?.isPublic" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
 			<mat-icon>more_horiz</mat-icon>
 		</button>
 		<mat-menu #overflowMenu="matMenu" xPosition="before">
-			<button mat-menu-item *ngIf="!model?.isPublic" (click)="share.emit()">
+			<button mat-menu-item>
+				<mat-icon>edit</mat-icon>Edit contract
+			</button>
+			<button mat-menu-item (click)="share.emit()">
 				<mat-icon>supervisor_account</mat-icon>Request assassin as backup
 			</button>
 			<button mat-menu-item>
-				<mat-icon>exit_to_app</mat-icon>Cancel all missions
+				<mat-icon>cancel</mat-icon>Cancel contract
 			</button>
 		</mat-menu>
 	</span>
@@ -32,6 +35,8 @@
 				<app-contract-target-details class="carousel-item" matRipple
 								     [title]="target.firstName"
 								     [target]="target"
+								     [allowEdit]="allowEdit"
+								     (edit)="editTarget.emit(target)"
 								     (setAsCover)="setContractCover(target)"></app-contract-target-details>
 			</ng-template>
 		</ng-container>

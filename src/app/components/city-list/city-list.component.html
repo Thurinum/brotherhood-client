@@ -1,15 +1,15 @@
 <nav>
-	<button mat-mini-fab color="primary" matTooltip="Register a city">
+	<button *ngIf="allowEdit" mat-mini-fab color="primary" matTooltip="Register a city" (click)="add.emit()">
 		<mat-icon>add</mat-icon>
 	</button>
-	<button mat-mini-fab color="primary" matTooltip="Refresh cities">
+	<button mat-mini-fab color="primary" matTooltip="Refresh cities" (click)="refresh.emit()">
 		<mat-icon>refresh</mat-icon>
 	</button>
 </nav>
 
 
 <section class="card-layout">
-	<app-card #card *ngFor="let city of cities" [model]="city" [allowRemove]="false"
+	<app-card #card *ngFor="let city of cities" [model]="city" [allowRemove]="allowEdit"
 		    [title]="city.name" [image]="city.image!"></app-card>
 </section>
 

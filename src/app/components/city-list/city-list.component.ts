@@ -10,6 +10,7 @@ import { SlideAnimation } from 'src/app/animations';
 })
 export class CityListComponent {
 	@Input() cities!: City[]
+	@Input() allowEdit: boolean = false
 
 	@Output() add = new EventEmitter
 	@Output() refresh = new EventEmitter

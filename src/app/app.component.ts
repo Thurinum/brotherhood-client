@@ -138,23 +138,7 @@ export class AppComponent {
 		);
 	}
 
-	nukeContract(contract?: Contract) {
-		this.brotherhood.deleteContract(contract?.id).subscribe(
-			(response: HttpResponse<Contract[]>) => {
-				this.helper.message(`Successfully unregistered ${contract?.codename}.`);
-				this.refreshContracts();
-				this.selectedContract = undefined;
-			},
-			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove ${contract?.codename}`, errorResponse);
-			}
-		)
-	}
-
 	selectContract(contract: Contract) {
-		if (!this.app.isLoggedIn)
-			this.helper.message("Please log in to assign assassins to contracts.");
-
 		this.brotherhood.getContractTargets(contract.id!).subscribe(
 			(response: HttpResponse<ContractTarget[]>) => {
 				this.selectedContract = contract;
@@ -172,6 +156,26 @@ export class AppComponent {
 		);
 	}
 
+	selectContractTarget(target: ContractTarget) {
+		if (!this.isLoggedIn)
+			return;
+
+		this.selectedTarget = target;
+		this.state = AppState.UpdateContractTarget;
+	}
+
+	nukeContract(contract?: Contract) {
+		this.brotherhood.deleteContract(contract?.id).subscribe(
+			(response: HttpResponse<Contract[]>) => {
+				this.helper.message(`Successfully unregistered ${contract?.codename}.`);
+				this.refreshContracts();
+				this.selectedContract = undefined;
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to remove ${contract?.codename}`, errorResponse);
+			}
+		)
+	}
 
 	constructor(
 		private brotherhood: BrotherhoodService,

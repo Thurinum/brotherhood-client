@@ -10,6 +10,7 @@ import { SlideAnimation } from 'src/app/animations';
 })
 export class ContractTargetListComponent {
 	@Input() targets!: ContractTarget[]
+	@Input() allowEdit: boolean = false
 
 	@Output() add = new EventEmitter
 	@Output() refresh = new EventEmitter

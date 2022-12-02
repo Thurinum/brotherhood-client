@@ -13,8 +13,11 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class ContractDetailsComponent {
 	@Input() model?: Contract
+	@Input() allowEdit: boolean = false
+
 	@Output() share = new EventEmitter()
 	@Output() addTarget = new EventEmitter()
+	@Output() editTarget = new EventEmitter<ContractTarget>()
 	@Output() refresh = new EventEmitter()
 
 	carouselOptions: OwlOptions = {
