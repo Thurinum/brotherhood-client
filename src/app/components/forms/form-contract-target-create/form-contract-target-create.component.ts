@@ -4,6 +4,7 @@ import { ContractTarget } from 'src/app/models/target.model';
 import { AppState, AppStateService } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { resizeImage } from "simple-image-resize";
 
 @Component({
 	selector: 'app-form-contract-target-create',
@@ -20,25 +21,39 @@ export class FormContractTargetCreateComponent {
 	title: string = ""
 	file?: File
 
-	createContractTarget(file?: File) {
-		if (!file) {
-			this.helper.message("Please select an image for the target.");
-			return;
+	async createContractTarget(file?: File) {
+		let target = new ContractTarget();
+		target.firstName = this.firstName;
+		target.lastName = this.lastName;
+		target.title = this.title;
+
+		const formData = new FormData();
+		formData.append("model", JSON.stringify(target));
+
+		if (file) {
+			const smImage = await resizeImage(file, {
+				maxWidth: 256,
+				maxHeight: Infinity,
+				quality: 1.0,
+			});
+			formData.append("image-sm", new File([smImage], file.name));
+
+			const lgImage = await resizeImage(file, {
+				maxWidth: 1024,
+				maxHeight: Infinity,
+				quality: 1.0,
+			});
+			formData.append("image-lg", new File([lgImage], file.name));
 		}
 
-		const target = new ContractTarget();
-		const formData = new FormData;
-		formData.append("file", file, file.name);
-		// target.formData = formData;
-
-		this.brotherhood.createContractTarget(target).subscribe(
+		this.brotherhood.createContractTarget(formData).subscribe(
 			(response: HttpResponse<any>) => {
-				this.helper.message(`Successfully added ${this.firstName} ${this.lastName} to the list of targets.`);
+				this.helper.message(`Successfully registered contract target ${target?.firstName} ${target?.lastName}.`);
 				this.app.state = AppState.None;
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to add ${this.firstName} ${this.lastName} to the list of targets`, errorResponse);
+				this.helper.httpError(`Failed to register contract target ${target?.firstName} ${target?.lastName}`, errorResponse);
 			}
 		);
 	}
