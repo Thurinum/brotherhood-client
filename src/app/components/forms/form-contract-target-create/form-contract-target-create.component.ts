@@ -15,9 +15,10 @@ export class FormContractTargetCreateComponent {
 
 	@Output() refresh = new EventEmitter()
 
-	firstName: string = "";
-	lastName: string = "";
-	file?: File;
+	firstName: string = ""
+	lastName: string = ""
+	title: string = ""
+	file?: File
 
 	createContractTarget(file?: File) {
 		if (!file) {
