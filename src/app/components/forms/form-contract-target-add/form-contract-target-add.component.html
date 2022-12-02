@@ -4,7 +4,7 @@
 		<mat-label>Target</mat-label>
 		<mat-select #target placeholder="Choose a target...">
 			<mat-option *ngFor="let target of contractTargets" [value]="target">
-				<mat-icon [style.border-radius.px]=50>add</mat-icon>
+				<mat-icon [style.border-radius.px]=50><img src="https://localhost:5001/images/targets/sm/{{target.id}}.webp?id={{target.imageCacheId}}"></mat-icon>
 				{{ target.firstName }} {{target.lastName}}
 			</mat-option>
 		</mat-select>
