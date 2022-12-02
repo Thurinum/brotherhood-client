@@ -7,7 +7,7 @@ import { Contract } from 'src/app/models/contract.model';
 	styleUrls: ['./card.component.sass'],
 })
 export class CardComponent implements OnInit {
-	fallbackImage: string = "https://i.pinimg.com/564x/36/21/55/36215579663ec50ce28f6cd2233de365.jpg"
+	fallbackImage: string = "/assets/blank-profile.svg"
 
 	@Input() allowRemove: boolean = false;
 	@Input() selected: boolean = false;

@@ -45,7 +45,7 @@ export class ContractDetailsComponent {
 	setContractCover(target: ContractTarget) {
 		this.brotherhood.setContractCover(this.model!.id, target).subscribe(
 			(response: HttpResponse<void>) => {
-				console.info(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.model?.codename}.`);
+				this.helper.message(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.model?.codename}.`);
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
