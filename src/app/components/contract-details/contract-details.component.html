@@ -2,10 +2,10 @@
 	<h2>{{model?.codename}}</h2>
 
 	<span>
-		<button *ngIf="!model?.isPublic" mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.emit()">
-			<mat-icon>add</mat-icon>
+		<button *ngIf="allowEdit" mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.emit()">
+			<mat-icon>person_add</mat-icon>
 		</button>
-		<button *ngIf="!model?.isPublic" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+		<button *ngIf="allowEdit" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
 			<mat-icon>more_horiz</mat-icon>
 		</button>
 		<mat-menu #overflowMenu="matMenu" xPosition="before">
@@ -13,7 +13,7 @@
 				<mat-icon>edit</mat-icon>Edit contract
 			</button>
 			<button mat-menu-item (click)="share.emit()">
-				<mat-icon>supervisor_account</mat-icon>Request assassin as backup
+				<mat-icon>group_add</mat-icon>Request assassin as backup
 			</button>
 			<button mat-menu-item>
 				<mat-icon>cancel</mat-icon>Cancel contract
