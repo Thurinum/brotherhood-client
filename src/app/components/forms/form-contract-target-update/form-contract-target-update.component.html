@@ -19,7 +19,7 @@
 	</div>
 
 	<mat-hint class="upload-preview">
-		<img #preview src="https://localhost:5001/images/targets/{{target.id}}.webp" (error)="preview.src = '/assets/blank-profile.svg'" alt="Picture preview of {{target.firstName}} {{target.lastName}}" />
+		<img #preview src="https://localhost:5001/images/targets/sm/{{target.id}}.webp" (error)="preview.src = '/assets/blank-profile.svg'" alt="Picture preview of {{target.firstName}} {{target.lastName}}" />
 		<br />
 		<small>Picture preview</small>
 	</mat-hint>
