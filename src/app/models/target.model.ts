@@ -3,4 +3,5 @@ export class ContractTarget {
 	firstName?: string
 	lastName?: string
 	title?: string
+	imageCacheId?: string
 }

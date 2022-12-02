@@ -13,5 +13,5 @@
 		    [title]="target.firstName + ' ' + target.lastName"
 		    (select)="select.emit(target); selectedId = target.id!"
 		    [selected]="target.id === selectedId"
-		    image="https://localhost:5001/images/targets/sm/{{target.id}}.webp"></app-card>
+		    image="https://localhost:5001/images/targets/sm/{{target.id}}.webp?id={{target.imageCacheId}}"></app-card>
 </section>
