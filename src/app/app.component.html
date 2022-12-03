@@ -60,7 +60,7 @@
 					<mat-icon>location_city</mat-icon>&nbsp;Cities
 				</span>
 			</ng-template>
-			<app-city-list [cities]="cities" [allowEdit]="isLoggedIn" (refresh)="refreshCities()"></app-city-list>
+			<app-city-list [cities]="cities" [allowEdit]="false" (refresh)="refreshCities()"></app-city-list>
 		</mat-tab>
 	</mat-tab-group>
 
@@ -72,8 +72,9 @@
 				    (addTarget)="state = AppState.AddContractTarget"
 				    (createTarget)="assignedContract = selectedContract;state = AppState.CreateContractTarget"
 				    (editTarget)="selectContractTarget($event);state = AppState.UpdateContractTarget"
+				    (deleteTarget)="selectContractTarget($event);state = AppState.RemoveDeleteContractTarget"
 				    (remove)="nukeContract(selectedContract)"
-				    (refresh)="refreshContracts()"></app-contract-details>
+				    (refresh)="refreshContractTargets();refreshContracts()"></app-contract-details>
 </main>
 
 <!-- MODAL DIALOGS -->

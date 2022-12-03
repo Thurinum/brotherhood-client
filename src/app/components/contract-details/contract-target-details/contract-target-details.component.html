@@ -5,20 +5,20 @@
 	<span>{{target.title}}</span>
 </div>
 
-<button *ngIf="allowEdit" class="overflow-menu-btn" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+<button *ngIf="allowEdit" class="overflow-menu-btn" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu" matTooltip="Target options">
 	<mat-icon>more_horiz</mat-icon>
 </button>
 <mat-menu #overflowMenu="matMenu" xPosition="before">
-	<button mat-menu-item (click)="setAsCover.emit()">
-		<mat-icon>insert_photo</mat-icon>Set target as contract cover
-	</button>
 	<button mat-menu-item (click)="edit.emit()">
-		<mat-icon>edit</mat-icon>Edit target
+		<mat-icon>edit</mat-icon>Edit details
 	</button>
-	<button mat-menu-item>
-		<mat-icon>remove_circle</mat-icon>Remove target from contract
+	<button mat-menu-item (click)="setAsCover.emit()">
+		<mat-icon>insert_photo</mat-icon>Set as contract cover
 	</button>
-	<button mat-menu-item>
-		<mat-icon>how_to_reg</mat-icon>Mark target as eliminated
+	<button mat-menu-item (click)="remove.emit()">
+		<mat-icon>remove_circle</mat-icon>Remove from contract
+	</button>
+	<button mat-menu-item (click)="delete.emit()">
+		<mat-icon>how_to_reg</mat-icon>Mark as eliminated
 	</button>
 </mat-menu>

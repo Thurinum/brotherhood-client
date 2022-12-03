@@ -22,6 +22,7 @@ export class ContractDetailsComponent {
 	@Output() createTarget = new EventEmitter()
 	@Output() addTarget = new EventEmitter()
 	@Output() editTarget = new EventEmitter<ContractTarget>()
+	@Output() deleteTarget = new EventEmitter()
 
 	carouselOptions: OwlOptions = {
 		loop: true,
@@ -56,6 +57,18 @@ export class ContractDetailsComponent {
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`, errorResponse);
+			}
+		);
+	}
+
+	removeTarget(target: ContractTarget) {
+		this.brotherhood.removeContractTarget(this.contract!.id, target).subscribe(
+			(response: HttpResponse<void>) => {
+				this.helper.message(`Successfully removed ${target.firstName} ${target.lastName} from ${this.contract?.codename}.`);
+				this.refresh.emit();
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.httpError(`Failed to remove ${target.firstName} ${target.lastName} from ${this.contract?.codename}.`, errorResponse);
 			}
 		);
 	}

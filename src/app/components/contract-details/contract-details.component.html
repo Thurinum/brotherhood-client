@@ -5,7 +5,7 @@
 		<button *ngIf="allowEdit" mat-mini-fab color="primary" matTooltip="Add target to contract" [matMenuTriggerFor]="addMenu">
 			<mat-icon>person_add</mat-icon>
 		</button>
-		<button *ngIf="allowEdit" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
+		<button *ngIf="allowEdit" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu" matTooltip="More options">
 			<mat-icon>more_horiz</mat-icon>
 		</button>
 
@@ -46,6 +46,8 @@
 								     [target]="target"
 								     [allowEdit]="allowEdit"
 								     (edit)="editTarget.emit(target)"
+								     (remove)="removeTarget(target)"
+								     (delete)="deleteTarget.emit(target)"
 								     (setAsCover)="setContractCover(target)"></app-contract-target-details>
 			</ng-template>
 		</ng-container>

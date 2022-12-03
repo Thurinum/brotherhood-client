@@ -54,8 +54,8 @@ export class BrotherhoodService {
 		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/targets`, {observe: "response"});
 	}
 
-	addContractTarget(contractId: number, target: ContractTarget): any {
-		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/${contractId}/target/add`, target);
+	addContractTarget(id: number, target: ContractTarget): any {
+		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/${id}/target/add`, target);
 	}
 
 	createContractTarget(data: FormData): any {
@@ -64,6 +64,10 @@ export class BrotherhoodService {
 
 	updateContractTarget(id: number, data: FormData): any {
 		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/target/${id}/edit`, data);
+	}
+
+	removeContractTarget(id: number, target: ContractTarget): any {
+		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/${id}/target/remove`, target);
 	}
 
 	softDeleteContractTarget(target: ContractTarget): any {

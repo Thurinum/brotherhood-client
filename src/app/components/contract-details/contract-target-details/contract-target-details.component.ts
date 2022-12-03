@@ -12,6 +12,7 @@ export class ContractTargetDetailsComponent {
 
 	@Output() share = new EventEmitter()
 	@Output() edit = new EventEmitter()
-	@Output() remove = new EventEmitter()
 	@Output() setAsCover = new EventEmitter()
+	@Output() remove = new EventEmitter()
+	@Output() delete = new EventEmitter()
 }
