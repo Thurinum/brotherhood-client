@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset [style.width.px]=250>
 	<legend>Register new target</legend>
 
 	<mat-form-field>
@@ -20,7 +20,8 @@
 		<button class="upload" (click)="upload.click()" mat-raised-button color="primary">
 			<mat-icon>upload</mat-icon>&nbsp;Choose picture
 		</button>
-		<input #upload type="file" accept="image/*" (change)="file = upload!.files![0];preview.src = URL.createObjectURL(file)" />
+		<p *ngIf="upload.files" class="upload-filename">{{upload.files.length > 0 ? upload.files[0].name : ''}}</p>
+		<input #upload hidden type="file" accept="image/*" (change)="file = upload!.files![0];preview.src = URL.createObjectURL(file)" />
 	</div>
 
 	<mat-hint class="upload-preview">
@@ -30,7 +31,6 @@
 	</mat-hint>
 
 	<button mat-raised-button color="primary" (click)="createContractTarget(file)">
-		<mat-icon>check</mat-icon>
-		Create target
+		<mat-icon>person_add</mat-icon>&nbsp;Register target
 	</button>
 </fieldset>
