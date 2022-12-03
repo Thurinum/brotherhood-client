@@ -42,6 +42,10 @@ export class BrotherhoodService {
 		return this.http.put<ContractTarget>(`https://localhost:5001/api/contract/target/${id}/edit`, data);
 	}
 
+	deleteContractTarget(target: ContractTarget): any {
+		return this.http.delete(`https://localhost:5001/api/contract/target/${target.id}/nuke`);
+	}
+
 	setContractCover(id: number, target: ContractTarget): any {
 		return this.http.put<number>(`https://localhost:5001/api/contract/${id}/setcover`, target);
 	}
