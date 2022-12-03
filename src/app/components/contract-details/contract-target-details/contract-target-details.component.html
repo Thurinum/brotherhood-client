@@ -1,6 +1,9 @@
 <img src="https://localhost:5001/images/targets/lg/{{target.id}}.webp?id={{target.imageCacheId}}" alt="Image de {{target.firstName}}"
-onerror="this.src = '/assets/blank-profile.svg'">
-<h3>{{target.firstName}} {{target.lastName}}<br/><span style="font-weight: normal;font-size: 0.85em">{{target.title}}</span></h3>
+     onerror="this.src = '/assets/blank-profile.svg'">
+<div class="heading">
+	<h3>{{target.firstName}} {{target.lastName}}</h3>
+	<span>{{target.title}}</span>
+</div>
 
 <button *ngIf="allowEdit" class="overflow-menu-btn" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
 	<mat-icon>more_horiz</mat-icon>

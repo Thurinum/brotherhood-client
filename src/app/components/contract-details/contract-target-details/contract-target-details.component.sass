@@ -16,15 +16,27 @@ $border-radius: 10px
 	transition: box-shadow 0.2s ease-out, transform 0.2s ease-out
 
 	img
-		height: 78%
+		height: 70%
 		border-radius: $border-radius
 		object-fit: cover
 		object-position: center
 
-	h3
-		margin: 0
+	.heading
+		height: 30%
 		padding: 20px
+
+		display: flex
+		flex-direction: column
+		justify-content: center
 		text-align: center
+		gap: 6px
+
+		h3
+			margin: 0
+			font-size: 1.5em
+
+		span
+			font-size: 1.15em
 
 	&:hover
 		box-shadow: 0 7px 7px #63637048

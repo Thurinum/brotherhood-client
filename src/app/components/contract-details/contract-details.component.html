@@ -38,7 +38,6 @@
 
 
 <section>
-	<h1>{{contract?.codename}}</h1>
 	<owl-carousel-o class="carousel" *ngIf="contract?.targets!.length > 0; else noTarget">
 		<ng-container *ngFor="let target of contract?.targets">
 			<ng-template carouselSlide>
