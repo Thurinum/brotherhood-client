@@ -69,7 +69,9 @@
 				    [model]="selectedContract" [allowEdit]="isLoggedIn"
 				    (share)="state = AppState.ShareContract"
 				    (addTarget)="state = AppState.AddContractTarget"
+
 				    (editTarget)="selectContractTarget($event);state = AppState.UpdateContractTarget"
+				    (remove)="nukeContract(selectedContract)"
 				    (refresh)="refreshContracts()"></app-contract-details>
 </main>
 

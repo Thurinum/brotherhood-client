@@ -168,7 +168,7 @@ export class AppComponent {
 	nukeContract(contract?: Contract) {
 		this.brotherhood.deleteContract(contract?.id).subscribe(
 			(response: HttpResponse<Contract[]>) => {
-				this.helper.message(`Successfully unregistered ${contract?.codename}.`);
+				this.helper.message(`Successfully ended contract ${contract?.codename}.`);
 				this.refreshContracts();
 				this.selectedContract = undefined;
 			},
