@@ -32,10 +32,12 @@ export class FormLoginComponent {
 
 				localStorage.setItem("authKey", response.token);
 				localStorage.setItem("authTime", response.validTo.toString());
-				this.helper.message(`Logged in as '${identifier}'.`);
+				localStorage.setItem("authUser", response.username);
+				this.helper.message(`Logged in as '${response.username}'.`);
 
 				this.app.isLoggedIn = true;
 				this.app.state = AppState.None;
+				this.app.user = response.username;
 				this.login.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {

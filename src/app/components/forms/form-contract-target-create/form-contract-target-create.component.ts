@@ -71,7 +71,6 @@ export class FormContractTargetCreateComponent {
 						},
 						(error: HttpErrorResponse) => {
 							this.helper.httpError(`Could not auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`, error);
-							this.refresh.emit();
 						}
 					);
 				}

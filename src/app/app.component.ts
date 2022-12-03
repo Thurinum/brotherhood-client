@@ -22,6 +22,9 @@ export class AppComponent {
 	get isLoggedIn() {
 		return this.app.isLoggedIn;
 	}
+	get user() {
+		return this.app.isLoggedIn ? this.app.user : undefined;
+	}
 	get state() {
 		return this.app.state;
 	}
@@ -41,8 +44,9 @@ export class AppComponent {
 	logout() {
 		localStorage.removeItem("authKey");
 		localStorage.removeItem("authTime");
+		localStorage.removeItem("authUser");
 		this.showUserContracts = false;
-		this.helper.message("Logged out.");
+		this.helper.message("Logged out successfully.");
 		this.app.isLoggedIn = false;
 
 		this.refreshContracts();
@@ -190,21 +194,22 @@ export class AppComponent {
 		private app: AppStateService,
 		private helper: HelperService,
 	) {
-		if (localStorage.getItem("authKey"))
+		const user = localStorage.getItem("authUser");
+		if (user && localStorage.getItem("authKey")) {
 			this.app.isLoggedIn = true;
+			this.app.user = user;
+		}
 
 		let validToStr = localStorage.getItem("authTime");
 
-		if (validToStr && new Date() > new Date(validToStr))
+		if (validToStr && new Date() > new Date(validToStr)) {
 			this.logout();
+			this.helper.message("Your session has expired. Please log in again.");
+		}
 
 		this.refreshContracts();
 		this.refreshContractTargets();
 		this.refreshCities();
-
-		if (this.app.isLoggedIn) {
-			this.refreshContractTargets();
-		}
 
 		window.addEventListener("keydown", (e) => {
 			if (e.key === "Escape")

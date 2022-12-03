@@ -16,5 +16,6 @@ export enum AppState {
 @Injectable({ providedIn: "root" })
 export class AppStateService {
 	state: AppState = AppState.None;
+	user?: string;
 	isLoggedIn: boolean = false
 }
