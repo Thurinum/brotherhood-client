@@ -51,7 +51,8 @@
 			<app-contract-target-list [targets]="targets" [allowEdit]="isLoggedIn"
 							  (add)="state = AppState.CreateContractTarget"
 							  (refresh)="refreshContractTargets()"
-							  (select)="selectContractTarget($event)"></app-contract-target-list>
+							  (select)="selectContractTarget($event)"
+							  (remove)="state = AppState.RemoveDeleteContractTarget"></app-contract-target-list>
 		</mat-tab>
 		<mat-tab label="Cities">
 			<ng-template mat-tab-label>
@@ -86,6 +87,7 @@
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
 		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" (refresh)="refreshContractTargets()"></app-form-contract-target-create>
 		<app-form-contract-target-update *ngSwitchCase="AppState.UpdateContractTarget" [target]="selectedTarget!" (refresh)="refreshContractTargets()"></app-form-contract-target-update>
+		<app-form-contract-target-nuke *ngSwitchCase="AppState.RemoveDeleteContractTarget" [target]="selectedTarget!" (refresh)="state = AppState.None;refreshContractTargets()"></app-form-contract-target-nuke>
 	</ng-container>
 
 	<div class="cutie">

@@ -15,8 +15,9 @@ export class ContractTargetListComponent {
 	@Input() targets!: ContractTarget[]
 	@Input() allowEdit: boolean = false
 
-	@Output() add = new EventEmitter
-	@Output() refresh = new EventEmitter
+	@Output() add = new EventEmitter()
+	@Output() refresh = new EventEmitter()
+	@Output() remove = new EventEmitter()
 	@Output() select = new EventEmitter<ContractTarget>()
 
 	selectedId: number = -1;

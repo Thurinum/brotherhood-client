@@ -35,6 +35,7 @@ import { FormContractShareComponent } from './components/forms/form-contract-sha
 import { FormContractTargetAddComponent } from './components/forms/form-contract-target-add/form-contract-target-add.component';
 import { FormContractTargetUpdateComponent } from './components/forms/form-contract-target-update/form-contract-target-update.component';
 import { FormContractTargetCreateComponent } from './components/forms/form-contract-target-create/form-contract-target-create.component';
+import { FormContractTargetNukeComponent } from './components/forms/form-contract-target-nuke/form-contract-target-nuke.component';
 
 @NgModule({
 	declarations: [
@@ -52,6 +53,7 @@ import { FormContractTargetCreateComponent } from './components/forms/form-contr
 		FormContractTargetAddComponent,
 		FormContractTargetUpdateComponent,
 		FormContractTargetCreateComponent,
+  FormContractTargetNukeComponent,
 	],
 	imports: [
 		BrowserModule,

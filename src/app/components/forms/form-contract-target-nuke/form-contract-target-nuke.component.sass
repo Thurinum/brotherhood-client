@@ -1,0 +1,36 @@
+.container
+	width: 100%
+
+	display: flex
+	flex-direction: column
+	gap: 30px
+
+	.action-link
+		width: 420px
+		padding: 30px
+
+		display: grid
+		grid-template-areas: "a a b" "a a c"
+		column-gap: 25px
+		align-items: center
+
+		background: #f0eeee
+		border-radius: 10px
+		box-shadow: 0 3px 4px #cccccc2d
+		transition: background 0.1s ease-out, box-shadow 0.1s ease-out
+
+		&:hover
+			background: #e0e0e0
+			box-shadow: 0 5px 4px #cccccc4a
+
+	.mat-icon
+		grid-area: a
+		zoom: 4.1
+
+	h3
+		grid-area: b
+		margin: 0
+		font-size: 1.5em
+
+	span
+		grid-area: c

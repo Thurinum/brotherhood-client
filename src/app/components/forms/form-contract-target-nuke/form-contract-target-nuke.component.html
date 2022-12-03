@@ -1,0 +1,17 @@
+<fieldset>
+	<legend>Choose action</legend>
+
+	<div class="container">
+		<div class="action-link" matRipple (click)="removeContractTarget()">
+			<mat-icon>assignment_ind</mat-icon>
+			<h3>Pardon target</h3>
+			<span>Target will be removed from all contracts but will stay registered.</span>
+		</div>
+
+		<div class="action-link" matRipple (click)="deleteContractTarget()">
+			<mat-icon>how_to_reg</mat-icon>
+			<h3>Mark target as eliminated</h3>
+			<span>Target will be removed from all contracts and permanently unregistered.</span>
+		</div>
+	</div>
+</fieldset>

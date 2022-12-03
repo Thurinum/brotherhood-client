@@ -14,6 +14,6 @@
 		    (select)="select.emit(target); selectedId = target.id!"
 		    [selected]="target.id === selectedId"
 		    [allowRemove]="allowEdit"
-		    (remove)="removeContractTarget($event)"
+		    (remove)="remove.emit()"
 		    image="https://localhost:5001/images/targets/sm/{{target.id}}.webp?id={{target.imageCacheId}}"></app-card>
 </section>
