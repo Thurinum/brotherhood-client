@@ -7,11 +7,11 @@ import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
-  selector: 'app-form-contract-upsert',
-  templateUrl: './form-contract-upsert.component.html',
-  styleUrls: ['./form-contract-upsert.component.sass']
+  selector: 'app-form-contract-create',
+  templateUrl: './form-contract-create.component.html',
+  styleUrls: ['./form-contract-create.component.sass']
 })
-export class FormContractUpsertComponent {
+export class FormContractCreateComponent {
 	@Input() cities: City[] = [];
 	@Output() create = new EventEmitter
 

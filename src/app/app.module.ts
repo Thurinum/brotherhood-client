@@ -30,12 +30,13 @@ import { ContractTargetListComponent } from './components/contract-target-list/c
 import { CityListComponent } from './components/city-list/city-list.component';
 import { FormLoginComponent } from './components/forms/form-login/form-login.component';
 import { FormRegisterComponent } from './components/forms/form-register/form-register.component';
-import { FormContractUpsertComponent } from './components/forms/form-contract-upsert/form-contract-upsert.component';
+import { FormContractCreateComponent } from './components/forms/form-contract-create/form-contract-create.component';
 import { FormContractShareComponent } from './components/forms/form-contract-share/form-contract-share.component';
 import { FormContractTargetAddComponent } from './components/forms/form-contract-target-add/form-contract-target-add.component';
 import { FormContractTargetUpdateComponent } from './components/forms/form-contract-target-update/form-contract-target-update.component';
 import { FormContractTargetCreateComponent } from './components/forms/form-contract-target-create/form-contract-target-create.component';
 import { FormContractTargetNukeComponent } from './components/forms/form-contract-target-nuke/form-contract-target-nuke.component';
+import { FormContractUpdateComponent } from './components/forms/form-contract-update/form-contract-update.component';
 
 @NgModule({
 	declarations: [
@@ -48,12 +49,13 @@ import { FormContractTargetNukeComponent } from './components/forms/form-contrac
 		CityListComponent,
 		FormLoginComponent,
 		FormRegisterComponent,
-		FormContractUpsertComponent,
+		FormContractCreateComponent,
 		FormContractShareComponent,
 		FormContractTargetAddComponent,
 		FormContractTargetUpdateComponent,
 		FormContractTargetCreateComponent,
-  FormContractTargetNukeComponent,
+		FormContractTargetNukeComponent,
+		FormContractUpdateComponent,
 	],
 	imports: [
 		BrowserModule,
