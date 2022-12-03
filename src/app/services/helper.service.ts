@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HelperService {
 	message(msg: string, action: string = "OK") {
 		this.snackBar.open(msg, action, { verticalPosition: "top", panelClass: ["snackbar"] });
+		console.info(msg);
 	}
 
 	httpError(msg: string, errorResponse: HttpErrorResponse, action: string = "OK") {
