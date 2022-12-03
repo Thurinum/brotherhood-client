@@ -12,7 +12,7 @@ import { HelperService } from 'src/app/services/helper.service';
 	styleUrls: ['./contract-details.component.sass']
 })
 export class ContractDetailsComponent {
-	@Input() model?: Contract
+	@Input() contract?: Contract
 	@Input() allowEdit: boolean = false
 
 	@Output() refresh = new EventEmitter()
@@ -49,13 +49,13 @@ export class ContractDetailsComponent {
 	}
 
 	setContractCover(target: ContractTarget) {
-		this.brotherhood.setContractCover(this.model!.id, target).subscribe(
+		this.brotherhood.setContractCover(this.contract!.id, target).subscribe(
 			(response: HttpResponse<void>) => {
-				this.helper.message(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.model?.codename}.`);
+				this.helper.message(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`);
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to set ${target.firstName} ${target.lastName} as cover for ${this.model?.codename}.`, errorResponse);
+				this.helper.httpError(`Failed to set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`, errorResponse);
 			}
 		);
 	}

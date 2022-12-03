@@ -1,8 +1,8 @@
 <nav>
-	<h2>{{model?.codename}}</h2>
+	<h2>{{contract?.codename}}</h2>
 
 	<span>
-		<button *ngIf="allowEdit" mat-mini-fab color="primary" matTooltip="Add target to contract" (click)="addTarget.emit()">
+		<button *ngIf="allowEdit" mat-mini-fab color="primary" matTooltip="Add target to contract" [matMenuTriggerFor]="addMenu">
 			<mat-icon>person_add</mat-icon>
 		</button>
 		<button *ngIf="allowEdit" mat-mini-fab color="primary" [matMenuTriggerFor]="overflowMenu">
@@ -10,11 +10,11 @@
 		</button>
 
 		<mat-menu #addMenu="matMenu" xPosition="before">
-			<button mat-menu-item (click)="addTarget.emit()">
-				<mat-icon>people</mat-icon>Add existing target
-			</button>
 			<button mat-menu-item (click)="createTarget.emit()">
 				<mat-icon>person_add</mat-icon>Create new target
+			</button>
+			<button mat-menu-item (click)="addTarget.emit()">
+				<mat-icon>people</mat-icon>Add existing target
 			</button>
 		</mat-menu>
 		<mat-menu #overflowMenu="matMenu" xPosition="before">
@@ -30,7 +30,7 @@
 		</mat-menu>
 	</span>
 </nav>
-<p>{{model?.briefing ?? "There is no description for this contract."}}</p>
+<p>{{contract?.briefing ?? "There is no description for this contract."}}</p>
 
 <br />
 <mat-divider></mat-divider>
@@ -38,10 +38,11 @@
 
 
 <section>
-	<owl-carousel-o class="carousel" *ngIf="model?.targets && model?.targets?.length! > 0; else noTarget">
-		<ng-container *ngFor="let target of model?.targets">
-			<ng-template carouselSlide>
-				<app-contract-target-details class="carousel-item" matRipple
+	<h1>{{contract?.codename}}</h1>
+	<owl-carousel-o class="carousel" *ngIf="contract?.targets!.length > 0; else noTarget">
+		<ng-container *ngFor="let target of contract?.targets">
+			<ng-template >
+				<app-contract-target-details carouselSlide class="carousel-item" matRipple
 								     [title]="target.firstName"
 								     [target]="target"
 								     [allowEdit]="allowEdit"

@@ -1,10 +1,11 @@
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContractTarget } from 'src/app/models/target.model';
 import { AppState, AppStateService } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { resizeImage } from "simple-image-resize";
+import { Contract } from 'src/app/models/contract.model';
 
 @Component({
 	selector: 'app-form-contract-target-create',
@@ -14,6 +15,7 @@ import { resizeImage } from "simple-image-resize";
 export class FormContractTargetCreateComponent {
 	URL = URL
 
+	@Input() assignTo?: Contract
 	@Output() refresh = new EventEmitter()
 
 	firstName: string = ""
@@ -47,10 +49,33 @@ export class FormContractTargetCreateComponent {
 		}
 
 		this.brotherhood.createContractTarget(formData).subscribe(
-			(response: HttpResponse<any>) => {
+			(response: Contract) => {
 				this.helper.message(`Successfully registered contract target ${target?.firstName} ${target?.lastName}.`);
 				this.app.state = AppState.None;
-				this.refresh.emit();
+
+				console.log(response)
+
+				if (!response) {
+					this.helper.message(`Could not auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`);
+					this.refresh.emit();
+					return;
+				}
+
+				target.id = response.id;
+
+				if (this.assignTo) {
+					this.brotherhood.addContractTarget(this.assignTo.id, target).subscribe(
+						(response: HttpResponse<any>) => {
+							this.helper.message(`Successfully assigned target to contract ${this.assignTo?.codename}.`);
+							this.refresh.emit();
+						},
+						(error: HttpErrorResponse) => {
+							this.helper.httpError(`Could not auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`, error);
+							this.refresh.emit();
+						}
+					);
+				}
+
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.httpError(`Failed to register contract target ${target?.firstName} ${target?.lastName}`, errorResponse);

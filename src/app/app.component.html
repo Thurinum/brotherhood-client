@@ -66,10 +66,10 @@
 
 	<!-- SECONDARY CONTENT -->
 	<app-contract-details *ngIf="selectedContract"
-				    [model]="selectedContract" [allowEdit]="isLoggedIn"
+				    [contract]="selectedContract" [allowEdit]="isLoggedIn"
 				    (share)="state = AppState.ShareContract"
 				    (addTarget)="state = AppState.AddContractTarget"
-
+				    (createTarget)="assignedContract = selectedContract;state = AppState.CreateContractTarget"
 				    (editTarget)="selectContractTarget($event);state = AppState.UpdateContractTarget"
 				    (remove)="nukeContract(selectedContract)"
 				    (refresh)="refreshContracts()"></app-contract-details>
@@ -87,7 +87,7 @@
 		<app-form-contract-upsert *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-upsert>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (add)="this.selectContract(selectedContract!)"></app-form-contract-target-add>
-		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" (refresh)="refreshContractTargets()"></app-form-contract-target-create>
+		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" [assignTo]="assignedContract" (refresh)="refreshContractTargets();assignedContract = undefined"></app-form-contract-target-create>
 		<app-form-contract-target-update *ngSwitchCase="AppState.UpdateContractTarget" [target]="selectedTarget!" (refresh)="refreshContractTargets()"></app-form-contract-target-update>
 		<app-form-contract-target-nuke *ngSwitchCase="AppState.RemoveDeleteContractTarget" [target]="selectedTarget!" (refresh)="state = AppState.None;refreshContractTargets()"></app-form-contract-target-nuke>
 	</ng-container>

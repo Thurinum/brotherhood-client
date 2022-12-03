@@ -34,6 +34,7 @@ export class AppComponent {
 	targets: ContractTarget[] = []
 	showUserContracts: boolean = false
 	selectedContract?: Contract
+	assignedContract?: Contract
 	selectedTarget?: ContractTarget
 	storage: Storage = window.localStorage
 
@@ -82,6 +83,8 @@ export class AppComponent {
 				}
 
 				this.targets = response.body;
+				this.selectedContract = undefined;
+				// this.selectedContract = this.contracts.find(t => t.id === this.selectedContract?.id);
 				console.info("Successfully fetched contract targets from the database.");
 			},
 			(errorResponse: HttpErrorResponse) => {
