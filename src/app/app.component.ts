@@ -83,8 +83,6 @@ export class AppComponent {
 				}
 
 				this.targets = response.body;
-				this.selectedContract = undefined;
-				// this.selectedContract = this.contracts.find(t => t.id === this.selectedContract?.id);
 				console.info("Successfully fetched contract targets from the database.");
 			},
 			(errorResponse: HttpErrorResponse) => {
@@ -152,6 +150,7 @@ export class AppComponent {
 					return;
 				}
 
+				this.selectedContract.city = this.cities.find(city => city.id === this.selectedContract?.cityId)!;
 				this.selectedContract.targets = response.body;
 			},
 			(errorResponse: HttpErrorResponse) => {

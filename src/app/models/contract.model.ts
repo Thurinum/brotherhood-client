@@ -4,6 +4,7 @@ import { ContractTarget } from "./target.model"
 
 export class Contract {
 	id!: number
+	cityId!: number
 	coverTargetId?: number
 	assassins: Assassin[] = []
 	targets: ContractTarget[] = []
