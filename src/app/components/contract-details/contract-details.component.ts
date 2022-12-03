@@ -15,10 +15,13 @@ export class ContractDetailsComponent {
 	@Input() model?: Contract
 	@Input() allowEdit: boolean = false
 
+	@Output() refresh = new EventEmitter()
+	@Output() edit = new EventEmitter()
+	@Output() remove = new EventEmitter()
 	@Output() share = new EventEmitter()
+	@Output() createTarget = new EventEmitter()
 	@Output() addTarget = new EventEmitter()
 	@Output() editTarget = new EventEmitter<ContractTarget>()
-	@Output() refresh = new EventEmitter()
 
 	carouselOptions: OwlOptions = {
 		loop: true,
