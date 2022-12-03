@@ -75,7 +75,7 @@ export class AppComponent {
 	refreshContractTargets() {
 		this.targets = [];
 
-		this.brotherhood.getTargets().subscribe(
+		this.brotherhood.getAllContractTargets().subscribe(
 			(response: HttpResponse<ContractTarget[]>) => {
 				if (!response.body) {
 					this.helper.message("Could not fetch contract targets from the database.");

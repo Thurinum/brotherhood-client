@@ -5,6 +5,7 @@ export enum AppState {
 	Login,
 	Register,
 	CreateContract,
+	EditContract,
 	ShareContract,
 	AddContractTarget,
 	CreateContractTarget,

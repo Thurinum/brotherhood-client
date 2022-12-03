@@ -26,8 +26,32 @@ export class BrotherhoodService {
 		return this.http.get<Contract[]>("https://localhost:5001/api/contracts/private", {observe: "response"});
 	}
 
+	createContract(contract: Contract): any {
+		return this.http.post<Contract>("https://localhost:5001/api/contract/create", contract);
+	}
+
+	updateContract(id: number, contract: Contract): any {
+		return this.http.put<Contract>(`https://localhost:5001/api/contract/${id}/edit`, contract);
+	}
+
+	shareContract(dto: ContractShareDTO): any {
+		return this.http.put<string>(`https://localhost:5001/api/contract/${dto.contractId}/share`, dto.assassinName);
+	}
+
+	setContractCover(id: number, target: ContractTarget): any {
+		return this.http.put<number>(`https://localhost:5001/api/contract/${id}/setcover`, target);
+	}
+
+	deleteContract(id?: number): any {
+		return this.http.delete<Contract>(`https://localhost:5001/api/contract/${id}/nuke`);
+	}
+
 	getContractTargets(id: number): any {
 		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/${id}/targets`, {observe: "response"});
+	}
+
+	getAllContractTargets(): any {
+		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/targets`, {observe: "response"});
 	}
 
 	addContractTarget(contractId: number, target: ContractTarget): any {
@@ -50,28 +74,8 @@ export class BrotherhoodService {
 		return this.http.delete(`https://localhost:5001/api/contract/target/${target.id}/delete/hard`);
 	}
 
-	setContractCover(id: number, target: ContractTarget): any {
-		return this.http.put<number>(`https://localhost:5001/api/contract/${id}/setcover`, target);
-	}
-
-	createContract(contract: Contract): any {
-		return this.http.post<Contract>("https://localhost:5001/api/contract/create", contract);
-	}
-
-	shareContract(dto: ContractShareDTO): any {
-		return this.http.put<string>(`https://localhost:5001/api/contract/${dto.contractId}/share`, dto.assassinName);
-	}
-
-	deleteContract(id?: number): any {
-		return this.http.delete<Contract>(`https://localhost:5001/api/contract/${id}/nuke`);
-	}
-
 	getCities(): any {
 		return this.http.get<City[]>("https://localhost:5001/api/cities", {observe: "response"});
-	}
-
-	getTargets(): any {
-		return this.http.get<ContractTarget[]>(`https://localhost:5001/api/contract/targets`, {observe: "response"});
 	}
 
 	getImageFromPlace(place: string): any {

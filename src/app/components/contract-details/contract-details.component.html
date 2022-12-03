@@ -41,8 +41,8 @@
 	<h1>{{contract?.codename}}</h1>
 	<owl-carousel-o class="carousel" *ngIf="contract?.targets!.length > 0; else noTarget">
 		<ng-container *ngFor="let target of contract?.targets">
-			<ng-template >
-				<app-contract-target-details carouselSlide class="carousel-item" matRipple
+			<ng-template carouselSlide>
+				<app-contract-target-details class="carousel-item" matRipple
 								     [title]="target.firstName"
 								     [target]="target"
 								     [allowEdit]="allowEdit"
