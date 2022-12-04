@@ -6,6 +6,8 @@ import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { resizeImage } from "simple-image-resize";
 import { Contract } from 'src/app/models/contract.model';
+import { Observable, Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
 	selector: 'app-form-contract-target-create',
@@ -16,7 +18,7 @@ export class FormContractTargetCreateComponent {
 	URL = URL
 
 	@Input() assignTo?: Contract
-	@Output() refresh = new EventEmitter()
+	@Output() create = new EventEmitter();
 
 	firstName: string = ""
 	lastName: string = ""
@@ -49,32 +51,31 @@ export class FormContractTargetCreateComponent {
 		}
 
 		this.brotherhood.createContractTarget(formData).subscribe(
-			(response: Contract) => {
+			async (response: Contract) => {
 				this.helper.message(`Successfully registered contract target ${target?.firstName} ${target?.lastName}.`);
-				this.app.state = AppState.None;
-
-				console.log(response)
+				// this.app.state = AppState.None;
 
 				if (!response) {
 					this.helper.error(`Failed to auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`);
-					this.refresh.emit();
+					this.create.emit();
 					return;
 				}
 
 				target.id = response.id;
 
 				if (this.assignTo) {
-					this.brotherhood.addContractTarget(this.assignTo.id, target).subscribe(
+					const assign$:any = this.brotherhood.addContractTarget(this.assignTo.id, target).subscribe(
 						(response: HttpResponse<any>) => {
-							this.helper.message(`Successfully assigned target to contract ${this.assignTo?.codename}.`);
-							this.refresh.emit();
+							this.helper.message(`Successfully assigned target ${target?.firstName} ${target?.lastName} to contract '${this.assignTo?.codename}'.`);
+							this.create.emit();
 						},
 						(error: HttpErrorResponse) => {
 							this.helper.errorWhile(`auto-assigning target to contract ${this.assignTo?.codename}`, error);
 						}
 					);
-				}
 
+					await assign$.lastValueFrom();
+				}
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.errorWhile(`registering contract target ${target?.firstName} ${target?.lastName} in the database`, errorResponse);

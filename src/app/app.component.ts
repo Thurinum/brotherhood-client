@@ -50,6 +50,9 @@ export class AppComponent {
 		this.refreshContracts();
 	}
 
+	test(c?: Contract) {
+		console.log("received")
+	}
 	refreshContracts() {
 		console.log("Refreshing contracts...");
 		let request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
