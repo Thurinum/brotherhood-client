@@ -29,7 +29,7 @@ export class ContractTargetListComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to unregister contract target ${target.firstName} ${target.lastName}`, errorResponse);
+				this.helper.errorWhile(`unregistering ${target.firstName} ${target.lastName}`, errorResponse);
 			}
 		);
 	}

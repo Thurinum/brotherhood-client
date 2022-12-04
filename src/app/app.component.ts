@@ -60,7 +60,7 @@ export class AppComponent {
 		request.subscribe(
 			(response: HttpResponse<Contract[]>) => {
 				if (!response.body) {
-					this.helper.message("Could not fetch contracts from the database.");
+					this.helper.error("Failed to fetch contracts from the database.");
 					return;
 				}
 
@@ -69,9 +69,9 @@ export class AppComponent {
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
-					this.helper.httpError("Could not connect to the database. Is the API server running?", errorResponse);
+					this.helper.errorWhile("connecting to the database", errorResponse);
 				else
-					this.helper.httpError("Could not fetch contracts from the database.", errorResponse);
+					this.helper.errorWhile("fetching contracts from the database", errorResponse);
 			}
 		);
 	}
@@ -82,7 +82,7 @@ export class AppComponent {
 		this.brotherhood.getAllContractTargets().subscribe(
 			(response: HttpResponse<ContractTarget[]>) => {
 				if (!response.body) {
-					this.helper.message("Could not fetch contract targets from the database.");
+					this.helper.error("Failed to fetch contract targets from the database.");
 					return;
 				}
 
@@ -91,9 +91,9 @@ export class AppComponent {
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
-					this.helper.httpError("Could not connect to the database. Is the API server running?", errorResponse);
+					this.helper.errorWhile("connecting to the database", errorResponse);
 				else
-					this.helper.httpError("Could not fetch contract targets from the database.", errorResponse);
+					this.helper.errorWhile("fetching contract targets from the database", errorResponse);
 			}
 		);
 	}
@@ -104,7 +104,7 @@ export class AppComponent {
 		this.brotherhood.getCities().subscribe(
 			(response: HttpResponse<City[]>) => {
 				if (!response.body) {
-					this.helper.message("Could not fetch cities from the database.");
+					this.helper.error("Failed to fetch cities from the database.");
 					return;
 				}
 
@@ -131,7 +131,7 @@ export class AppComponent {
 								}
 							},
 							(errorResponse: HttpErrorResponse) => {
-								console.error(`Failed to fetch image for city '${name}', which will now be skipped.`);
+								console.warn(`Failed to fetch image for city '${name}', which will now be skipped.`);
 								localStorage.setItem("contractImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
 							}
 						);
@@ -139,7 +139,7 @@ export class AppComponent {
 				})
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError("Could not fetch cities from the database.", errorResponse);
+				this.helper.errorWhile("fetching cities from the database", errorResponse);
 			}
 		);
 	}
@@ -150,7 +150,7 @@ export class AppComponent {
 				this.selectedContract = contract;
 
 				if (!response.body) {
-					this.helper.message("Could not fetch targets from the database.");
+					this.helper.error("Failed to fetch contract targets from the database.");
 					return;
 				}
 
@@ -158,7 +158,7 @@ export class AppComponent {
 				this.selectedContract.targets = response.body;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to get assassination targets within ${contract?.codename}`, errorResponse);
+				this.helper.errorWhile(`fetching those targeted by contract '${contract?.codename}'`, errorResponse);
 			}
 		);
 	}
@@ -179,7 +179,7 @@ export class AppComponent {
 				this.selectedContract = undefined;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove ${contract?.codename}`, errorResponse);
+				this.helper.errorWhile(`ending contract '${contract?.codename}'`, errorResponse);
 			}
 		)
 	}

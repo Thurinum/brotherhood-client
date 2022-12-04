@@ -41,7 +41,7 @@ export class FormLoginComponent {
 				this.login.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Authentication invalid`, errorResponse);
+				this.helper.errorWhile(`authenticating to the server`, errorResponse);
 			}
 		);
 	}

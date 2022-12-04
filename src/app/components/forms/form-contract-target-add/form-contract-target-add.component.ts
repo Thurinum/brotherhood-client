@@ -23,7 +23,7 @@ export class FormContractTargetAddComponent {
 				this.added.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to add target ${target.firstName} ${target.lastName} to contract '${this.contract?.codename}'`, errorResponse);
+				this.helper.errorWhile(`adding target ${target.firstName} ${target.lastName} to contract '${this.contract?.codename}'`, errorResponse);
 			})
 		this.app.state = AppState.None;
 	}

@@ -56,7 +56,7 @@ export class ContractDetailsComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`, errorResponse);
+				this.helper.errorWhile(`setting ${target.firstName} ${target.lastName} as cover for contract '${this.contract?.codename}'`, errorResponse);
 			}
 		);
 	}
@@ -68,7 +68,7 @@ export class ContractDetailsComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to remove ${target.firstName} ${target.lastName} from ${this.contract?.codename}.`, errorResponse);
+				this.helper.errorWhile(`removing ${target.firstName} ${target.lastName} from '${this.contract?.codename}'`, errorResponse);
 			}
 		);
 	}

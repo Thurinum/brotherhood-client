@@ -29,7 +29,8 @@ export class FormRegisterComponent {
 				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to register user`, errorResponse);
+				// TODO: Handle first name and last name
+				this.helper.errorWhile(`registering user '${user.username}'`, errorResponse);
 			}
 		);
 	}

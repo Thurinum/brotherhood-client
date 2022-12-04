@@ -25,7 +25,7 @@ export class FormContractCreateComponent {
 				this.create.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to add contract`, errorResponse);
+				this.helper.errorWhile(`adding contract`, errorResponse);
 			}
 		)
 	}

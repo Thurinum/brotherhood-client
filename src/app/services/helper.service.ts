@@ -9,7 +9,12 @@ export class HelperService {
 		console.info(message);
 	}
 
-	httpError(attemptedAction: string, errorResponse: HttpErrorResponse, action: string = "OK") {
+	error(message: string, action: string = "OK") {
+		this.snackBar.open(message, action, { verticalPosition: "top", panelClass: ["snackbar", "snackbar-error"] });
+		console.error(message);
+	}
+
+	errorWhile(attemptedAction: string, errorResponse: HttpErrorResponse, action: string = "OK") {
 		const errorMessage = errorResponse.error?.errors
 			? Object.values(errorResponse.error.errors).join('\n').replace(/,/g, '\n')
 			: errorResponse.error?.message ?? errorResponse.message ?? "Unknown error";

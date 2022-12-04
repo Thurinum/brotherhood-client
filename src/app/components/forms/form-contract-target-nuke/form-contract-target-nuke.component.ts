@@ -20,7 +20,7 @@ export class FormContractTargetNukeComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to unregister contract target ${this.target.firstName} ${this.target.lastName}`, errorResponse);
+				this.helper.errorWhile(`removing target ${this.target.firstName} ${this.target.lastName} from all contracts`, errorResponse);
 			}
 		);
 	}
@@ -32,7 +32,7 @@ export class FormContractTargetNukeComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to unregister contract target ${this.target.firstName} ${this.target.lastName}`, errorResponse);
+				this.helper.errorWhile(`unregistering contract target ${this.target.firstName} ${this.target.lastName} from the database`, errorResponse);
 			}
 		);
 	}

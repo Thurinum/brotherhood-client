@@ -16,12 +16,12 @@ export class FormContractShareComponent {
 
 	addContractAssassin(owner?: string, contract?: Contract) {
 		if (!owner) {
-			this.helper.message("Please enter an assassin name.");
+			this.helper.error("Please provide an assassin name.");
 			return;
 		}
 
 		if (!contract) {
-			this.helper.message("Something went wrong. Please retry.");
+			this.helper.error("Failed to add user since no contract was provided. Please try again.");
 			return;
 		}
 
@@ -33,7 +33,7 @@ export class FormContractShareComponent {
 				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to assign ${owner} to ${contract.codename}`, errorResponse);
+				this.helper.errorWhile(`assigning ${owner} to contract '${contract.codename}'`, errorResponse);
 			}
 		)
 	}

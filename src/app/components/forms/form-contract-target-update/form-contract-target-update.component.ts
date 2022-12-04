@@ -46,7 +46,7 @@ export class FormContractTargetUpdateComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to update target ${this.target?.firstName} ${this.target?.lastName}`, errorResponse);
+				this.helper.errorWhile(`updating contract target ${this.target?.firstName} ${this.target?.lastName}`, errorResponse);
 			}
 		);
 	}

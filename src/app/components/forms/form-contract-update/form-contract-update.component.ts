@@ -24,7 +24,7 @@ export class FormContractUpdateComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to update contract ${this.contract.codename}`, errorResponse);
+				this.helper.errorWhile(`updating contract ${this.contract.codename}`, errorResponse);
 			}
 		);
 	}

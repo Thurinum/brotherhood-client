@@ -56,7 +56,7 @@ export class FormContractTargetCreateComponent {
 				console.log(response)
 
 				if (!response) {
-					this.helper.message(`Could not auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`);
+					this.helper.error(`Failed to auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`);
 					this.refresh.emit();
 					return;
 				}
@@ -70,14 +70,14 @@ export class FormContractTargetCreateComponent {
 							this.refresh.emit();
 						},
 						(error: HttpErrorResponse) => {
-							this.helper.httpError(`Could not auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`, error);
+							this.helper.errorWhile(`auto-assigning target to contract ${this.assignTo?.codename}`, error);
 						}
 					);
 				}
 
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.helper.httpError(`Failed to register contract target ${target?.firstName} ${target?.lastName}`, errorResponse);
+				this.helper.errorWhile(`registering contract target ${target?.firstName} ${target?.lastName} in the database`, errorResponse);
 			}
 		);
 	}
