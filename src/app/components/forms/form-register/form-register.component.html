@@ -1,5 +1,5 @@
 <fieldset >
-	<legend>Sign up</legend>
+	<legend>Register user</legend>
 	<mat-form-field>
 		<mat-label>Username</mat-label>
 		<input #username matInput type="text" placeholder="What's your identifier?" />
@@ -22,6 +22,6 @@
 	<button mat-raised-button color="primary"
 		  (click)="register(username.value, email.value, password.value, passwordConfirm.value)">
 		<mat-icon>account_circle</mat-icon>
-		Sign up
+		Register
 	</button>
 </fieldset>

@@ -17,5 +17,6 @@ export enum AppState {
 export class AppStateService {
 	state: AppState = AppState.None;
 	user?: string;
+	role?: string;
 	isLoggedIn: boolean = false
 }

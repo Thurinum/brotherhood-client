@@ -33,11 +33,13 @@ export class FormLoginComponent {
 				localStorage.setItem("authKey", response.token);
 				localStorage.setItem("authTime", response.validTo.toString());
 				localStorage.setItem("authUser", response.username);
+				localStorage.setItem("authRole", response.role);
 				this.helper.message(`Logged in as '${response.username}'.`);
 
 				this.app.isLoggedIn = true;
 				this.app.state = AppState.None;
 				this.app.user = response.username;
+				this.app.role = response.role;
 				this.login.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {

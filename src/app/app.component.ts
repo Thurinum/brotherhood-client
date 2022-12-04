@@ -23,6 +23,9 @@ export class AppComponent {
 	get user() {
 		return this.app.isLoggedIn ? this.app.user : undefined;
 	}
+	get role() {
+		return this.app.isLoggedIn ? this.app.role : undefined;
+	}
 	get state() {
 		return this.app.state;
 	}
@@ -43,6 +46,7 @@ export class AppComponent {
 		localStorage.removeItem("authKey");
 		localStorage.removeItem("authTime");
 		localStorage.removeItem("authUser");
+		localStorage.removeItem("authRole");
 		this.showUserContracts = false;
 		this.helper.message("Logged out successfully.");
 		this.app.isLoggedIn = false;
@@ -50,9 +54,6 @@ export class AppComponent {
 		this.refreshContracts();
 	}
 
-	test(c?: Contract) {
-		console.log("received")
-	}
 	refreshContracts() {
 		console.log("Refreshing contracts...");
 		let request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
@@ -205,9 +206,11 @@ export class AppComponent {
 		private helper: HelperService,
 	) {
 		const user = localStorage.getItem("authUser");
-		if (user && localStorage.getItem("authKey")) {
+		const role = localStorage.getItem("authRole");
+		if (user && role && localStorage.getItem("authKey")) {
 			this.app.isLoggedIn = true;
 			this.app.user = user;
+			this.app.role = role;
 		}
 
 		let validToStr = localStorage.getItem("authTime");
