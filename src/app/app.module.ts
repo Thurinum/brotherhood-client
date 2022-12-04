@@ -38,6 +38,8 @@ import { FormContractTargetCreateComponent } from './components/forms/form-contr
 import { FormContractTargetNukeComponent } from './components/forms/form-contract-target-nuke/form-contract-target-nuke.component';
 import { FormContractUpdateComponent } from './components/forms/form-contract-update/form-contract-update.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
 	declarations: [
@@ -57,7 +59,9 @@ import { UserListComponent } from './components/user-list/user-list.component';
 		FormContractTargetCreateComponent,
 		FormContractTargetNukeComponent,
 		FormContractUpdateComponent,
-  UserListComponent,
+		UserListComponent,
+		StatisticsComponent,
+		WelcomeComponent,
 	],
 	imports: [
 		BrowserModule,

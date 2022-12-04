@@ -1,0 +1,21 @@
+<ul>
+	<li>
+		<h4>There are {{statistics?.nbContracts}} contracts currently opened.</h4>
+	</li>
+	<li>
+		<mat-icon>description</mat-icon>
+		Of those, {{statistics?.nbPublicContracts}} are <mat-icon>public</mat-icon> public, and {{statistics?.nbContracts! - statistics?.nbPublicContracts!}} are <mat-icon>lock</mat-icon> private.
+	</li>
+	<li>
+		<mat-icon>person_outline</mat-icon>
+		There are {{statistics?.nbTargets}} people targeted by our order.
+	</li>
+	<li>
+		<mat-icon>people</mat-icon>
+		There are {{statistics?.nbAssassins}} assassins with major contracts assigned.
+	</li>
+	<li>
+		<mat-icon>location_pin</mat-icon>
+		There are {{statistics?.nbCities}} major cities registered.
+	</li>
+</ul>

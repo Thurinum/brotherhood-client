@@ -260,7 +260,7 @@ export class AppComponent {
 		if (index > 1)
 			this.selectedContract = undefined;
 
-		this.showUserContracts = index == 1;
+		this.showUserContracts = index == 1 && this.isLoggedIn;
 	}
 
 	constructor(
@@ -283,7 +283,7 @@ export class AppComponent {
 			this.helper.message("Your session has expired. Please log in again.");
 		}
 
-		this.showUserContracts = this.currentTab == 1;
+		this.showUserContracts = this.currentTab == 1 && this.isLoggedIn;
 
 		this.refreshContracts();
 		this.refreshCities();

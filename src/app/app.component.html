@@ -75,7 +75,7 @@
 	</mat-tab-group>
 
 	<!-- SECONDARY CONTENT -->
-	<app-contract-details *ngIf="selectedContract; else welcome"
+	<app-contract-details *ngIfElse="selectedContract; else welcome"
 				    [contract]="selectedContract" [allowEdit]="isLoggedIn"
 				    (share)="state = AppState.ShareContract"
 				    (edit)="state = AppState.EditContract"
@@ -87,39 +87,7 @@
 				    (refresh)="refreshContractTargets();refreshContracts();selectContract(selectedContract!)"
 				    (setCover)="selectedContract = $event; selectContract(selectedContract)"></app-contract-details>
 
-	<ng-template #welcome>
-		<div *ngIf="isLoggedIn">
-			<h2><span style="font-weight: normal">Welcome back, {{role == 'Mentor' ? 'Master ' : ''}}</span><b>{{user}}</b>.</h2>
-			<h3 style="font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;The brotherhood could use your {{role == "Mentor" ? "mentorship" : "skills"}} today.</h3>
-
-			<!-- list of statistics -->
-			<ul class="welcome">
-				<li>
-					<h4>There are {{statistics?.nbContracts}} contracts currently opened.</h4>
-				</li>
-				<li>
-					<mat-icon>description</mat-icon>
-					Of those, {{statistics?.nbPublicContracts}} are <mat-icon>public</mat-icon> public, and {{statistics?.nbContracts! - statistics?.nbPublicContracts!}} are <mat-icon>lock</mat-icon> private.
-				</li>
-				<li>
-					<mat-icon>person_outline</mat-icon>
-					There are {{statistics?.nbTargets}} people targeted by our order.
-				</li>
-				<li>
-					<mat-icon>people</mat-icon>
-					There are {{statistics?.nbAssassins}} assassins with major contracts assigned.
-				</li>
-				<li>
-					<mat-icon>location_pin</mat-icon>
-					There are {{statistics?.nbCities}} major cities registered.
-				</li>
-			</ul>
-		</div>
-		<div *ngIf="!isLoggedIn">
-			<h2>Welcome, stranger.</h2>
-			<h3 style="font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;Please log in to continue.</h3>
-		</div>
-	</ng-template>
+	<app-welcome [user]="user" [currentTab]="currentTab" [isLoggedIn]="isLoggedIn" [statistics]="statistics" [role]="role"></app-welcome>
 </main>
 
 <!-- MODAL DIALOGS -->
