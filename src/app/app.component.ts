@@ -27,7 +27,7 @@ export class AppComponent {
 	statistics?: Statistics
 
 	showUserContracts: boolean = false
-	showNews: boolean = false;
+	showNews: boolean = true;
 	selectedContract?: Contract
 	assignedContract?: Contract
 	selectedTarget?: ContractTarget
@@ -311,7 +311,7 @@ export class AppComponent {
 		}
 
 		setTimeout(() => {
-			document.querySelector("#breakingNews")!.innerHTML = "";
+			document.querySelector(".breakingNews")!.innerHTML = "";
 			for (let i = 0; i < 5; i++, this.generateRandomNews());
 		}, 3000);
 
@@ -330,8 +330,8 @@ export class AppComponent {
 		const user$ = this.brotherhood.getRandomPerson();
 		const location: HttpResponse<any> = await lastValueFrom(location$);
 		const user: HttpResponse<any> = await lastValueFrom(user$);
-		const content = `${target.firstName} ${target.lastName} was ${this.random(this.ACTIONS)} at ${location.body.city} by ${user.body.first_name} ${user.body.last_name}. It is ${this.random(this.BELIEVED)}, ${this.random(this.NEVERTHELESS)}, that this ${this.random(this.IMPORTANT)} news will have ${this.random(this.TREMENDOUS)} impact on ${Math.random() > 0.5 ? "our" : "the"} brotherhood's efforts in ${this.random(this.OBJECTIVES)} the ${this.random(this.OBJECT)} of ${this.random(this.OWNER)}, which it has been ${this.random(this.COVETING)} for over ${Math.round(Math.random() * 100)} years. - `;
-		document.querySelector("#breakingNews")!.innerHTML += content;
+		const content = `${target.firstName} ${target.lastName} was ${this.random(this.ACTIONS)} at ${location.body.city} by ${user.body.first_name} ${user.body.last_name}. It is ${this.random(this.BELIEVED)}, ${this.random(this.NEVERTHELESS)}, that these ${this.random(this.IMPORTANT)} news will have ${this.random(this.TREMENDOUS)} impact on ${Math.random() > 0.5 ? "our" : "the"} brotherhood's efforts in ${this.random(this.OBJECTIVES)} the ${this.random(this.OBJECT)} of ${this.random(this.OWNER)}, which it has been ${this.random(this.COVETING)} for over ${Math.round(Math.random() * 100)} years. - `;
+		document.querySelector(".breakingNews")!.innerHTML += content;
 	}
 
 	private IMPORTANT = [

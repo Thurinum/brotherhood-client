@@ -63,16 +63,20 @@ header
 	align-items: center
 	gap: 5px
 
-.legal
-	text-align: right
+	transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1)
+
+	&:hover
+		transform: translateY(-2px)
+		text-shadow: 0 5px 5px #4d4b4b4e
 
 .breakingNewsLegend
 	position: fixed
 	left: 22px
-	top: 52px
+	top: 30px
+	scale: 0.9
 	padding: 10px
 	z-index: 4
-	background: #bb988c57
+	background: rgb(79 44 31 / 10%)
 	border-radius: 10px
 	backdrop-filter: blur(25px)
 	border: solid 2px #94786e42
@@ -85,16 +89,20 @@ header
 	width: 100vw
 	left: 0
 	top: 0
-	padding: 20px
+	padding: 10px
 
-	font-size: 1.3em
 	z-index: 3
 
 	backdrop-filter: blur(25px)
-	background-color: #d239001a
-	border-top: solid 2px #ff450045
+	background-color: rgb(79 44 31 / 10%)
+	border-bottom: solid 2px #94786e42
+	border-bottom-left-radius: 5px
+	border-bottom-right-radius: 5px
 	box-shadow: 0 4px 10px #80808054
 	font-family: Roboto
+
+.legal
+	text-align: right
 
 @media screen and (max-width: 550px)
 	header
