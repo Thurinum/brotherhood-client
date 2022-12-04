@@ -89,11 +89,11 @@
 
 	<ng-template #welcome>
 		<div *ngIf="isLoggedIn">
-			<h2><span style="font-weight: normal">Welcome back, </span><b>{{user}}</b>.</h2>
+			<h2><span style="font-weight: normal">Welcome back, {{role == 'Mentor' ? 'Master ' : ''}}</span><b>{{user}}</b>.</h2>
 			<h3 style="font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;The brotherhood could use your {{role == "Mentor" ? "mentorship" : "skills"}} today.</h3>
 
 			<!-- list of statistics -->
-			<ul class="statistics">
+			<ul class="welcome">
 				<li>
 					<h4>There are {{statistics?.nbContracts}} contracts currently opened.</h4>
 				</li>
@@ -115,7 +115,10 @@
 				</li>
 			</ul>
 		</div>
-		<h2 *ngIf="!isLoggedIn">Welcome. Please login to continue.</h2>
+		<div *ngIf="!isLoggedIn">
+			<h2>Welcome</h2>
+			<h3 style="font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;Please log in to continue.</h3>
+		</div>
 	</ng-template>
 </main>
 
