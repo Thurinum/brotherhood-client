@@ -23,6 +23,7 @@ export class ContractDetailsComponent {
 	@Output() addTarget = new EventEmitter()
 	@Output() editTarget = new EventEmitter<ContractTarget>()
 	@Output() deleteTarget = new EventEmitter()
+	@Output() setCover = new EventEmitter<Contract>()
 
 	carouselOptions: OwlOptions = {
 		loop: true,
@@ -51,9 +52,11 @@ export class ContractDetailsComponent {
 
 	setContractCover(target: ContractTarget) {
 		this.brotherhood.setContractCover(this.contract!.id, target).subscribe(
-			(response: HttpResponse<void>) => {
+			(response: Contract) => {
 				this.helper.message(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`);
-				this.refresh.emit();
+				this.contract = response;
+				console.log(this.contract.coverTargetId)
+				this.setCover.emit(this.contract);
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.errorWhile(`setting ${target.firstName} ${target.lastName} as cover for contract '${this.contract?.codename}'`, errorResponse);

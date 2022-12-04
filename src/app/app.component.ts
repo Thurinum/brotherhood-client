@@ -8,8 +8,6 @@ import { City } from './models/city.model';
 import { AppState, AppStateService } from './services/appstate.service';
 import { ZoomAnimation, FormAnimation } from './animations';
 
-
-
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -53,6 +51,7 @@ export class AppComponent {
 	}
 
 	refreshContracts() {
+		console.log("Refreshing contracts...");
 		let request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
 
 		this.contracts = [];

@@ -10,8 +10,8 @@ import { HelperService } from 'src/app/services/helper.service';
 	styleUrls: ['./form-contract-target-nuke.component.sass']
 })
 export class FormContractTargetNukeComponent {
-	@Input() target!: ContractTarget
-	@Output() refresh = new EventEmitter()
+	@Input() target!: ContractTarget;
+	@Output() refresh = new EventEmitter();
 
 	removeContractTarget() {
 		this.brotherhood.softDeleteContractTarget(this.target).subscribe(
