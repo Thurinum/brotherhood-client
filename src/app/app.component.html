@@ -6,14 +6,14 @@
 			<mat-icon>account_circle</mat-icon>&nbsp;
 			<mat-label>Log in</mat-label>
 		</button>
-		<button *ngIf="!isLoggedIn" mat-stroked-button color="primary" (click)="state = AppState.Register">
-			<mat-icon>account_circle</mat-icon>&nbsp;
-			<mat-label>Sign up</mat-label>
-		</button>
 		<mat-hint *ngIf="isLoggedIn" class="user"><small>Logged in as&nbsp;<b>{{user}}</b><mat-icon matTooltip="{{role?.toUpperCase()}} access level">info</mat-icon></small></mat-hint>
 		<button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logout()">
 			<mat-icon>vpn_key</mat-icon>&nbsp;
 			<mat-label>Log out</mat-label>
+		</button>
+		<button *ngIf="role == 'Mentor'" mat-stroked-button color="primary" (click)="state = AppState.Register">
+			<mat-icon>account_circle</mat-icon>&nbsp;
+			<mat-label>Manage users</mat-label>
 		</button>
 	</div>
 </header>
@@ -29,7 +29,7 @@
 					<mat-icon>public</mat-icon>&nbsp;Public Contracts
 				</span>
 			</ng-template>
-			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" [canRemove]="role == 'Mentor'" (refresh)="refreshContracts()"
 						 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
 						 (remove)="nukeContract($event)"></app-contract-list>
 		</mat-tab>
@@ -39,7 +39,7 @@
 					<mat-icon>lock</mat-icon>&nbsp;My Contracts
 				</span>
 			</ng-template>
-			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" (refresh)="refreshContracts()"
+			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" [canRemove]="isLoggedIn" (refresh)="refreshContracts()"
 						 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
 						 (remove)="nukeContract($event)"></app-contract-list>
 		</mat-tab>
@@ -49,7 +49,7 @@
 					<mat-icon>person_outline</mat-icon>&nbsp;Targets
 				</span>
 			</ng-template>
-			<app-contract-target-list [targets]="targets" [allowEdit]="isLoggedIn"
+			<app-contract-target-list [targets]="targets" [allowEdit]="role == 'Mentor'"
 							  (add)="state = AppState.CreateContractTarget"
 							  (refresh)="refreshContractTargets()"
 							  (select)="selectContractTarget($event)"

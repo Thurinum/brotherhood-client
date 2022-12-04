@@ -17,6 +17,9 @@ export class ContractListComponent {
 	@Input()
 	canAdd: boolean = false;
 
+	@Input()
+	canRemove: boolean = false;
+
 	@Output()
 	add = new EventEmitter<void>();
 
