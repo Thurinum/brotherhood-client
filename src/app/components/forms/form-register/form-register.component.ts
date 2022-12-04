@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { AppState, AppStateService } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
@@ -11,6 +11,8 @@ import { HelperService } from 'src/app/services/helper.service';
 	styleUrls: ['./form-register.component.sass']
 })
 export class FormRegisterComponent {
+	@Output() add = new EventEmitter();
+
 	register(
 		username: string,
 		email: string,
@@ -26,6 +28,7 @@ export class FormRegisterComponent {
 		this.brotherhood.createUser(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
+				this.add.emit();
 				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {

@@ -213,6 +213,18 @@ export class AppComponent {
 		)
 	}
 
+	deleteUser(user: User) {
+		this.brotherhood.deleteUser(user.id!).subscribe(
+			(response: HttpResponse<any>) => {
+				this.helper.message(`Successfully deleted user ${user.username}.`);
+				this.refreshUsers();
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.errorWhile(`deleting user '${user.username}'`, errorResponse);
+			}
+		)
+	}
+
 	get currentTab() {
 		return this.storage.getItem('lastTabIndex') as any;
 	}

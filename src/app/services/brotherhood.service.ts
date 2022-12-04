@@ -87,11 +87,11 @@ export class BrotherhoodService {
 	}
 
 	editUser(id: number, user: User): any {
-		return this.http.put<any>("https://localhost:5001/api/user/edit", user);
+		return this.http.put<any>(`https://localhost:5001/api/user/${id}/edit`, user);
 	}
 
 	deleteUser(id: number): any {
-		return this.http.delete<any>(`https://localhost:5001/user/delete/${id}`);
+		return this.http.delete<any>(`https://localhost:5001/api/user/${id}/delete`);
 	}
 
 	getCities(): any {
