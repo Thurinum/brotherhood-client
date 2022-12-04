@@ -7,6 +7,7 @@ import { ContractTarget } from './models/target.model';
 import { City } from './models/city.model';
 import { AppState, AppStateService } from './services/appstate.service';
 import { ZoomAnimation, FormAnimation } from './animations';
+import { User as User } from './models/user.model';
 
 @Component({
 	selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent {
 	contracts: Contract[] = []
 	cities: City[] = []
 	targets: ContractTarget[] = []
+	users: User[] = [];
 	showUserContracts: boolean = false
 	selectedContract?: Contract
 	assignedContract?: Contract
@@ -97,6 +99,30 @@ export class AppComponent {
 					this.helper.errorWhile("connecting to the database", errorResponse);
 				else
 					this.helper.errorWhile("fetching contract targets from the database", errorResponse);
+			}
+		);
+	}
+
+	refreshUsers() {
+		this.users = [];
+
+		const request = this.role == "Mentor" ? this.brotherhood.getAllUsers() : this.brotherhood.getPublicUsers();
+		request.subscribe(
+			(response: HttpResponse<User[]>) => {
+				if (!response.body) {
+					this.helper.error("Failed to fetch users from the database.");
+					return;
+				}
+
+				this.users = response.body;
+
+				console.info("Successfully fetched users from the database.");
+			},
+			(errorResponse: HttpErrorResponse) => {
+				if (errorResponse.status === 0)
+					this.helper.errorWhile("connecting to the database", errorResponse);
+				else
+					this.helper.errorWhile("fetching users from the database", errorResponse);
 			}
 		);
 	}
@@ -225,6 +251,7 @@ export class AppComponent {
 		this.refreshContracts();
 		this.refreshContractTargets();
 		this.refreshCities();
+		this.refreshUsers();
 
 		window.addEventListener("keydown", (e) => {
 			if (e.key === "Escape")

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Contract } from "../models/contract.model";
-import { Assassin } from "../models/assassin.model";
+import { User } from "../models/user.model";
 import { HttpHeaders } from "@angular/common/http";
 import { ContractTarget } from "../models/target.model";
 import { City } from "../models/city.model";
@@ -10,12 +10,8 @@ import { ContractShareDTO } from "../models/contractShareDTO";
 
 @Injectable({ providedIn: "root" })
 export class BrotherhoodService {
-	login(user: Assassin): any {
+	login(user: User): any {
 		return this.http.post<any>("https://localhost:5001/api/login", user);
-	}
-
-	register(user: Assassin): any {
-		return this.http.post<any>("https://localhost:5001/api/register", user);
 	}
 
 	getPublicContracts(): any {
@@ -76,6 +72,26 @@ export class BrotherhoodService {
 
 	deleteContractTarget(target: ContractTarget): any {
 		return this.http.delete(`https://localhost:5001/api/contract/target/${target.id}/delete/hard`);
+	}
+
+	getPublicUsers(): any {
+		return this.http.get<User[]>("https://localhost:5001/api/users/public", {observe: "response"});
+	}
+
+	getAllUsers(): any {
+		return this.http.get<User[]>("https://localhost:5001/api/users/private", {observe: "response"});
+	}
+
+	createUser(user: User): any {
+		return this.http.post<any>("https://localhost:5001/api/user/create", user);
+	}
+
+	editUser(id: number, user: User): any {
+		return this.http.put<any>("https://localhost:5001/api/user/edit", user);
+	}
+
+	deleteUser(id: number): any {
+		return this.http.delete<any>(`https://localhost:5001/user/delete/${id}`);
 	}
 
 	getCities(): any {

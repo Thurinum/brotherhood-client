@@ -26,7 +26,7 @@
 		<mat-tab>
 			<ng-template mat-tab-label>
 				<span class="tab-label" (click)="showUserContracts = false; refreshContracts()">
-					<mat-icon>public</mat-icon>&nbsp;Public Contracts
+					<mat-icon>public</mat-icon>Public Contracts
 				</span>
 			</ng-template>
 			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" [canRemove]="role == 'Mentor'" (refresh)="refreshContracts()"
@@ -36,7 +36,7 @@
 		<mat-tab *ngIf="isLoggedIn">
 			<ng-template mat-tab-label>
 				<span class="tab-label" (click)="showUserContracts = true; refreshContracts()">
-					<mat-icon>lock</mat-icon>&nbsp;My Contracts
+					<mat-icon>lock</mat-icon>My Contracts
 				</span>
 			</ng-template>
 			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" [canRemove]="isLoggedIn" (refresh)="refreshContracts()"
@@ -46,7 +46,7 @@
 		<mat-tab>
 			<ng-template mat-tab-label>
 				<span class="tab-label">
-					<mat-icon>person_outline</mat-icon>&nbsp;Targets
+					<mat-icon>person_outline</mat-icon>Targets
 				</span>
 			</ng-template>
 			<app-contract-target-list [targets]="targets" [allowEdit]="role == 'Mentor'"
@@ -55,10 +55,18 @@
 							  (select)="selectContractTarget($event)"
 							  (remove)="state = AppState.RemoveDeleteContractTarget"></app-contract-target-list>
 		</mat-tab>
-		<mat-tab label="Cities">
+		<mat-tab>
+			<ng-template mat-tab-label *ngIf="role == 'Mentor'">
+				<span class="tab-label">
+					<mat-icon>group</mat-icon>Assassins
+				</span>
+			</ng-template>
+			<app-user-list [users]="users" [allowEdit]="role == 'Mentor'"></app-user-list>
+		</mat-tab>
+		<mat-tab>
 			<ng-template mat-tab-label>
 				<span class="tab-label">
-					<mat-icon>location_city</mat-icon>&nbsp;Cities
+					<mat-icon>location_city</mat-icon>Cities
 				</span>
 			</ng-template>
 			<app-city-list [cities]="cities" [allowEdit]="false" (refresh)="refreshCities()"></app-city-list>

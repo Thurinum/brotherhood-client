@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Assassin } from 'src/app/models/assassin.model';
+import { User } from 'src/app/models/user.model';
 import { AppState, AppStateService } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
@@ -17,13 +17,13 @@ export class FormRegisterComponent {
 		password: string,
 		passwordConfirm: string
 	) {
-		let user: Assassin = new Assassin;
+		let user: User = new User;
 		user.username = username;
 		user.email = email;
 		user.password = password;
 		user.passwordConfirm = passwordConfirm;
 
-		this.brotherhood.register(user).subscribe(
+		this.brotherhood.createUser(user).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully registered as '${user.username}'.`);
 				this.app.state = AppState.None;

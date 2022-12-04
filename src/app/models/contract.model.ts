@@ -1,4 +1,4 @@
-import { Assassin } from "./assassin.model"
+import { User } from "./user.model"
 import { City } from "./city.model"
 import { ContractTarget } from "./target.model"
 
@@ -6,7 +6,7 @@ export class Contract {
 	id!: number
 	cityId!: number
 	coverTargetId?: number
-	assassins: Assassin[] = []
+	assassins: User[] = []
 	targets: ContractTarget[] = []
 
 	constructor(

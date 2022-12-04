@@ -1,4 +1,4 @@
-export class Assassin {
+export class User {
 	id!: number
 	username?: string
 	email?: string

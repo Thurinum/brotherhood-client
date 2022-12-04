@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Assassin } from 'src/app/models/assassin.model';
+import { User } from 'src/app/models/user.model';
 import { Auth } from 'src/app/models/auth.interface';
 import { AppStateService, AppState } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
@@ -15,7 +15,7 @@ export class FormLoginComponent {
 	@Output() login = new EventEmitter
 
 	_login(identifier: string, password: string) {
-		let user: Assassin = new Assassin;
+		let user: User = new User;
 
 		// detect email (simple check for x@y)
 		if (identifier.match(/^\S+@\S+$/))
