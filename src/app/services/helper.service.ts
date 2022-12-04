@@ -19,7 +19,7 @@ export class HelperService {
 		const errorMessage = errorResponse.error?.errors
 			? Object.values(errorResponse.error.errors).join('\n').replace(/,/g, '\n')
 			: errorResponse.error?.message ?? errorResponse.message ?? "Unknown error";
-		const errorStatus = errorResponse.error?.statusName ?? errorResponse.status === 401 ? "Unauthorized" : errorResponse.status === 500 ? "Internal server error" : "Unknown error";
+		const errorStatus = errorResponse.error?.statusName ?? errorResponse.status === 401 ? "Unauthorized" : errorResponse.status === 500 ? "Internal server error" : "Validation error";
 		const fullMessage = `${errorResponse.status} ${errorStatus.toUpperCase()} while ${attemptedAction.toUpperCase()}:\n\n${errorMessage}`;
 
 		this.snackBar.open(fullMessage, action, { verticalPosition: "top", panelClass: ["snackbar", "snackbar-error"] });
