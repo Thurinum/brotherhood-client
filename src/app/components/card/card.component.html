@@ -4,7 +4,7 @@
 	<marquee #marquee class="card-title"
 		   behavior="alternate" scrollDelay="200"
 		   [scrollAmount]="marquee.scrollWidth > marquee.clientWidth + 10 ? 6 : 0"
-		   [style.justifyContent]="marquee.scrollWidth > marquee.clientWidth + 10 ? 'inherit' : 'center'">
+		   [style.justifyContent]="marquee.scrollWidth > marquee.clientWidth + 10 ? 'left' : 'center'">
 		{{title}}
 	</marquee>
 	<img *ngIf="overlay != ''" class="card-overlay" [src]="overlay" />

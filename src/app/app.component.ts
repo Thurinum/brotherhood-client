@@ -186,9 +186,17 @@ export class AppComponent {
 		)
 	}
 
-	changeTab(index: number) {
+	get currentTab() {
+		return this.storage.getItem('lastTabIndex') as any;
+	}
+
+	set currentTab(index: number) {
+		this.storage.setItem('lastTabIndex', index.toString());
+
 		if (index > 1)
 			this.selectedContract = undefined;
+
+		this.showUserContracts = index == 1;
 	}
 
 	constructor(
@@ -208,6 +216,8 @@ export class AppComponent {
 			this.logout();
 			this.helper.message("Your session has expired. Please log in again.");
 		}
+
+		this.showUserContracts = this.currentTab == 1;
 
 		this.refreshContracts();
 		this.refreshContractTargets();

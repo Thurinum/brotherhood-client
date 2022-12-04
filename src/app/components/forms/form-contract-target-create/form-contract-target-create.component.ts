@@ -66,7 +66,7 @@ export class FormContractTargetCreateComponent {
 				if (this.assignTo) {
 					const assign$:any = this.brotherhood.addContractTarget(this.assignTo.id, target).subscribe(
 						(response: HttpResponse<any>) => {
-							this.helper.message(`Successfully assigned target ${target?.firstName} ${target?.lastName} to contract '${this.assignTo?.codename}'.`);
+		      				this.helper.message(`Successfully assigned target ${target?.firstName} ${target?.lastName} to contract '${this.assignTo?.codename}'.`);
 							this.create.emit();
 						},
 						(error: HttpErrorResponse) => {
