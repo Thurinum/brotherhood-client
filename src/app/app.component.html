@@ -75,7 +75,7 @@
 	</mat-tab-group>
 
 	<!-- SECONDARY CONTENT -->
-	<app-contract-details *ngIfElse="selectedContract; else welcome"
+	<app-contract-details *ngIf="selectedContract; else welcome"
 				    [contract]="selectedContract" [allowEdit]="isLoggedIn"
 				    (share)="state = AppState.ShareContract"
 				    (edit)="state = AppState.EditContract"
@@ -87,7 +87,12 @@
 				    (refresh)="refreshContractTargets();refreshContracts();selectContract(selectedContract!)"
 				    (setCover)="selectedContract = $event; selectContract(selectedContract)"></app-contract-details>
 
-	<app-welcome [user]="user" [currentTab]="currentTab" [isLoggedIn]="isLoggedIn" [statistics]="statistics" [role]="role"></app-welcome>
+	<ng-template #welcome>
+		<app-welcome [user]="user" [currentTab]="currentTab" [isLoggedIn]="isLoggedIn" [statistics]="statistics" [role]="role"></app-welcome>
+	</ng-template>
+
+	<legend *ngIf="isLoggedIn" id="breakingNewsLegend"><mat-icon>public</mat-icon>&nbsp;Breaking News</legend>
+	<marquee *ngIf="isLoggedIn" id="breakingNews" behavior="scroll" truespeed scrolldelay="50" direction="left">Loading breaking news...</marquee>
 </main>
 
 <!-- MODAL DIALOGS -->
@@ -97,7 +102,7 @@
 	</button>
 
 	<ng-container [ngSwitch]="state">
-		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts();refreshUsers()"></app-form-login>
+		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts();refreshContractTargets();refreshUsers()"></app-form-login>
 		<app-form-register *ngSwitchCase="AppState.Register" (add)="refreshUsers()"></app-form-register>
 		<app-form-contract-create *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-create>
 		<app-form-contract-update *ngSwitchCase="AppState.EditContract" [cities]="cities" [contract]="selectedContract!" (refresh)="refreshContracts()"></app-form-contract-update>

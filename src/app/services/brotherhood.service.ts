@@ -106,6 +106,14 @@ export class BrotherhoodService {
 		return this.http.get<any>("https://localhost:5001/api/statistics");
 	}
 
+	getRandomAddress(): any {
+		return this.http.get<any>("https://random-data-api.com/api/v2/addresses?size=1", {observe: "response"});
+	}
+
+	getRandomPerson(): any {
+		return this.http.get<any>("https://random-data-api.com/api/v2/users?size=1", {observe: "response"});
+	}
+
 	constructor(
 		private http: HttpClient,
 	) { }
