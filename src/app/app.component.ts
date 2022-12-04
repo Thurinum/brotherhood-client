@@ -8,6 +8,7 @@ import { City } from './models/city.model';
 import { AppState, AppStateService } from './services/appstate.service';
 import { ZoomAnimation, FormAnimation } from './animations';
 import { User as User } from './models/user.model';
+import { Statistics } from './models/statistics.model';
 
 @Component({
 	selector: 'app-root',
@@ -38,6 +39,8 @@ export class AppComponent {
 	cities: City[] = []
 	targets: ContractTarget[] = []
 	users: User[] = [];
+	statistics?: Statistics
+
 	showUserContracts: boolean = false
 	selectedContract?: Contract
 	assignedContract?: Contract
@@ -72,6 +75,7 @@ export class AppComponent {
 
 				this.contracts = response.body;
 				console.info("Successfully fetched contracts from the database.");
+				this.refreshStatistics();
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
@@ -94,6 +98,7 @@ export class AppComponent {
 
 				this.targets = response.body;
 				console.info("Successfully fetched contract targets from the database.");
+				this.refreshStatistics();
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
@@ -118,6 +123,7 @@ export class AppComponent {
 				this.users = response.body;
 
 				console.info("Successfully fetched users from the database.");
+				this.refreshStatistics();
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)
@@ -140,6 +146,7 @@ export class AppComponent {
 
 				this.cities = response.body;
 				console.info("Successfully fetched cities from the database.");
+				this.refreshStatistics();
 
 				this.cities.forEach(city => {
 					const name = city.name.toLowerCase();
@@ -170,6 +177,23 @@ export class AppComponent {
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.helper.errorWhile("fetching cities from the database", errorResponse);
+			}
+		);
+	}
+
+	refreshStatistics() {
+		this.brotherhood.getStatistics().subscribe(
+			(response: Statistics) => {
+				if (!response) {
+					this.helper.error("Failed to fetch statistics from the database.");
+					return;
+				}
+
+				this.statistics = response;
+				console.info("Successfully fetched statistics from the database.");
+			},
+			(errorResponse: HttpErrorResponse) => {
+				this.helper.errorWhile("fetching statistics from the database", errorResponse);
 			}
 		);
 	}
@@ -262,9 +286,11 @@ export class AppComponent {
 		this.showUserContracts = this.currentTab == 1;
 
 		this.refreshContracts();
-		this.refreshContractTargets();
 		this.refreshCities();
 		this.refreshUsers();
+
+		if (this.isLoggedIn)
+			this.refreshContractTargets();
 
 		window.addEventListener("keydown", (e) => {
 			if (e.key === "Escape")

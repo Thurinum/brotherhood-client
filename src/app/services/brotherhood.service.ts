@@ -86,9 +86,9 @@ export class BrotherhoodService {
 		return this.http.post<any>("https://localhost:5001/api/user/create", user);
 	}
 
-	editUser(id: number, user: User): any {
-		return this.http.put<any>(`https://localhost:5001/api/user/${id}/edit`, user);
-	}
+	// editUser(id: number, user: User): any {
+	// 	return this.http.put<any>(`https://localhost:5001/api/user/${id}/edit`, user);
+	// }
 
 	deleteUser(id: number): any {
 		return this.http.delete<any>(`https://localhost:5001/api/user/${id}/delete`);
@@ -100,6 +100,10 @@ export class BrotherhoodService {
 
 	getImageFromPlace(place: string): any {
 		return this.http.get(`https://api.teleport.org/api/urban_areas/slug:${place}/images/`);
+	}
+
+	getStatistics(): any {
+		return this.http.get<any>("https://localhost:5001/api/statistics");
 	}
 
 	constructor(
