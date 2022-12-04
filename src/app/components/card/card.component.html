@@ -1,7 +1,12 @@
 <div class="card" matRipple [class.selected]="selected" (click)="select.next(model)">
 	<ng-content class="card-icon"></ng-content>
 	<img class="card-image" [src]="image" draggable="false" (error)="image = fallbackImage">
-	<marquee class="card-title" behavior="alternate" scrollDelay="200">{{title}}</marquee>
+	<marquee #marquee class="card-title"
+		   behavior="alternate" scrollDelay="200"
+		   [scrollAmount]="marquee.scrollWidth > marquee.clientWidth + 10 ? 6 : 0"
+		   [style.justifyContent]="marquee.scrollWidth > marquee.clientWidth + 10 ? 'inherit' : 'center'">
+		{{title}}
+	</marquee>
 	<img *ngIf="overlay != ''" class="card-overlay" [src]="overlay" />
 </div>
 <button *ngIf="allowRemove; else spacer" class="card-delete" (click)="remove.next(model)" mat-fab color="warn">

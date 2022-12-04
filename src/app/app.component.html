@@ -10,7 +10,7 @@
 			<mat-icon>account_circle</mat-icon>&nbsp;
 			<mat-label>Sign up</mat-label>
 		</button>
-		<mat-hint *ngIf="isLoggedIn"><small>Logged in as {{user}}&nbsp;</small></mat-hint>
+		<mat-hint *ngIf="isLoggedIn"><small>Logged in as <b>{{user}}</b>&nbsp;</small></mat-hint>
 		<button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logout()">
 			<mat-icon>vpn_key</mat-icon>&nbsp;
 			<mat-label>Log out</mat-label>
