@@ -27,6 +27,7 @@ export class AppComponent {
 	statistics?: Statistics
 
 	showUserContracts: boolean = false
+	showNews: boolean = false;
 	selectedContract?: Contract
 	assignedContract?: Contract
 	selectedTarget?: ContractTarget

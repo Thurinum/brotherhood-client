@@ -91,8 +91,10 @@
 		<app-welcome [user]="user" [currentTab]="currentTab" [isLoggedIn]="isLoggedIn" [statistics]="statistics" [role]="role"></app-welcome>
 	</ng-template>
 
-	<legend *ngIf="isLoggedIn" id="breakingNewsLegend"><mat-icon>public</mat-icon>&nbsp;Breaking News</legend>
-	<marquee *ngIf="isLoggedIn" id="breakingNews" behavior="scroll" truespeed scrolldelay="50" direction="left">Loading breaking news...</marquee>
+	<ng-container *ngIf="isLoggedIn && showNews">
+		<legend class="breakingNewsLegend"><mat-icon>public</mat-icon>&nbsp;Breaking News</legend>
+		<marquee class="breakingNews" behavior="scroll" truespeed scrolldelay="50" direction="left">Loading breaking news...</marquee>
+	</ng-container>
 </main>
 
 <!-- MODAL DIALOGS -->
@@ -124,5 +126,5 @@
 <!-- FOOTER -->
 <footer class="legal">
 	<mat-divider></mat-divider>
-	<p><small>&copy; 2022 JuliePro LLC - v1.69</small></p>
+	<p><small>&copy; 2022 JuliePro LLC - v1.69.<br /><small>The context of this project is fictional and does not aim to encourage violence.</small></small></p>
 </footer>

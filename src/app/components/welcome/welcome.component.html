@@ -14,25 +14,47 @@
 		<ng-container *ngIf="!isLoggedIn">
 			<ng-container *ngTemplateOutlet="citiesContent"></ng-container>
 		</ng-container>
+		<ng-container *ngIf="isLoggedIn">
+			<div class="content">
+				Once someone has caused enough <b>grief</b> to the world that they need be removed, they are added to this contract list.
+				<ng-container *ngIf="role == 'Mentor'; else assassin">
+					From there, mentors such as yourself coordinates the efforts of assassins around the world to ensure that justice be served.<br />
+					<br />
+					Here you can view the contracts you have tasked yourself with, as well as those assigned by your mentor.
+					Whichever you pursue first, make sure to walk in the shadows and respect the creed.
+				</ng-container>
+				<ng-template #assassin>
+					From there, assassins around the world such as yourself take care that no harm come from them.<br />
+					<br />
+					Here you can view the contracts you have tasked yourself with, as well as those assigned by your mentor.
+					Whichever you pursue first, make sure to walk in the shadows and respect the creed.
+				</ng-template>
+
+			</div>
+		</ng-container>
 	</ng-container>
 	<ng-container *ngSwitchCase="2">
-		<p class="content">
-			Our Brotherhood is strong of a diverse group of individuals, each with their own unique skills and talents.
-			Each of these men and women are uniquely suited to help each other in their own way.
-			We are a community of people who are willing to help each other, and we are always looking for new members to join us.
-		</p>
+		<div class="content">
+			Our Brotherhood is strong of hundreds of individuals, each with their own unique skills and talents.<br />
+			<br />
+			<ng-container *ngIf="role == 'Mentor'; else assassin">
+				As a <b>Mentor</b>, you are authorized to make use of your better judgment to decide who deserves to be in our midst.
+				Here you can view the assassins whom are currently in your care, add new initiates,
+				and remove those who fail to meet your expectations.
+			</ng-container>
+			<ng-template #assassin>
+				As an <b>Assassin</b>, you are encouraged to become acquainted with your fellow brothers.<br />
+				Here you can view those of your neighborhood who have joined our ranks.
+			</ng-template>
+		</div>
 	</ng-container>
 	<ng-container *ngSwitchCase="3">
 		<p class="content">
-			There are those who believe that the world needs to be controlled.
-			They believe that the only way to survive is to be strong and ruthless.
-			They believe that the only way to be happy is to be powerful.
-			They believe that the only way to be free is to be a slave to their own desires.
-			They believe that the only way to be good is to be evil.
-			They believe that the only way to be right is to be wrong.
-			They believe that the only way to be happy is to be sad.
-			They believe that the only way to be free is to be a slave to their own desires.
-			They are wrong and we send them to Hades lol.
+			The core of our work lies in <b>removing</b> those who would do harm before they do.<br />
+			It is through such preemptive elimination that we better the world: one puppeteer at a time.<br />
+			<br />
+			Here you can view those whose evil make them deserve to be removed from this world.<br />
+			May your blade be swift and your aim true on the day your meet each other.
 		</p>
 	</ng-container>
 	<ng-container *ngSwitchCase="4">
@@ -41,9 +63,14 @@
 
 	<ng-template #citiesContent>
 		<p class="content">
-			From Orient to Occident, the Brotherhood's reach knows no bounds. Standing strong in the shadows since immemorial times,
-			our kind vows to heal and fortify the tissues that unite all men and women through the bond of peace, friendship, and freedom of choice and opportunity,
-			while tasking itself to sever the chains that, tightening around societies, aim to enslave mankind through the lure of absolute control.
+			From Orient to Occident, our <b>Brotherhood</b>'s reach knows no bounds.<br />
+			<br />
+			Standing strong in the shadows since immemorial times,
+			our kind vows to heal and fortify the tissues that unite all men and women through the bonds of peace, friendship, and freedom of choice and opportunity.<br />
+			<br />
+			This often means severing the chains that, tightening around societies, aim to enslave mankind through the lure of absolute control.<br />
+			<br />
+			Here you can view the cities which are currently involved in our operations. They are the battlegrounds of our wars and the theaters of our struggle at play.
 		</p>
 	</ng-template>
 </ng-container>
