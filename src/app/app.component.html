@@ -41,7 +41,7 @@
 						 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
 						 (remove)="nukeContract($event)"></app-contract-list>
 		</mat-tab>
-		<mat-tab>
+		<mat-tab *ngIf="isLoggedIn">
 			<ng-template mat-tab-label>
 				<span class="tab-label">
 					<mat-icon>person_outline</mat-icon>Targets
@@ -53,8 +53,8 @@
 							  (select)="selectContractTarget($event)"
 							  (remove)="state = AppState.RemoveDeleteContractTarget"></app-contract-target-list>
 		</mat-tab>
-		<mat-tab>
-			<ng-template mat-tab-label *ngIf="role == 'Mentor'">
+		<mat-tab *ngIf="isLoggedIn">
+			<ng-template mat-tab-label>
 				<span class="tab-label">
 					<mat-icon>group</mat-icon>Assassins
 				</span>
@@ -95,7 +95,7 @@
 	</button>
 
 	<ng-container [ngSwitch]="state">
-		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts()"></app-form-login>
+		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts();refreshUsers()"></app-form-login>
 		<app-form-register *ngSwitchCase="AppState.Register" (add)="refreshUsers()"></app-form-register>
 		<app-form-contract-create *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-create>
 		<app-form-contract-update *ngSwitchCase="AppState.EditContract" [cities]="cities" [contract]="selectedContract!" (refresh)="refreshContracts()"></app-form-contract-update>

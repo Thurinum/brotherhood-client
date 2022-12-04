@@ -54,6 +54,7 @@ export class AppComponent {
 		this.app.isLoggedIn = false;
 
 		this.refreshContracts();
+		this.refreshUsers();
 	}
 
 	refreshContracts() {
