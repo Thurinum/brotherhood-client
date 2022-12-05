@@ -90,11 +90,6 @@
 	<ng-template #welcome>
 		<app-welcome [user]="user" [currentTab]="currentTab" [isLoggedIn]="isLoggedIn" [statistics]="statistics" [role]="role"></app-welcome>
 	</ng-template>
-
-	<ng-container *ngIf="isLoggedIn && showNews">
-		<legend class="breakingNewsLegend"><mat-icon>public</mat-icon>&nbsp;Breaking News</legend>
-		<marquee class="breakingNews" behavior="scroll" truespeed scrolldelay="50" direction="left">Loading breaking news...</marquee>
-	</ng-container>
 </main>
 
 <!-- MODAL DIALOGS -->
