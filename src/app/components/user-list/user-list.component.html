@@ -10,7 +10,7 @@
 
 <section class="card-layout">
 	<app-card #card *ngFor="let user of users" [model]="user" [allowRemove]="allowEdit"
-		    [title]="user.username!" [image]="'TEMP'"
+		    [title]="user.username!" image="https://localhost:5001/images/users/lg/{{user.id}}.webp"
 		    [overlay]="user.role == 'Mentor' ? '/assets/favicon.webp' : ''"
 		    (remove)="remove.emit(user)"></app-card>
 </section>
