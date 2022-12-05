@@ -275,27 +275,27 @@ export class AppComponent {
 	) {
 		const user = localStorage.getItem("authUser");
 		const role = localStorage.getItem("authRole");
+		const validToStr = localStorage.getItem("authTime");
+
 		if (user && role && localStorage.getItem("authKey")) {
 			this.app.isLoggedIn = true;
 			this.app.user = user;
 			this.app.role = role;
 		}
 
-		let validToStr = localStorage.getItem("authTime");
-
 		if (validToStr && new Date() > new Date(validToStr)) {
 			this.logout();
 			this.helper.message("Your session has expired. Please log in again.");
 		}
 
+		if (this.isLoggedIn) {
+			this.showUserContracts = this.currentTab == 1;
+			this.refreshContractTargets();
+		}
+
 		this.refreshContracts();
 		this.refreshCities();
 		this.refreshUsers();
-
-		if (this.isLoggedIn) {
-			this.refreshContractTargets();
-			this.showUserContracts = this.currentTab == 1;
-		}
 
 		window.addEventListener("keydown", (e) => {
 			if (e.key === "Escape")
