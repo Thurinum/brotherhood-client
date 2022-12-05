@@ -18,12 +18,15 @@ export class FormContractTargetAddComponent {
 	@Output() refresh = new EventEmitter()
 
 	addTargetToCurrentContract(target: ContractTarget) {
+		this.app.isLoading = true;
+
 		this.brotherhood.addContractTarget(this.contract?.id!, target).subscribe(
 			(response: HttpResponse<void>) => {
 				console.log("Added target to contract");
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`adding target ${target.firstName} ${target.lastName} to contract '${this.contract?.codename}'`, errorResponse);
 			}
 		);
@@ -31,6 +34,7 @@ export class FormContractTargetAddComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
+		private app: AppStateService,
 		private helper: HelperService
 	) { }
 }

@@ -16,6 +16,7 @@ export class FormContractCreateComponent {
 	@Output() create = new EventEmitter
 
 	createContract(codename: string, briefing: string, city: City, isPublic: boolean) {
+		this.app.isLoading = true;
 		const contract: Contract = new Contract(codename, briefing, city, isPublic);
 
 		this.brotherhood.createContract(contract).subscribe(
@@ -25,6 +26,7 @@ export class FormContractCreateComponent {
 				this.create.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`adding contract`, errorResponse);
 			}
 		)

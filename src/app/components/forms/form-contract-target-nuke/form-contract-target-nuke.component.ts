@@ -1,6 +1,7 @@
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContractTarget } from 'src/app/models/target.model';
+import { AppStateService } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HelperService } from 'src/app/services/helper.service';
 
@@ -14,6 +15,8 @@ export class FormContractTargetNukeComponent {
 	@Output() refresh = new EventEmitter();
 
 	removeContractTarget() {
+		this.app.isLoading = true;
+
 		this.brotherhood.softDeleteContractTarget(this.target).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`${this.target.firstName} ${this.target.lastName} is no longer targeted by any contract.`);
@@ -26,12 +29,15 @@ export class FormContractTargetNukeComponent {
 	}
 
 	deleteContractTarget() {
+		this.app.isLoading = true;
+
 		this.brotherhood.deleteContractTarget(this.target).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Contract target ${this.target.firstName} ${this.target.lastName} unregistered successfully.`);
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`unregistering contract target ${this.target.firstName} ${this.target.lastName} from the database`, errorResponse);
 			}
 		);
@@ -39,6 +45,7 @@ export class FormContractTargetNukeComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
+		private app: AppStateService,
 		private helper: HelperService,
 	) { }
 }

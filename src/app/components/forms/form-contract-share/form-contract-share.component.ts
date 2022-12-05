@@ -15,6 +15,8 @@ export class FormContractShareComponent {
 	@Input() contract?: Contract;
 
 	addContractAssassin(owner?: string, contract?: Contract) {
+		this.app.isLoading = true;
+
 		if (!owner) {
 			this.helper.error("Please provide an assassin name.");
 			return;
@@ -33,6 +35,7 @@ export class FormContractShareComponent {
 				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`assigning ${owner} to contract '${contract.codename}'`, errorResponse);
 			}
 		)

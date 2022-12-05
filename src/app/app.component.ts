@@ -27,7 +27,6 @@ export class AppComponent {
 	statistics?: Statistics
 
 	showUserContracts: boolean = false
-	isLoading: boolean = true;
 	selectedContract?: Contract
 	assignedContract?: Contract
 	selectedTarget?: ContractTarget
@@ -35,6 +34,14 @@ export class AppComponent {
 
 	get isLoggedIn() {
 		return this.app.isLoggedIn;
+	}
+
+	get isLoading() {
+		return this.app.isLoading;
+	}
+
+	set isLoading(isLoading: boolean) {
+		this.app.isLoading = isLoading;
 	}
 
 	get user() {
@@ -80,9 +87,10 @@ export class AppComponent {
 
 	refreshContracts() {
 		console.log("Refreshing contracts...");
-		let request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
-
+		this.isLoading = true;
 		this.contracts = [];
+
+		const request = this.showUserContracts ? this.brotherhood.getPrivateContracts() : this.brotherhood.getPublicContracts();
 
 		request.subscribe(
 			(response: HttpResponse<Contract[]>) => {
@@ -94,9 +102,9 @@ export class AppComponent {
 				this.contracts = response.body;
 				console.info("Successfully fetched contracts from the database.");
 				this.refreshStatistics();
-				this.isLoading = false;
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				if (errorResponse.status === 0)
 					this.helper.errorWhile("connecting to the database", errorResponse);
 				else
@@ -106,6 +114,7 @@ export class AppComponent {
 	}
 
 	refreshContractTargets() {
+		this.isLoading = true;
 		this.targets = [];
 
 		this.brotherhood.getAllContractTargets().subscribe(
@@ -120,6 +129,7 @@ export class AppComponent {
 				this.refreshStatistics();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				if (errorResponse.status === 0)
 					this.helper.errorWhile("connecting to the database", errorResponse);
 				else
@@ -129,6 +139,7 @@ export class AppComponent {
 	}
 
 	refreshUsers() {
+		this.isLoading = true;
 		this.users = [];
 
 		const request = this.role == "Mentor" ? this.brotherhood.getAllUsers() : this.brotherhood.getPublicUsers();
@@ -145,6 +156,7 @@ export class AppComponent {
 				this.refreshStatistics();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				if (errorResponse.status === 0)
 					this.helper.errorWhile("connecting to the database", errorResponse);
 				else
@@ -154,6 +166,7 @@ export class AppComponent {
 	}
 
 	refreshCities() {
+		this.isLoading = true;
 		this.cities = [];
 
 		this.brotherhood.getCities().subscribe(
@@ -187,6 +200,7 @@ export class AppComponent {
 								}
 							},
 							(errorResponse: HttpErrorResponse) => {
+								this.isLoading = false;
 								console.warn(`Failed to fetch image for city '${name}', which will now be skipped.`);
 								localStorage.setItem("contractImg_" + name, "https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA2L2pvYjk0OC0yNTYtdi1sNDdyOXNoNC5qcGc.jpg");
 							}
@@ -195,6 +209,7 @@ export class AppComponent {
 				})
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				this.helper.errorWhile("fetching cities from the database", errorResponse);
 			}
 		);
@@ -210,14 +225,23 @@ export class AppComponent {
 
 				this.statistics = response;
 				console.info("Successfully fetched statistics from the database.");
+				this.isLoading = false;
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				this.helper.errorWhile("fetching statistics from the database", errorResponse);
 			}
 		);
 	}
 
-	selectContract(contract: Contract) {
+	selectContract(contract?: Contract) {
+		this.isLoading = true;
+
+		if (!contract) {
+			console.warn("An attempt was made to select a contract that doesn't exist.");
+			return;
+		}
+
 		this.brotherhood.getContractTargets(contract.id!).subscribe(
 			(response: HttpResponse<ContractTarget[]>) => {
 				this.selectedContract = contract;
@@ -229,8 +253,11 @@ export class AppComponent {
 
 				this.selectedContract.city = this.cities.find(city => city.id === this.selectedContract?.cityId)!;
 				this.selectedContract.targets = response.body;
+				this.helper.message(`Selected contract '${contract.codename}'.`);
+				this.isLoading = false;
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				this.helper.errorWhile(`fetching those targeted by contract '${contract?.codename}'`, errorResponse);
 			}
 		);
@@ -242,9 +269,12 @@ export class AppComponent {
 
 		this.selectedTarget = target;
 		this.state = AppState.UpdateContractTarget;
+		this.helper.message(`Selected target '${target.firstName} ${target.lastName}'.`);
 	}
 
 	nukeContract(contract?: Contract) {
+		this.isLoading = true;
+
 		this.brotherhood.deleteContract(contract?.id).subscribe(
 			(response: HttpResponse<Contract[]>) => {
 				this.helper.message(`Successfully ended contract ${contract?.codename}.`);
@@ -252,18 +282,22 @@ export class AppComponent {
 				this.selectedContract = undefined;
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				this.helper.errorWhile(`ending contract '${contract?.codename}'`, errorResponse);
 			}
 		)
 	}
 
 	deleteUser(user: User) {
+		this.isLoading = true;
+
 		this.brotherhood.deleteUser(user.id!).subscribe(
 			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully deleted user ${user.username}.`);
 				this.refreshUsers();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.isLoading = false;
 				this.helper.errorWhile(`deleting user '${user.username}'`, errorResponse);
 			}
 		)

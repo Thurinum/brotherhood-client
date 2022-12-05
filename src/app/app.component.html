@@ -1,4 +1,5 @@
 <img src="/assets/attract.webp" class="overlay" />
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <!-- HEADER -->
 <header>
@@ -108,7 +109,7 @@
 		<app-form-contract-update *ngSwitchCase="AppState.EditContract" [cities]="cities" [contract]="selectedContract!" (refresh)="refreshContracts()"></app-form-contract-update>
 		<app-form-contract-share *ngSwitchCase="AppState.ShareContract" [contract]="selectedContract"></app-form-contract-share>
 		<app-form-contract-target-add *ngSwitchCase="AppState.AddContractTarget" [contract]="selectedContract" [contractTargets]="targets" (refresh)="state = AppState.None;refreshContracts();selectContract(selectedContract!)"></app-form-contract-target-add>
-		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" [assignTo]="assignedContract" (create)="state = AppState.None;refreshContracts();selectContract(selectedContract!);assignedContract = undefined"></app-form-contract-target-create>
+		<app-form-contract-target-create *ngSwitchCase="AppState.CreateContractTarget" [assignTo]="assignedContract" (create)="refreshContractTargets()" (createAndAssign)="refreshContractTargets();selectContract(selectedContract!);assignedContract = undefined"></app-form-contract-target-create>
 		<app-form-contract-target-update *ngSwitchCase="AppState.UpdateContractTarget" [target]="selectedTarget!" (refresh)="refreshContractTargets()"></app-form-contract-target-update>
 		<app-form-contract-target-nuke *ngSwitchCase="AppState.RemoveDeleteContractTarget" [target]="selectedTarget!" (refresh)="state = AppState.None;refreshContractTargets();selectContract(selectedContract!)"></app-form-contract-target-nuke>
 	</ng-container>

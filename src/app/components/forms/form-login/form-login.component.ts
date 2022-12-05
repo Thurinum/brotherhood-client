@@ -15,6 +15,8 @@ export class FormLoginComponent {
 	@Output() login = new EventEmitter
 
 	_login(identifier: string, password: string) {
+		this.app.isLoading = true;
+
 		let user: User = new User;
 
 		// detect email (simple check for x@y)
@@ -43,6 +45,7 @@ export class FormLoginComponent {
 				this.login.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`authenticating to the server`, errorResponse);
 			}
 		);

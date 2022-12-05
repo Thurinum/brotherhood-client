@@ -19,6 +19,7 @@ export class FormContractTargetCreateComponent {
 
 	@Input() assignTo?: Contract
 	@Output() create = new EventEmitter();
+	@Output() createAndAssign = new EventEmitter();
 
 	firstName: string = ""
 	lastName: string = ""
@@ -26,6 +27,8 @@ export class FormContractTargetCreateComponent {
 	file?: File
 
 	async createContractTarget(file?: File) {
+		this.app.isLoading = true;
+
 		let target = new ContractTarget();
 		target.firstName = this.firstName;
 		target.lastName = this.lastName;
@@ -52,9 +55,6 @@ export class FormContractTargetCreateComponent {
 
 		this.brotherhood.createContractTarget(formData).subscribe(
 			async (response: Contract) => {
-				this.helper.message(`Successfully registered contract target ${target?.firstName} ${target?.lastName}.`);
-				// this.app.state = AppState.None;
-
 				if (!response) {
 					this.helper.error(`Failed to auto-assign target to contract ${this.assignTo?.codename}. Please do so manually.`);
 					this.create.emit();
@@ -64,20 +64,26 @@ export class FormContractTargetCreateComponent {
 				target.id = response.id;
 
 				if (this.assignTo) {
-					const assign$:any = this.brotherhood.addContractTarget(this.assignTo.id, target).subscribe(
+					const assign$: any = this.brotherhood.addContractTarget(this.assignTo.id, target).subscribe(
 						(response: HttpResponse<any>) => {
-		      				this.helper.message(`Successfully assigned target ${target?.firstName} ${target?.lastName} to contract '${this.assignTo?.codename}'.`);
-							this.create.emit();
+							this.helper.message(`Successfully assigned target ${target?.firstName} ${target?.lastName} to contract '${this.assignTo?.codename}'.`);
+							this.createAndAssign.emit();
 						},
 						(error: HttpErrorResponse) => {
+							this.app.isLoading = false;
 							this.helper.errorWhile(`auto-assigning target to contract ${this.assignTo?.codename}`, error);
 						}
 					);
 
 					await assign$.lastValueFrom();
 				}
+
+				this.app.state = AppState.None;
+				this.create.emit();
+				this.helper.message(`Successfully registered contract target ${target?.firstName} ${target?.lastName}.`);
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`registering contract target ${target?.firstName} ${target?.lastName} in the database`, errorResponse);
 			}
 		);

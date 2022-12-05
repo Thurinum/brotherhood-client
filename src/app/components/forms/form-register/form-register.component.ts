@@ -21,6 +21,8 @@ export class FormRegisterComponent {
 		password: string,
 		passwordConfirm: string
 	) {
+		this.app.isLoading = true;
+
 		let user: User = new User;
 		user.username = username;
 		user.firstName = firstName;
@@ -36,7 +38,7 @@ export class FormRegisterComponent {
 				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				// TODO: Handle first name and last name
+				this.app.isLoading = false;
 				this.helper.errorWhile(`registering user '${user.firstName} ${user.lastName}'`, errorResponse);
 			}
 		);

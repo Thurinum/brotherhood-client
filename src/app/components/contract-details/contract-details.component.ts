@@ -5,6 +5,7 @@ import { ContractTarget } from 'src/app/models/target.model';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/services/helper.service';
+import { AppStateService } from 'src/app/services/appstate.service';
 
 @Component({
 	selector: 'app-contract-details',
@@ -51,6 +52,8 @@ export class ContractDetailsComponent {
 	}
 
 	setContractCover(target: ContractTarget) {
+		this.app.isLoading = true;
+
 		this.brotherhood.setContractCover(this.contract!.id, target).subscribe(
 			(response: Contract) => {
 				this.helper.message(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`);
@@ -59,18 +62,22 @@ export class ContractDetailsComponent {
 				this.setCover.emit(this.contract);
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`setting ${target.firstName} ${target.lastName} as cover for contract '${this.contract?.codename}'`, errorResponse);
 			}
 		);
 	}
 
 	removeTarget(target: ContractTarget) {
+		this.app.isLoading = true;
+
 		this.brotherhood.removeContractTarget(this.contract!.id, target).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Successfully removed ${target.firstName} ${target.lastName} from ${this.contract?.codename}.`);
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`removing ${target.firstName} ${target.lastName} from '${this.contract?.codename}'`, errorResponse);
 			}
 		);
@@ -78,6 +85,7 @@ export class ContractDetailsComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
+		private app: AppStateService,
 		private helper: HelperService
 	) { }
 }

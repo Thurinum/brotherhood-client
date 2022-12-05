@@ -17,6 +17,8 @@ export class FormContractUpdateComponent {
 	@Output() refresh = new EventEmitter
 
 	updateContract() {
+		this.app.isLoading = true;
+
 		this.brotherhood.updateContract(this.contract.id, this.contract).subscribe(
 			(response: HttpResponse<any>) => {
 				this.helper.message(`Successfully updated contract ${this.contract.codename}.`);
@@ -24,6 +26,7 @@ export class FormContractUpdateComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`updating contract ${this.contract.codename}`, errorResponse);
 			}
 		);

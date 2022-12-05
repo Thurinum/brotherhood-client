@@ -4,6 +4,7 @@ import { SlideAnimation } from 'src/app/animations';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HelperService } from 'src/app/services/helper.service';
+import { AppStateService } from 'src/app/services/appstate.service';
 
 @Component({
 	selector: 'app-contract-target-list',
@@ -24,12 +25,15 @@ export class ContractTargetListComponent {
 	selectedId: number = -1;
 
 	removeContractTarget(target: ContractTarget) {
+		this.app.isLoading = true;
+
 		this.brotherhood.deleteContractTarget(target).subscribe(
 			(response: HttpResponse<void>) => {
 				this.helper.message(`Contract target ${target.firstName} ${target.lastName} unregistered successfully`);
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`unregistering ${target.firstName} ${target.lastName}`, errorResponse);
 			}
 		);
@@ -37,6 +41,7 @@ export class ContractTargetListComponent {
 
 	constructor(
 		private brotherhood: BrotherhoodService,
+		private app: AppStateService,
 		private helper: HelperService,
 	) {}
 }

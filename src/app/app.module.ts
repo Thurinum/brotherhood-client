@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
@@ -82,6 +83,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 		MatTooltipModule,
 		MatButtonToggleModule,
 		MatSelectModule,
+		MatProgressSpinnerModule,
 
 		CarouselModule
 	],

@@ -20,6 +20,7 @@ export class FormContractTargetUpdateComponent {
 	file?: File;
 
 	async updateContractTarget(file?: File) {
+		this.app.isLoading = true;
 		const formData = new FormData();
 		formData.append("model", JSON.stringify(this.target));
 
@@ -46,6 +47,7 @@ export class FormContractTargetUpdateComponent {
 				this.refresh.emit();
 			},
 			(errorResponse: HttpErrorResponse) => {
+				this.app.isLoading = false;
 				this.helper.errorWhile(`updating contract target ${this.target?.firstName} ${this.target?.lastName}`, errorResponse);
 			}
 		);

@@ -19,4 +19,5 @@ export class AppStateService {
 	user?: string;
 	role?: string;
 	isLoggedIn: boolean = false
+	isLoading: boolean = true
 }
