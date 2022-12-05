@@ -9,11 +9,11 @@
 
 <section class="card-layout">
 	<app-card *ngFor="let target of targets"
-		    [model]="target" [allowRemove]="true"
+		    [model]="target"
 		    [title]="target.firstName + ' ' + target.lastName"
 		    (select)="select.emit(target); selectedId = target.id!"
 		    [selected]="target.id === selectedId"
-		    [allowRemove]="allowEdit"
+		    [allowRemove]="allowRemove"
 		    (remove)="select.emit(target); selectedId = target.id!;remove.emit()"
 		    image="https://localhost:5001/images/targets/sm/{{target.id}}.webp?id={{target.imageCacheId}}"></app-card>
 </section>

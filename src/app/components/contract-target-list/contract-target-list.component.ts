@@ -14,6 +14,7 @@ import { HelperService } from 'src/app/services/helper.service';
 export class ContractTargetListComponent {
 	@Input() targets!: ContractTarget[]
 	@Input() allowEdit: boolean = false
+	@Input() allowRemove: boolean = false
 
 	@Output() add = new EventEmitter()
 	@Output() refresh = new EventEmitter()
