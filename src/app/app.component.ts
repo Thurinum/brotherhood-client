@@ -27,7 +27,7 @@ export class AppComponent {
 	statistics?: Statistics
 
 	showUserContracts: boolean = false
-	showNews: boolean = true;
+	isLoading: boolean = true;
 	selectedContract?: Contract
 	assignedContract?: Contract
 	selectedTarget?: ContractTarget
@@ -94,6 +94,7 @@ export class AppComponent {
 				this.contracts = response.body;
 				console.info("Successfully fetched contracts from the database.");
 				this.refreshStatistics();
+				this.isLoading = false;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				if (errorResponse.status === 0)

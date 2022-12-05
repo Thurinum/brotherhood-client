@@ -37,7 +37,8 @@
 					<mat-icon>lock</mat-icon>My Contracts
 				</span>
 			</ng-template>
-			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" [canRemove]="isLoggedIn" (refresh)="refreshContracts()"
+			<app-contract-list [contracts]="contracts" [canAdd]="isLoggedIn" [canRemove]="isLoggedIn" [isLoading]="isLoading"
+						 (refresh)="refreshContracts()"
 						 (select)="selectContract($event)" (add)="state = AppState.CreateContract;refreshCities()"
 						 (remove)="nukeContract($event)"></app-contract-list>
 		</mat-tab>

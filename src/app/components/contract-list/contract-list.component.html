@@ -7,7 +7,7 @@
 	</button>
 </nav>
 
-<section class="card-layout" [@slide-animation] *ngIf="contracts && contracts.length > 0">
+<section class="card-layout" [@slide-animation] *ngIf="contracts && contracts.length > 0; else emptyList">
 	<app-card #card *ngFor="let contract of contracts" [model]="contract" [allowRemove]="canAdd"
 		    [title]="contract.codename" image="https://localhost:5001/images/targets/lg/{{contract.coverTargetId}}.webp"
 		    [selected]="contract.id === selectedId" (select)="select.next(contract); selectedId = contract.id!"
@@ -21,8 +21,9 @@
 </section>
 
 <ng-template #emptyList>
-	<div style="text-align: center" [@zoom-animation]>
-		<p>There are no contracts added. Add contracts to see them here.</p>
+	<div style="text-align: center;margin-bottom: 45px" [@zoom-animation]>
+		<p *ngIf="isLoading">Loading contracts...</p>
+		<p *ngIf="!isLoading">There are no contracts added. Add contracts to see them here.</p>
 		<br />
 	</div>
 </ng-template>

@@ -18,6 +18,9 @@ export class ContractListComponent {
 	canAdd: boolean = false;
 
 	@Input()
+	isLoading: boolean = true;
+
+	@Input()
 	canRemove: boolean = false;
 
 	@Output()
