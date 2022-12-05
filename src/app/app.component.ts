@@ -72,6 +72,7 @@ export class AppComponent {
 		this.showUserContracts = false;
 		this.helper.message("Logged out successfully.");
 		this.app.isLoggedIn = false;
+		this.currentTab = 0;
 
 		this.refreshContracts();
 		this.refreshUsers();

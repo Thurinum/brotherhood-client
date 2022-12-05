@@ -1,26 +1,33 @@
 <fieldset >
 	<legend>Register user</legend>
 	<mat-form-field>
+		<mat-label>First name</mat-label>
+		<input #firstName matInput type="text" placeholder="Enter first name" />
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Last name</mat-label>
+		<input #lastName matInput type="text" placeholder="Enter last name" />
+	</mat-form-field>
+	<mat-form-field>
 		<mat-label>Username</mat-label>
-		<input #username matInput type="text" placeholder="What's your identifier?" />
-		<mat-hint>ID provided by the .</mat-hint>
+		<input #userName matInput type="text" placeholder="Enter username" />
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>E-mail address</mat-label>
-		<input #email matInput type="email" placeholder="What's your e-mail?" />
+		<input #email matInput type="email" placeholder="Enter email" />
 		<mat-hint>Don't use your personal e-mail.</mat-hint>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Password</mat-label>
-		<input #password matInput type="password" placeholder="What's your password?" />
+		<input #password matInput type="password" placeholder="Enter password" />
 		<mat-hint>At least 5 characters.</mat-hint>
 	</mat-form-field>
 	<mat-form-field>
 		<mat-label>Confirm password</mat-label>
-		<input #passwordConfirm matInput type="password" placeholder="Repeat your password" />
+		<input #passwordConfirm matInput type="password" placeholder="Repeat password" />
 	</mat-form-field>
 	<button mat-raised-button color="primary"
-		  (click)="register(username.value, email.value, password.value, passwordConfirm.value)">
+		  (click)="register(userName.value, firstName.value, lastName.value, email.value, password.value, passwordConfirm.value)">
 		<mat-icon>account_circle</mat-icon>
 		Register
 	</button>

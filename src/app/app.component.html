@@ -104,7 +104,7 @@
 	</button>
 
 	<ng-container [ngSwitch]="state">
-		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts();refreshContractTargets();refreshUsers()"></app-form-login>
+		<app-form-login *ngSwitchCase="AppState.Login" (login)="refreshContracts();refreshContractTargets();refreshUsers();currentTab = 0"></app-form-login>
 		<app-form-register *ngSwitchCase="AppState.Register" (add)="refreshUsers()"></app-form-register>
 		<app-form-contract-create *ngSwitchCase="AppState.CreateContract" [cities]="cities" (create)="refreshContracts()"></app-form-contract-create>
 		<app-form-contract-update *ngSwitchCase="AppState.EditContract" [cities]="cities" [contract]="selectedContract!" (refresh)="refreshContracts()"></app-form-contract-update>

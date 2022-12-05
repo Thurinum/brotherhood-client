@@ -15,25 +15,29 @@ export class FormRegisterComponent {
 
 	register(
 		username: string,
+		firstName: string,
+		lastName: string,
 		email: string,
 		password: string,
 		passwordConfirm: string
 	) {
 		let user: User = new User;
 		user.username = username;
+		user.firstName = firstName;
+		user.lastName = lastName;
 		user.email = email;
 		user.password = password;
 		user.passwordConfirm = passwordConfirm;
 
 		this.brotherhood.createUser(user).subscribe(
 			(response: HttpResponse<void>) => {
-				this.helper.message(`Successfully registered as '${user.username}'.`);
+				this.helper.message(`Successfully registered '${user.username}'.`);
 				this.add.emit();
 				this.app.state = AppState.None;
 			},
 			(errorResponse: HttpErrorResponse) => {
 				// TODO: Handle first name and last name
-				this.helper.errorWhile(`registering user '${user.username}'`, errorResponse);
+				this.helper.errorWhile(`registering user '${user.firstName} ${user.lastName}'`, errorResponse);
 			}
 		);
 	}
