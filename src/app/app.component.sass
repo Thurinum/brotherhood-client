@@ -72,6 +72,19 @@ header
 .legal
 	text-align: right
 
+.overlay
+	height: 100%
+
+	position: fixed
+	left: 50%
+	top: 0
+	transform: translate(-50%, 0)
+
+	opacity: 0.1
+	filter: blur(10px) grayscale(0.3)
+
+	object-fit: cover
+
 @media screen and (max-width: 550px)
 	header
 		flex-direction: column
