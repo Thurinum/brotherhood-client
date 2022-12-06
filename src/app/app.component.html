@@ -89,7 +89,7 @@
 				    (deleteTarget)="selectContractTarget($event);state = AppState.RemoveDeleteContractTarget"
 				    (remove)="nukeContract(selectedContract)"
 				    (refresh)="refreshContractTargets();refreshContracts();selectContract(selectedContract!)"
-				    (setCover)="selectedContract = $event; selectContract(selectedContract)"></app-contract-details>
+				    (setCover)="refreshContracts();selectedContract = $event;selectContract(selectedContract)"></app-contract-details>
 
 	<ng-template #welcome>
 		<app-welcome [user]="user" [currentTab]="currentTab" [isLoggedIn]="isLoggedIn" [statistics]="statistics" [role]="role"></app-welcome>

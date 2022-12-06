@@ -58,7 +58,6 @@ export class ContractDetailsComponent {
 			(response: Contract) => {
 				this.helper.message(`Successfully set ${target.firstName} ${target.lastName} as cover for ${this.contract?.codename}.`);
 				this.contract = response;
-				console.log(this.contract.coverTargetId)
 				this.setCover.emit(this.contract);
 			},
 			(errorResponse: HttpErrorResponse) => {
