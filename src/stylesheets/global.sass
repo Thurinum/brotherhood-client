@@ -44,7 +44,6 @@ button
 		transform: translateY(-2px)
 		box-shadow: 0 5px 7px #4d4b4b5d !important
 
-
 /* Layout for contract, target, and city cards */
 .card-layout
 	width: max-content
@@ -72,8 +71,9 @@ button
 	overflow: visible !important
 
 .owl-item
+	display: flex
+	justify-content: center
 	transition: scale 0.3s ease-out, filter 0.3s ease-out
-
 	filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.3))
 
 .center
@@ -89,7 +89,6 @@ button
 /* Fix glitching scrollbars appearing on tab-bar transition */
 .mat-tab-body, .mat-tab-body-content
 	overflow: hidden !important
-
 
 .mat-form-field-infix
 	display: flex !important
@@ -109,4 +108,3 @@ button
 
 	.mat-simple-snackbar-action
 		color: white !important
-
