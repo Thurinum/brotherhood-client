@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormAnimation, SlideAnimation, ZoomAnimation } from 'src/app/animations';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SlideAnimation } from 'src/app/animations';
 import { User } from 'src/app/models/user.model';
-import { AppState } from 'src/app/services/appstate.service';
 
 @Component({
 	selector: 'app-user-list',
