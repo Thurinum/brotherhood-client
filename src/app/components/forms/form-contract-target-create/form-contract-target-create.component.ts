@@ -75,7 +75,7 @@ export class FormContractTargetCreateComponent {
 						}
 					);
 
-					await assign$.lastValueFrom();
+					await lastValueFrom(assign$);
 				}
 
 				this.app.state = AppState.None;
