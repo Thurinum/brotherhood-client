@@ -62,7 +62,7 @@
 					<mat-icon>person_outline</mat-icon>Our Targets
 				</span>
 			</ng-template>
-			<app-contract-target-list [targets]="targets" [allowEdit]="isLoggedIn" [allowRemove]="role == 'Mentor'"
+			<app-contract-target-list [targets]="targets" [allowEdit]="isLoggedIn"
 							  (add)="state = AppState.CreateContractTarget"
 							  (refresh)="refreshContractTargets()"
 							  (select)="selectContractTarget($event)"
