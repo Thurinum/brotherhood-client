@@ -2,9 +2,15 @@
 <fieldset>
 	<legend>Request backup for {{contract?.codename}}</legend>
 	<mat-form-field>
-		<mat-label>Username or email</mat-label>
-		<input #shareeName matInput type="text" placeholder="Enter assassin identifier..." />
-		<mat-hint>The assassin attempt to come to your aid.</mat-hint>
+		<mat-label>Target</mat-label>
+		<mat-icon [style.border-radius.px]=50><img *ngIf="shareeName.value" src="https://localhost:5001/images/users/lg/{{shareeName.value.id}}.webp"></mat-icon>
+		<mat-select #shareeName placeholder="Choose a target...">
+			<mat-option *ngFor="let user of users?.filter(isNotCurrentUser)" [value]="user">
+				<mat-icon [style.border-radius.px]=50><img src="https://localhost:5001/images/users/lg/{{user.id}}.webp"></mat-icon>
+				{{ user.firstName }} {{ user.lastName }}
+			</mat-option>
+		</mat-select>
+		<mat-hint>The assassin will receive a request for aid.</mat-hint>
 	</mat-form-field>
 	<br />
 	<button mat-raised-button color="primary"
