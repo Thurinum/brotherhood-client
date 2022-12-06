@@ -27,28 +27,16 @@ export class ContractDetailsComponent {
 	@Output() setCover = new EventEmitter<Contract>()
 
 	carouselOptions: OwlOptions = {
-		loop: true,
+		loop: false,
 		mouseDrag: true,
 		touchDrag: true,
 		pullDrag: true,
 		dots: true,
-		navSpeed: 700,
+		nav: true,
 		navText: ['<', '>'],
-		responsive: {
-			0: {
-				items: 1
-			},
-			400: {
-				items: 2
-			},
-			740: {
-				items: 3
-			},
-			940: {
-				items: 4
-			}
-		},
-		nav: true
+		navSpeed: 700,
+		items: 2,
+		center: true
 	}
 
 	setContractCover(target: ContractTarget) {
