@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AppState, AppStateService } from './appstate.service';
 
 @Injectable({ providedIn: 'root' })
 export class HelperService {
@@ -12,6 +13,7 @@ export class HelperService {
 	error(message: string, action: string = "OK") {
 		this.snackBar.open(message, action, { verticalPosition: "top", panelClass: ["snackbar", "snackbar-error"] });
 		console.error(message);
+		this.app.isLoading = false;
 	}
 
 	// garbage
@@ -24,7 +26,11 @@ export class HelperService {
 
 		this.snackBar.open(fullMessage, action, { verticalPosition: "top", panelClass: ["snackbar", "snackbar-error"] });
 		console.error(fullMessage);
+		this.app.isLoading = false;
 	}
 
-	constructor(private snackBar: MatSnackBar) { }
+	constructor(
+		private app: AppStateService,
+		private snackBar: MatSnackBar
+	) { }
 }

@@ -14,7 +14,7 @@ export class FormRegisterComponent {
 	@Output() add = new EventEmitter();
 
 	register(
-		username: string,
+		userName: string,
 		firstName: string,
 		lastName: string,
 		email: string,
@@ -24,7 +24,7 @@ export class FormRegisterComponent {
 		this.app.isLoading = true;
 
 		let user: User = new User;
-		user.username = username;
+		user.userName = userName;
 		user.firstName = firstName;
 		user.lastName = lastName;
 		user.email = email;
@@ -33,7 +33,7 @@ export class FormRegisterComponent {
 
 		this.brotherhood.createUser(user).subscribe(
 			(response: HttpResponse<void>) => {
-				this.helper.message(`Successfully registered '${user.username}'.`);
+				this.helper.message(`Successfully registered '${user.userName}'.`);
 				this.add.emit();
 				this.app.state = AppState.None;
 			},

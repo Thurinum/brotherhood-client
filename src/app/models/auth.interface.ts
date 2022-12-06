@@ -1,6 +1,6 @@
 export interface Auth {
 	token: string
-	username: string
+	userName: string
 	role: string
 	validTo: Date
 }

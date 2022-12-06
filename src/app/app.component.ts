@@ -253,7 +253,7 @@ export class AppComponent {
 
 				this.selectedContract.city = this.cities.find(city => city.id === this.selectedContract?.cityId)!;
 				this.selectedContract.targets = response.body;
-				this.helper.message(`Selected contract '${contract.codename}'.`);
+				console.info(`Selected contract '${contract.codename}'.`);
 				this.isLoading = false;
 			},
 			(errorResponse: HttpErrorResponse) => {
@@ -269,7 +269,7 @@ export class AppComponent {
 
 		this.selectedTarget = target;
 		this.state = AppState.UpdateContractTarget;
-		this.helper.message(`Selected target '${target.firstName} ${target.lastName}'.`);
+		console.info(`Selected target '${target.firstName} ${target.lastName}'.`);
 	}
 
 	nukeContract(contract?: Contract) {
@@ -293,12 +293,12 @@ export class AppComponent {
 
 		this.brotherhood.deleteUser(user.id!).subscribe(
 			(response: HttpResponse<any>) => {
-				this.helper.message(`Successfully deleted user ${user.username}.`);
+				this.helper.message(`Successfully deleted user ${user.userName}.`);
 				this.refreshUsers();
 			},
 			(errorResponse: HttpErrorResponse) => {
 				this.isLoading = false;
-				this.helper.errorWhile(`deleting user '${user.username}'`, errorResponse);
+				this.helper.errorWhile(`deleting user '${user.userName}'`, errorResponse);
 			}
 		)
 	}

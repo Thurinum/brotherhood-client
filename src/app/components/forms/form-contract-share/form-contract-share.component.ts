@@ -1,7 +1,6 @@
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Contract } from 'src/app/models/contract.model';
-import { ContractShareDTO } from 'src/app/models/contractShareDTO';
 import { User } from 'src/app/models/user.model';
 import { AppState, AppStateService } from 'src/app/services/appstate.service';
 import { BrotherhoodService } from 'src/app/services/brotherhood.service';
@@ -17,10 +16,10 @@ export class FormContractShareComponent {
 	@Input() currentUserName?: string;
 	@Input() users?: User[];
 
-	addContractAssassin(owner?: string, contract?: Contract) {
+	addContractAssassin(sharee?: User, contract?: Contract) {
 		this.app.isLoading = true;
 
-		if (!owner) {
+		if (!sharee) {
 			this.helper.error("Please provide an assassin name.");
 			return;
 		}
@@ -30,16 +29,14 @@ export class FormContractShareComponent {
 			return;
 		}
 
-		const dto: ContractShareDTO = new ContractShareDTO(contract.id, owner);
-
-		this.brotherhood.shareContract(dto).subscribe(
+		this.brotherhood.shareContract(contract.id, sharee).subscribe(
 			(response: HttpResponse<any>) => {
-				this.helper.message(`Successfully assigned ${owner} to ${contract.codename}.`);
+				this.helper.message(`Successfully assigned ${sharee.firstName} ${sharee.lastName} to ${contract.codename}.`);
 				this.app.state = AppState.None;
+				this.app.isLoading = false;
 			},
 			(errorResponse: HttpErrorResponse) => {
-				this.app.isLoading = false;
-				this.helper.errorWhile(`assigning ${owner} to contract '${contract.codename}'`, errorResponse);
+				this.helper.errorWhile(`assigning ${sharee.firstName} ${sharee.lastName} to contract '${contract.codename}'`, errorResponse);
 			}
 		)
 	}

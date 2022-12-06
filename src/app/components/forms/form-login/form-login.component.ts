@@ -23,7 +23,7 @@ export class FormLoginComponent {
 		if (identifier.match(/^\S+@\S+$/))
 			user.email = identifier;
 		else
-			user.username = identifier;
+			user.userName = identifier;
 
 		user.password = password;
 
@@ -34,13 +34,13 @@ export class FormLoginComponent {
 
 				localStorage.setItem("authKey", response.token);
 				localStorage.setItem("authTime", response.validTo.toString());
-				localStorage.setItem("authUser", response.username);
+				localStorage.setItem("authUser", response.userName);
 				localStorage.setItem("authRole", response.role);
-				this.helper.message(`Logged in as '${response.username}'.`);
+				this.helper.message(`Logged in as '${response.userName}'.`);
 
 				this.app.isLoggedIn = true;
 				this.app.state = AppState.None;
-				this.app.user = response.username;
+				this.app.user = response.userName;
 				this.app.role = response.role;
 				this.login.emit();
 			},
