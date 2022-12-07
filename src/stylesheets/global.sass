@@ -67,14 +67,30 @@ button
 .carousel
 	overflow: visible
 
+.owl-carousel
+	display: flex !important
+	flex-direction: column
+
 .owl-stage-outer
 	overflow: visible !important
 
+.owl-stage
+	display: flex
+	justify-content: center
+	padding: 5px
+
+.owl-nav
+	order: 1
+
 .owl-item
+	max-width: 30%
 	display: flex
 	justify-content: center
 	transition: scale 0.3s ease-out, filter 0.3s ease-out
 	filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.3))
+
+.owl-theme .owl-nav [class*=owl-]
+	background-color: #5c5048
 
 .center
 	scale: 0.9
