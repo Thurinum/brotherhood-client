@@ -33,7 +33,7 @@ export class BrotherhoodService {
 	}
 
 	setContractCover(id: number, target: ContractTarget): any {
-		return this.http.put<number>(`https://localhost:5001/api/contract/${id}/setcover`, target);
+		return this.http.put<number>(`https://localhost:5001/api/contract/${id}/edit/cover`, target);
 	}
 
 	deleteContract(id?: number): any {
