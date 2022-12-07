@@ -86,7 +86,6 @@ export class AppComponent {
 		this.currentTab = 0;
 
 		this.refreshContracts();
-		this.refreshUsers();
 	}
 
 	refreshContracts() {
@@ -330,11 +329,11 @@ export class AppComponent {
 		if (this.isLoggedIn) {
 			this.showUserContracts = this.currentTab == 1;
 			this.refreshContractTargets();
+			this.refreshUsers();
 		}
 
 		this.refreshContracts();
 		this.refreshCities();
-		this.refreshUsers();
 
 		window.addEventListener("keydown", (e) => {
 			if (e.key === "Escape")
