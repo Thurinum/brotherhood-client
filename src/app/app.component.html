@@ -84,6 +84,7 @@
 				    (share)="state = AppState.ShareContract"
 				    (edit)="state = AppState.EditContract"
 				    (addTarget)="state = AppState.AddContractTarget"
+				    (selectTarget)="selectedTarget = $event;state = AppState.FullScreenPhoto"
 				    (createTarget)="assignedContract = selectedContract;state = AppState.CreateContractTarget"
 				    (editTarget)="selectContractTarget($event);state = AppState.UpdateContractTarget"
 				    (deleteTarget)="selectContractTarget($event);state = AppState.RemoveDeleteContractTarget"
@@ -141,6 +142,8 @@
 							 [target]="selectedTarget!"
 							 (refresh)="state = AppState.None;refreshContractTargets();selectContract(selectedContract!)">
 		</app-form-contract-target-nuke>
+
+		<img class="fullscreen-photo" *ngIf="state === AppState.FullScreenPhoto" [src]="selectedTargetImage" />
 	</ng-container>
 
 	<div class="cutie">

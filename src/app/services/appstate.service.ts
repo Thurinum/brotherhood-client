@@ -10,7 +10,8 @@ export enum AppState {
 	AddContractTarget,
 	CreateContractTarget,
 	UpdateContractTarget,
-	RemoveDeleteContractTarget
+	RemoveDeleteContractTarget,
+	FullScreenPhoto
 }
 
 @Injectable({ providedIn: "root" })

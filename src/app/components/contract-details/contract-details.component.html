@@ -45,6 +45,7 @@
 								     [title]="target.firstName"
 								     [target]="target"
 								     [allowEdit]="allowEdit"
+								     (click)="selectTarget.emit(target)"
 								     (edit)="editTarget.emit(target)"
 								     (remove)="removeTarget(target)"
 								     (delete)="deleteTarget.emit(target)"

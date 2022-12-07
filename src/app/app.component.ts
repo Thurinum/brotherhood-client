@@ -32,6 +32,10 @@ export class AppComponent {
 	selectedTarget?: ContractTarget
 	storage: Storage = window.localStorage
 
+	get selectedTargetImage() : string {
+		return this.selectedTarget ? `https://localhost:5001/images/targets/lg/${this.selectedTarget.id}.webp` : "/assets/attract.webp";
+	}
+
 	get isLoggedIn() {
 		return this.app.isLoggedIn;
 	}

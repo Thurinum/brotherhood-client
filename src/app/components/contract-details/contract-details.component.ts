@@ -20,6 +20,7 @@ export class ContractDetailsComponent {
 	@Output() edit = new EventEmitter()
 	@Output() remove = new EventEmitter()
 	@Output() share = new EventEmitter()
+	@Output() selectTarget = new EventEmitter<ContractTarget>()
 	@Output() createTarget = new EventEmitter()
 	@Output() addTarget = new EventEmitter()
 	@Output() editTarget = new EventEmitter<ContractTarget>()
