@@ -57,6 +57,10 @@ export class ContractDetailsComponent {
 		);
 	}
 
+	promptToSelect() {
+		this.helper.promptToSelect();
+	}
+
 	removeTarget(target: ContractTarget) {
 		this.app.isLoading = true;
 

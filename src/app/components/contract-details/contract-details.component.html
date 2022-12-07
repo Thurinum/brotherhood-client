@@ -41,11 +41,12 @@
 	<owl-carousel-o class="carousel" *ngIf="contract?.targets!.length > 0; else noTarget" [options]="carouselOptions">
 		<ng-container *ngFor="let target of contract?.targets">
 			<ng-template carouselSlide>
-				<app-contract-target-details class="carousel-item"
+				<app-contract-target-details class="carousel-item" matRipple
 								     [title]="target.firstName"
 								     [target]="target"
 								     [allowEdit]="allowEdit"
-								     (click)="selectTarget.emit(target)"
+								     (click)="promptToSelect()"
+								     (dblclick)="selectTarget.emit(target)"
 								     (edit)="editTarget.emit(target)"
 								     (remove)="removeTarget(target)"
 								     (delete)="deleteTarget.emit(target)"

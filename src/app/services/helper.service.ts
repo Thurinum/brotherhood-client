@@ -29,6 +29,15 @@ export class HelperService {
 		this.app.isLoading = false;
 	}
 
+	shownPrompt: boolean = false;
+
+	promptToSelect() {
+		if (this.shownPrompt) return;
+
+		this.snackBar.open("Double-click to view full image.", "OK", { verticalPosition: "bottom", duration: 4000 });
+		this.shownPrompt = true;
+	}
+
 	constructor(
 		private app: AppStateService,
 		private snackBar: MatSnackBar
