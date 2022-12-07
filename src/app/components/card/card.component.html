@@ -2,7 +2,7 @@
 	<ng-content class="card-icon"></ng-content>
 	<img class="card-image" [src]="image" draggable="false" (error)="image = fallbackImage">
 	<marquee #marquee class="card-title"
-		   behavior="scroll" scrollDelay="200"
+		   behavior="alternate" scrollDelay="200"
 		   [scrollAmount]="marquee.scrollWidth > marquee.clientWidth + 10 ? 6 : 0"
 		   [style.justifyContent]="marquee.scrollWidth > marquee.clientWidth + 10 ? 'left' : 'center'">
 		{{title}}

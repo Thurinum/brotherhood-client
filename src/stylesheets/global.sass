@@ -70,6 +70,7 @@ button
 .owl-carousel
 	display: flex !important
 	flex-direction: column
+	gap: 10px
 
 .owl-stage-outer
 	overflow: visible !important
@@ -81,20 +82,28 @@ button
 
 .owl-nav
 	order: 1
+	margin-top: 0 !important
 
 .owl-item
 	max-width: 30%
 	display: flex
 	justify-content: center
 	transition: scale 0.3s ease-out, filter 0.3s ease-out
-	filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.3))
+	filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0))
+	scale: 0.9
 
 .owl-theme .owl-nav [class*=owl-]
 	background-color: #5c5048
 
+.owl-dots
+	margin-top: 30px
+
+.owl-theme .owl-dots .owl-dot.active span
+	background-color: #5c5048 !important
+
 .center
-	scale: 0.9
-	filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0))
+	scale: 1
+	filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.3))
 
 /* Fix size of icon inside mat select */
 .mat-icon img

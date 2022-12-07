@@ -36,7 +36,8 @@ export class ContractDetailsComponent {
 		navText: ['<', '>'],
 		navSpeed: 700,
 		items: 3,
-		center: true
+		center: true,
+		startPosition: 1
 	}
 
 	setContractCover(target: ContractTarget) {
