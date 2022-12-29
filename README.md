@@ -7,7 +7,9 @@ Developed by the acclaimed JuliePro in collaboration with dozens of brotherhoods
 
 ## What this is
 A truly enlightening Angular and ASP.Net Core college assignment, featuring cringeworthy storytelling and careless use of Ubisoft IP.  
-(I might come back one day and sweep the dozens of AC artworks I used to populate the database)
+(I might come back one day and sweep the dozens of AC artworks I used to populate the database)  
+  
+  See also: https://github.com/Thurinum/brotherhood-server
 
 ### Technologies
 - Angular
