@@ -3,10 +3,11 @@
 
 Developed by the acclaimed JuliePro in collaboration with dozens of brotherhoods worldwide, IntelliBrotherhood empowers your Mentors to keep track of their Assassins' progress at all times. Create contracts, manage your assassins, and send them across the globe to perilous voyages in the name of liberty. Whether your brotherhood is a local effort or an international contract agency, it will benefit from the great gain in efficiency brought by JuliePro's next-gen engineering.
 
-<img width="949" alt="image" src="https://user-images.githubusercontent.com/43908636/210014861-cdc47544-ab63-4e98-96ca-e10ace8e1548.png">
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/43908636/210015733-5a586db0-d108-45c1-ad59-f7274d8e1afe.png">
 
 ## What this is
-A truly enlightening Angular and ASP.Net Core assignment, featuring cringeworthy storytelling and stolen Ubisoft IP.
+A truly enlightening Angular and ASP.Net Core college assignment, featuring cringeworthy storytelling and careless use of Ubisoft IP.  
+(I might come back later and sweep the dozens of promo art I used to populate the database)
 
 ### Technologies
 - Angular
