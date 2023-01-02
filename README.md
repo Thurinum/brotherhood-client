@@ -109,4 +109,4 @@ Ezio (requiescat in pace)
 Theodore (dioxus420)  
 
 ## Next steps
-Stop using Angular, or any web frameworks, and install Qt.
+Stop using Angular or any web framework and use Qt :3
