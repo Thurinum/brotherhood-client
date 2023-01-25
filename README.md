@@ -6,8 +6,7 @@ Developed by the acclaimed JuliePro in collaboration with dozens of brotherhoods
 <img width="959" alt="image" src="https://user-images.githubusercontent.com/43908636/210015733-5a586db0-d108-45c1-ad59-f7274d8e1afe.png">
 
 ## What this is
-A truly enlightening Angular and ASP.Net Core college assignment, featuring cringeworthy storytelling and careless use of Ubisoft IP.  
-(I might come back one day and sweep the dozens of AC artworks I used to populate the database)  
+A truly enlightening Angular and ASP.Net Core college assignment, featuring cringeworthy storytelling.
   
   See also: https://github.com/Thurinum/brotherhood-server
 
